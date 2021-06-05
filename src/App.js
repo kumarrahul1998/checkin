@@ -11,8 +11,8 @@ import ViewCartPage from "./services/Cart/pages/ViewCartPage"
 import CheckoutPage from './services/Checkout/pages/CheckoutPage'
 import ApplyPrommos from './services/Checkout/components/ApplyPrommos';
 import MyRequestPage from './services/RoomServices/pages/RoomServicesPage';
-
-
+import ViewOrders from "./services/order/pages/ViewOrders";
+import PaymentSuccessful from "./services/order/pages/PaymentSuccessful";
 // import { useSelector } from "react-redux"
 // import axios from "axios";
 function App(props) {
@@ -36,6 +36,8 @@ function App(props) {
                 <Route path="/Apply" component={ApplyPrommos} />
                 <Route exact path="/" component={HomePage} />
                 <Route path="/requests" component={MyRequestPage} />
+                <Route path="/order" component={ViewOrders} />
+                <Route path="/payment" component={PaymentSuccessful} />
               </>
               :
               <>

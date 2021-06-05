@@ -107,16 +107,16 @@ function MenuCusomisation({ variants, _add_item, _remove_item }) {
                         background: '#32c282',
                         marginTop: Height * 0.48 + 'px',
                         position: 'absolute',
-                        marginLeft: '25px',
+                        marginLeft: '7.75%',
                         zIndex: 1000,
                         borderRadius: '5px',
                         bottom: 10
                     }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', margin: '17px', marginTop: '25px', color: '#fff', position: 'sticky' }}>
-                            <div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between',alignItems:"center",height:"100%", color: '#fff', position: 'sticky' }}>
+                            <div style={{padding:"0 1rem"}}>
                                 Total&nbsp;&#8377; 123.00
                             </div>
-                            <div onClick={addToCart} >
+                            <div style={{padding:"0 1rem",cursor:"pointer"}} onClick={addToCart} >
                                 ADD ITEM
                             </div>
                         </div>

@@ -11,6 +11,9 @@ import Button from '../.././../shared/components/Button/Basic'
 
 export const CheckoutPage = (props) => {
   const history = useHistory()
+  const handlePayClick=()=>{
+    history.push('/payment')
+  }
   return (
     <div>
       <div style={{ height: '80px', width: '100%', backgroundColor: '#ececec' }}>
@@ -27,7 +30,7 @@ export const CheckoutPage = (props) => {
         <div><SettleBill /></div>
         <div> <Promos /></div>
         <div><GrandTotal /></div>
-        <div className="text-center" style={{ bottom: 20, position: 'fixed', width: '100%' }}><Button fullWidth style={{ backgroundColor: '#32c282', marginTop: '30px', color: '#fff', width: '90%' }}>PAY</Button></div>
+        <div className="text-center" style={{ bottom: 20, position: 'fixed', width: '100%' }}><Button fullWidth style={{ backgroundColor: '#32c282', marginTop: '30px', color: '#fff', width: '90%' }} onClick={handlePayClick}>PAY</Button></div>
       </div>
 
 

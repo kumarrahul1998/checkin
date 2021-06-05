@@ -8,6 +8,7 @@ import RoundedButton from '../../../shared/components/Button/Rounded'
 // import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from "@material-ui/core"
+import { useHistory } from "react-router"
 
 const useStyles= makeStyles(theme=>({
     container:{
@@ -51,6 +52,10 @@ const useStyles= makeStyles(theme=>({
 
 export default function OrderStatus() {
     const classes = useStyles();
+    const history= useHistory();
+    const handleClick=()=>{
+        history.push('/order');
+    }
     return (<>
         {/* <Grid style={{ height: "130px", backgroundColor: "#ffefef", marginTop: "15px" ,display:"flex",justifyContent:"space-between",padding:"0"}} container spacing={0}>
             <Grid style={{ margin: "10px", marginLeft: '30px', backgroundColor: "white", borderRadius: "6px", height: "70px", marginTop: "30px" }} item xs={7} lg={7} md={7} sm={7}>
@@ -162,6 +167,7 @@ export default function OrderStatus() {
                         <RoundedButton
                             size={"small"}
                             style={{width: "96%"}}
+                            onClick={handleClick}
                         >
                             <span
                                 style={{ fontSize: "14px" }}
