@@ -80,7 +80,13 @@ function MenuListComposition() {
         width: '4vw',
         height: '4vw',
         right: '1vw',
-        top: '1vw'
+        top: '1vw',
+        cursor: 'pointer'
+        
+    }
+
+    const searchIconStyle = {
+        cursor: 'pointer'
     }
 
     return (
@@ -128,7 +134,7 @@ function MenuListComposition() {
                         <input style={searchStyle} type="text" placeholder="Start typing to search..." />
                         <img src={cancel} style={closeIconStyle} onClick={() => setButtonClicked(false)}/>
                     </div>):
-                    (<SearchIcon onClick={() => setButtonClicked(true)}/>)
+                    (<div style={searchIconStyle} ><SearchIcon onClick={() => setButtonClicked(true)}/></div>)
                 }
                 
             </div>
