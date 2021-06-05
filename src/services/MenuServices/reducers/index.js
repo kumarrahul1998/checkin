@@ -21,8 +21,8 @@ const initState = {
         data: [],
         error: ""
     }
-
 }
+
 export default (state = initState, action) => {
     switch (action.type) {
 

@@ -40,13 +40,13 @@ function MenuPage(props) {
         left: '0',
         zIndex: '100',
         background: 'white',
-        height: '6.5vh'
+        height: 'auto',
+        background: 'white'
     }
+
     return (
-        <div style={{width: '100%'}} id="container">
-            <div
-                style={menuNavBarStyle}
-            >
+        <div style={{width: '100vw'}} id="container">
+            <div style={menuNavBarStyle} id="MenuNav">
                 <div style={{ margin: '15px', display: 'flex' }}>
                     <div style={{cursor: 'pointer'}}>
                         <ArrowBackIosIcon onClick={handleChange} />
@@ -61,7 +61,7 @@ function MenuPage(props) {
                     </div>
                 </div>
             </div>
-            <div style={{marginTop: '6.5vh'}}>
+            <div style={{marginTop: '8vh'}}>
                 <Offers />
             </div>
             
