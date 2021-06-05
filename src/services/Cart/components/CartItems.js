@@ -7,6 +7,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import BrightnessLowIcon from '@material-ui/icons/BrightnessLow';
+import Radium from 'radium';
 
 export const CartItems = ({ cart }) => {
   const items = cart.items.data
@@ -35,10 +36,10 @@ export const CartItems = ({ cart }) => {
     margin: '1vh 4vw',
     border: '1px solid #cdcdcd',
     borderRadius: '1.5vw',
-    fontSize: '16px',
     ":focus": {
-        outline: 'none'
+      outline: 'none'
     },
+    fontSize: '16px',
     fontWeight: '500',
     fontFamily: '"Josefin Sans", sans-serif',
     padding: '8px',
@@ -144,4 +145,4 @@ const mapDispatchToProps = {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartItems)
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(CartItems))
