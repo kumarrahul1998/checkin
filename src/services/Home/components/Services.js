@@ -58,15 +58,15 @@ function TextFieldSizes() {
     const pointerStyle = {
         color: '#ff5656',
         position: 'absolute',
-        right: '3vw',
+        right: '6vw',
         top: '28%',
         cursor: 'pointer'
     }
 
     const serviceSearchStyle = {
-        width: '95vw',
+        width: '85vw',
         height: '4vh',
-        margin: '0 0.5vw',
+        margin: '0 5vw',
         border: '1px solid #cdcdcd',
         borderRadius: '13px',
         fontSize: '14px',
