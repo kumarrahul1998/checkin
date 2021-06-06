@@ -13,6 +13,7 @@ import ApplyPrommos from './services/Checkout/components/ApplyPrommos';
 import MyRequestPage from './services/RoomServices/pages/RoomServicesPage';
 import ViewOrders from "./services/order/pages/ViewOrders";
 import PaymentSuccessful from "./services/order/pages/PaymentSuccessful";
+import ScrollToTop from 'react-router-scroll-top';
 // import { useSelector } from "react-redux"
 // import axios from "axios";
 function App(props) {
@@ -24,31 +25,33 @@ function App(props) {
   return (
     <div>
       <BrowserRouter>
-        <Switch>
-          {
-            state.signup.login.isLoggedIn ?
-              <>
-                <Route path="/settlebill" component={CheckoutPage} />
-                <Route path="/viewcart" component={ViewCartPage} />
-                <Route path="/home" component={HomePage} />
-                <Route path="/menu" component={MenuPage} />
-                <Route path="/sides" component={MenuCustomisation} />
-                <Route path="/Apply" component={ApplyPrommos} />
-                <Route exact path="/" component={HomePage} />
-                <Route path="/requests" component={MyRequestPage} />
-                <Route path="/order" component={ViewOrders} />
-                <Route path="/payment" component={PaymentSuccessful} />
-              </>
-              :
-              <>
-                <Route exact path="/" component={SignupPage} />
-                <Route path="/signup" component={SignupPage} />
-              </>
-          }
-          <div style={{ background: "yellow", width: "100%", padding: "100px" }} >
-            Hello
-          </div>
-        </Switch>
+        <ScrollToTop>
+          <Switch>
+            {
+              state.signup.login.isLoggedIn ?
+                <>
+                  <Route path="/settlebill" component={CheckoutPage} />
+                  <Route path="/viewcart" component={ViewCartPage} />
+                  <Route path="/home" component={HomePage} />
+                  <Route path="/menu" component={MenuPage} />
+                  <Route path="/sides" component={MenuCustomisation} />
+                  <Route path="/Apply" component={ApplyPrommos} />
+                  <Route exact path="/" component={HomePage} />
+                  <Route path="/requests" component={MyRequestPage} />
+                  <Route path="/order" component={ViewOrders} />
+                  <Route path="/payment" component={PaymentSuccessful} />
+                </>
+                :
+                <>
+                  <Route exact path="/" component={SignupPage} />
+                  <Route path="/signup" component={SignupPage} />
+                </>
+            }
+            <div style={{ background: "yellow", width: "100%", padding: "100px" }} >
+              Hello
+            </div>
+          </Switch>
+        </ScrollToTop>
       </BrowserRouter>
     </div>
   );
