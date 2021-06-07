@@ -1,6 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-function MyRequest() {
+function MyRequest(props) {
 
     const divStyle = {
         paddingTop: "1.11vh",
@@ -33,29 +34,21 @@ function MyRequest() {
         fontSize: '3.125vw'
     }
 
-    
-
-    const requests = [
-        {
-            request: 'Send houskeeping staff to room.', status : 'PENDING'
-        },
-        {
-            request: 'Send fresh towels to room.', status : 'PENDING'
-        },
-        {
-            request: 'The food served to us burnt. Can you replace the food or provide a refund?', status : 'RESOLVED'
-        }
-    ];
-
     const requestsContainerStyle = {
         paddingTop: '8.25vh',
         paddingLeft: "4.78vw",
         paddingRight: '6.25vw',
     }
 
+    const noRequestStyle = {
+        textAlign: 'center',
+        fontSize: '6vw',
+        marginTop: '25vh'
+    }
+
     return (
             <div style={requestsContainerStyle}>
-                {requests.map(ele => {
+                {props.requests.length > 0 ? props.requests.map(ele => {
                     return ( 
                     <div style={{...divStyle,marginTop: '2.87vh'}}>
                         <span style={requestStyle}>{ele.request}</span>
@@ -65,9 +58,13 @@ function MyRequest() {
                         }
                     </div>
                     )
-                })}
+                }) : <p style={noRequestStyle}>No requests at the moment.</p>}
             </div>
     )
 }
 
-export default MyRequest;
+const mapStateToProps = state => ({
+    requests : state.home.serviceRequest,
+})
+
+export default connect(mapStateToProps)(MyRequest);

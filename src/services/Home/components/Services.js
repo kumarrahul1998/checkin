@@ -19,8 +19,10 @@ import { shadows } from '@material-ui/system';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Radium from 'radium';
+import {connect} from 'react-redux';
+import actionTypes from '../actions/actionTypes';
 
-function TextFieldSizes() {
+function TextFieldSizes(props) {
 
     const history = useHistory()
     var value = ""
@@ -29,28 +31,34 @@ function TextFieldSizes() {
         {
 
             services: "Room Service",
-            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/C9479B3F-4E34-4794-BA30-4C139B82D6D2.svg"
+            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/C9479B3F-4E34-4794-BA30-4C139B82D6D2.svg",
+            serviceText : 'Please send a person to clean the room.'
 
         },
         {
             services: "Dental Kit",
-            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/1726C101-BBE7-47C5-9F1A-A0E99736588B.svg"
+            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/1726C101-BBE7-47C5-9F1A-A0E99736588B.svg",
+            serviceText : 'I need a Dental Kit. Please send it quickly.'
         },
         {
             services: "Shaving Kit",
-            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/A7289ADA-DA04-462B-8BB3-0C94B470877E.svg"
+            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/A7289ADA-DA04-462B-8BB3-0C94B470877E.svg",
+            serviceText : 'I need a Shaving Kit. Please send it quickly.'
         },
         {
             services: "Fresh towels",
-            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/A2E5D614-E32B-4D8A-B76D-67DAC4DD235F.svg"
+            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/A2E5D614-E32B-4D8A-B76D-67DAC4DD235F.svg",
+            serviceText : 'Fresh towels are needed. Please send it.'
         },
         {
-            services: "water",
-            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/4C1DBA35-E7E2-4986-A7BE-8A3B13A38B11.svg"
+            services: "Water",
+            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/4C1DBA35-E7E2-4986-A7BE-8A3B13A38B11.svg",
+            serviceText : 'Please refill mini bar with packaged water bottles'
         },
         {
             services: "Tissue",
-            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/2AD1B33C-A68B-4625-9767-707F22AACE59.svg"
+            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/2AD1B33C-A68B-4625-9767-707F22AACE59.svg",
+            serviceText : 'Please send Tissues.'
         }
     ]
     let windowWidth = window.innerWidth;
@@ -60,7 +68,7 @@ function TextFieldSizes() {
         position: 'absolute',
         right: '6vw',
         top: '28%',
-        cursor: 'pointer'
+        cursor: 'pointer',
     }
 
     const serviceSearchStyle = {
@@ -75,16 +83,50 @@ function TextFieldSizes() {
         },
         fontWeight: '500',
         fontFamily: '"Josefin Sans", sans-serif',
-        padding: '8px',
+        paddingTop: '8px',
+        paddingBottom: '8px',
+        paddingRight: '8px',
         paddingLeft: '10px'
     }
     
     const goBack = () => {
         history.push('/requests');
     }
+
+    // HandleService
+    const [serviceMessage, setServiceMessage] = React.useState('');
+    const handleService = text => {
+        document.querySelector('#serviceSearch').value = text;
+        //setServiceMessage(text);
+    }
+
+    // Send Request Button Clicked
+
+    const sendRequestButtonClicked = () => {
+        let searchValue = document.querySelector('#serviceSearch').value.trim();
+        const pastServices = props.requests.find(request => request.request.toLowerCase() === searchValue.toLowerCase());
+        if(searchValue !== ''){
+            if(!pastServices){
+                props.sendRequest(searchValue, 'PENDING');
+            }else{
+                alert('This Service Already Exists!');
+            }
+        } else {
+            alert('Please Enter a Service Request');
+        }
+        document.querySelector('#searchForm').reset();
+    }
+
+    React.useEffect(() => {
+        const searchField = document.querySelector('#searchForm');
+        searchField.addEventListener('submit',e => {
+            e.preventDefault();
+        })
+    },[]);
+
     return (
 
-
+        
         <div style={{ width: "100%" }} >
             <div style={{ display: "flex", justifyContent: 'space-between' }}>
                 <div style={{ marginLeft: '10px', color: '#6d6d6d', fontSize: '14px', letterSpacing: '0.8px', marginBottom: '20px' }}><h3>Services</h3></div>
@@ -98,47 +140,10 @@ function TextFieldSizes() {
 
 
                 <div>
-                    {/* <TextField
-                        // className={classes.inputfield}
-                        label="Search"
-                        id="outlined-size-small"
-                        // defaultValue="Small"
-                        placeholder="Ask for anything"
-                        variant="outlined"
-                        size="small"
-                        fullWidth
-                    /> */}
-                    {/*<Paper
-                        elevation={0}
-                        component="form"
-                        style={{
-                            borderRadius: '20px',
-                            margin: '5px',
-                            height: '43px',
-                            marginTop: '-10px',
-                            border: "1px solid #cdcdcd",
-                        }}
-                    >
-                        <div style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            marginTop: "0px"
-                        }}
-                        >
-                            <InputBase
-                                placeholder="Ask for anything"
-                                style={{ marginLeft: '10px' }}
-                            />
-                            <IconButton aria-label="search" style={{ marginLeft: windowWidth * 0.32 + 'px' }} >
-                                <img src={arrow5} style={{ color: '#ff5656' }} width="20" height="20" viewBox="0 0 30 30"></img>
-                            </IconButton>
-
-                        </div>
-                    </Paper>*/}
                     <div>
-                        <form style={{position: 'relative'}}>
+                        <form id="searchForm" style={{position: 'relative'}}>
                             <input id="serviceSearch" style={serviceSearchStyle} type="text" placeholder="Ask for anything" autocomplete="off"/>
-                            <img src={arrow5} style={pointerStyle} width="20" height="20" viewBox="0 0 30 30"></img>
+                            <img onClick={sendRequestButtonClicked} src={arrow5} style={pointerStyle} width="20" height="20" viewBox="0 0 30 30"/>
                         </form>
                     </div>
                     
@@ -151,12 +156,11 @@ function TextFieldSizes() {
                 <ScrollMenu
 
                     data={items.map(res =>
-                        <Box boxShadow={1} style={{ height: "90px", width: "100px", margin: "20px", marginRight: "10px", borderRadius: '10px' }}>
+                        <Box onClick={() => handleService(res.serviceText)} boxShadow={1} style={{ height: "90px", width: "100px", margin: "20px", marginRight: "10px", borderRadius: '10px' }}>
                             <CardMedia
                                 style={{ height: "45px", marginTop: '10px', width: '50px', marginLeft: '25px', marginBottom: "0", }}
                                 image={res.imageUrl}
                                 title="services"
-                            //  onClick={handleService}
                             />
                             <Typography>
                                 <p style={{ fontSize: '12px', fontWeight: 600, textAlign: 'center', marginLeft: "6px", color: '#6d6d6c' }}>  {res.services}</p>
@@ -166,7 +170,16 @@ function TextFieldSizes() {
             </div>
 
         </div>
+        
     );
 }
 
-export default Radium(TextFieldSizes);
+const mapDispatchToProps = dispatch => ({
+    sendRequest : (value,serviceStatus) => dispatch({type: actionTypes.SEND_REQUEST, request : value, status : serviceStatus}),
+})
+
+const mapStateToProps = state => ({
+    requests : state.home.serviceRequest,
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Radium(TextFieldSizes));
