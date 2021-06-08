@@ -9,6 +9,10 @@ export const ViewCartPage = () => {
     const history = useHistory()
     const height = window.innerHeight;
 
+    React.useEffect(() => {
+        console.log(history);
+    })
+
     const cartNavStyle = {
         width: '100vw',
         borderBottom: "1px solid grey",
@@ -26,7 +30,7 @@ export const ViewCartPage = () => {
             >
                 <div style={{ display: 'flex', }}>
                     <div style={{ marginTop: '15px', marginLeft: '10px' }}>
-                        <ArrowBackIosIcon style={{ color: '#6d6d6d' }} onClick={() => history.hasOwnProperty("back") ? history.back() : history.push("/menu")} />
+                        <ArrowBackIosIcon style={{ color: '#6d6d6d' }} onClick={() => history.hasOwnProperty("goBack") ? history.goBack() : history.push("/menu")} />
                     </div>
                     <div>
                         <div style={{ color: "#6d6d6d", marginTop: '20px', fontSize: '20px' }}>

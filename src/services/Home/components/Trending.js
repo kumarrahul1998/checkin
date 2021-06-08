@@ -12,14 +12,12 @@ import nonVeg from '../../../assets/home/nonvegicon.jpg'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ScrollMenu from "react-horizontal-scrolling-menu";
 import Skeleton from '@material-ui/lab/Skeleton';
-import { connect } from "react-redux"
+import { connect } from "react-redux";
+import actionTypes from '../actions/actionTypes';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 
-function Trending({ home }) {
-
-    
-    React.useEffect(() => {
-        console.log('value of home',home);
-    },[])
+function Trending({ home, sendToCart, cart }) {
 
     let items = [
         {
@@ -52,10 +50,6 @@ function Trending({ home }) {
 
     const trendingDishes = home.trendingDishes
 
-    const jj = (dish) => {
-        console.log(dish)
-    }
-
     return (
         <div >
             <div style={{ marginLeft: '10px', color: '#6d6d6d', marginTop: '40px', fontSize: '14px' }}>
@@ -78,7 +72,7 @@ function Trending({ home }) {
                     <div style={{ display: "flex", overflow: "scroll", marginLeft: "0" }} >
                         <ScrollMenu
 
-                            data={trendingDishes.data.map(dish =>
+                            data={trendingDishes.data.map((dish,index )=>
                                 <Card style={{ height: "170px", width: "180px", marginRight: "5px", marginLeft: "3px", }}>
                                     <CardMedia
                                         style={{ height: "70px" }}
@@ -95,13 +89,23 @@ function Trending({ home }) {
                                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                                             <div style={{ fontSize: '12px', fontWeight: 600, marginLeft: "20px", marginTop: "5px", color: "#6d6d6d" }}>&#8377; {dish.costs?.[0]}</div>
                                             {/* <IconButton color="primary" aria-label="add to shopping cart"> */}
-                                            <div onClick={()=>jj(dish)} style={{marginRight: "5px", marginTop: "-6px"}}>   <div
+                                            {true?<div style={{marginRight: "5px", marginTop: "-6px"}}>   <div
                                                     style={{ padding: "3px 10px", fontSize: '8px', fontWeight: 700, backgroundColor: "#ff5656", color: "white", borderRadius: "5px" }}
-                                                     
+                                                    onClick={() => sendToCart(dish)}
                                                 >
                                                     ADD 
                                                     
-                                                </div> </div>
+                                                </div> </div>:<div style={{
+                                                    backgroundColor: '#ff5656', height: '21px', marginRight: '5px',
+                                                    cursor: 'pointer', width: '60px', borderRadius: '5px'
+                                                }}>
+                                                    <div style={{ display: 'flex', color: '#fff' }}>
+                                                        <div ><RemoveIcon style={{ width: '13px', marginLeft: '5px' }}  /></div>
+                                                        <div style={{ marginTop: '5px', marginLeft: '7px', }} >5</div>
+                                                        <div ><AddIcon style={{ width: '13px', marginLeft: '8px' }}  /></div>
+                                                    </div>
+    
+                                                </div>}
                                             {/* </IconButton> */}
                                         </div>
                                     </div>
@@ -117,11 +121,12 @@ function Trending({ home }) {
 }
 
 const mapStateToProps = (state) => ({
-    home: state.home
+    home: state.home,
+    cart: state.cart
 })
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = dispatch => ({
+    sendToCart : (data) => dispatch({type : actionTypes.SEND_TO_CART, payload : data})
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trending)

@@ -68,7 +68,7 @@ function MenuPage(props) {
 
             <div style={{ position: 'absolute', zIndex: 10, width: '100%', }} > <CategoriesMenu /></div>
             <Items />
-            {dishes.map((item, index) => {
+            {dishes.map((item, index) => { 
                 return( 
                     <div>                                                       
                         <Displaydish key={item.categoryName} obj = {JSON.parse(JSON.stringify(item))} index = {index}/>

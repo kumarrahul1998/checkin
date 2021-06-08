@@ -95,35 +95,6 @@ export const CartItems = ({ cart }) => {
 
           <div>
             <input style={cartSearchStyle} type="text" placeholder="Write special instructions..." />
-            {/* {<Paper
-              elevation={0}
-              component="form"
-              style={{
-                borderRadius: '10px',
-                margin: '5px',
-                height: '30px',
-                marginTop: '-10px',
-                border: "1px solid #cdcdcd",
-                marginLeft: '40px',
-                marginRight: '32px'
-
-              }}
-            >
-              <div style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: "2px"
-              }}
-              >
-                <InputBase
-                  placeholder="Write special instructions"
-                  style={{ marginLeft: '10px', fontSize: '13px', color: '#6d6d6d' }}
-                />
-                
-
-
-              </div>
-            </Paper>} */}
           </div>
         </div>
       )}
