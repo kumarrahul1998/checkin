@@ -34,11 +34,14 @@ export default (state = initialState, { type, payload }) => {
       }
 
     case ACTION.REMOVE_ITEM:
-      return {
+    const index= state.items.data.findIndex((item)=>item.name==payload.name)  
+    const list= state;
+    list.items.data.splice(index,1);
+    return {
         ...state,
         items: {
           ...state.items,
-          data: state.items.data.filter(item => item.id !== payload)
+          data: list.items.data,
         }
       }
 

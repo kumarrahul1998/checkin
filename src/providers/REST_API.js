@@ -8,7 +8,7 @@ const make_API_call = (req_method, path, data = {}) => {
         .get(path)
         .then((res) => res.data)
         .catch((err) => {
-          console.log(err.response);
+          // console.log(err.response);
           throw err.response.data;
         });
 
@@ -17,7 +17,7 @@ const make_API_call = (req_method, path, data = {}) => {
         .post(path, data)
         .then((res) => res.data)
         .catch((err) => {
-          console.log(err.response);
+          // console.log(err.response);
           throw err.response.data;
         });
 
@@ -26,7 +26,7 @@ const make_API_call = (req_method, path, data = {}) => {
         .put(path, data)
         .then((res) => res.data)
         .catch((err) => {
-          console.log(err.response);
+          // console.log(err.response);
           throw err.response.data;
         });
 
@@ -35,7 +35,7 @@ const make_API_call = (req_method, path, data = {}) => {
         .delete(path)
         .then((res) => res.data)
         .catch((err) => {
-          console.log(err.response);
+          // console.log(err.response);
           throw err.response.data;
         });
   }

@@ -15,7 +15,6 @@ import {useHistory} from 'react-router-dom';
 
 function HomePage(props) {
     const { loadRestaurentDetails, state, loadOrders, loadTrendingDishes } = props
-    console.log(state);
     const { details } = state
     let windowHeight = window.innerHeight;
     let windowWidth = window.innerWidth;

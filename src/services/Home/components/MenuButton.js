@@ -13,9 +13,9 @@ export default function FloatingActionButtons() {
 
     return (
         <div >
-            <Fab color="primary" aria-label="add">
-                <img style={{ height: "62px", width: "62px", borderRadius: "50%" ,position: "fixed",right:"2rem", bottom:"3.5rem"}} src={MenuImage} onClick={handleOpen} />
-            </Fab>
+            {/* <Fab color="primary" aria-label="add"> */}
+                <img style={{ height: "62px", width: "62px", borderRadius: "50%" ,position: "fixed",right:"1rem", bottom:"3.5rem",cursor:"pointer"}} src={MenuImage} onClick={handleOpen} />
+            {/* </Fab> */}
         </div>
     );
 }
