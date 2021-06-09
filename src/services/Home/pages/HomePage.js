@@ -15,7 +15,7 @@ import {useHistory} from 'react-router-dom';
 
 function HomePage(props) {
     const { loadRestaurentDetails, state, loadOrders, loadTrendingDishes } = props
-    console.log(state);
+    //console.log(state);
     const { details } = state
     let windowHeight = window.innerHeight;
     let windowWidth = window.innerWidth;
@@ -48,14 +48,14 @@ function HomePage(props) {
 
                 <div>
                     <div
-                        style={{ width: '100%', borderBottom: "1px solid grey" }}
+                        style={{ width: '100vw', borderBottom: "1px solid grey" }}
                     >
                         <div style={{ margin: '15px' }}><div style={{ color: "#ff5656", fontWeight: 600 }}>Room  301</div>
                             <div style={{ fontSize: '10px', fontWeight: 600, marginTop: '5px', color: '#6d6d6d' }}> {details.data.restaurant.display_name ? <h3>{details.data.restaurant.display_name}</h3> : <h3>Oyo Townhouse 032</h3>}  </div>
                             <div style={cartStyle} onClick={() => history.push('/viewcart')}>
                                 <Badge style={{ marginBottom: "10vh", marginRight: "-12vw" }} badgeContent={cartLength} color="error">
                                 </Badge>
-                                <img src={CartIcon}/>
+                                <img src={CartIcon} alt="cart icon"/>
                             </div>
                         </div>
                     </div>
