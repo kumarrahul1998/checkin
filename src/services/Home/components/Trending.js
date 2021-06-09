@@ -17,7 +17,7 @@ import actionTypes from '../actions/actionTypes';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 
-function Trending({ home, sendToCart, cart }) {
+function Trending({ home, sendToCart, cart,removeFromCart }) {
 
     let items = [
         {
@@ -49,7 +49,10 @@ function Trending({ home, sendToCart, cart }) {
     ]
 
     const trendingDishes = home.trendingDishes
-
+    const handleDecrease=(dish)=>{
+        removeFromCart(dish);
+    }
+    
     return (
         <div >
             <div style={{ marginLeft: '10px', color: '#6d6d6d', marginTop: '40px', fontSize: '14px' }}>
@@ -73,7 +76,7 @@ function Trending({ home, sendToCart, cart }) {
                         <ScrollMenu
 
                             data={trendingDishes.data.map((dish,index )=>
-                                <Card style={{ height: "170px", width: "180px", marginRight: "5px", marginLeft: "3px", }}>
+                                <Card key={index} style={{ height: "170px", width: "180px", marginRight: "5px", marginLeft: "3px", }}>
                                     <CardMedia
                                         style={{ height: "70px" }}
                                         image={dish.image}
@@ -89,8 +92,8 @@ function Trending({ home, sendToCart, cart }) {
                                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                                             <div style={{ fontSize: '12px', fontWeight: 600, marginLeft: "20px", marginTop: "5px", color: "#6d6d6d" }}>&#8377; {dish.costs?.[0]}</div>
                                             {/* <IconButton color="primary" aria-label="add to shopping cart"> */}
-                                            {true?<div style={{marginRight: "5px", marginTop: "-6px"}}>   <div
-                                                    style={{ padding: "3px 10px", fontSize: '8px', fontWeight: 700, backgroundColor: "#ff5656", color: "white", borderRadius: "5px" }}
+                                            {cart.items&&cart.items.data&&!cart.items.data.find((item)=>item.name==dish.name)?<div style={{marginRight: "5px", marginTop: "-6px"}}>   <div
+                                                    style={{ padding: "3px 10px", fontSize: '8px', fontWeight: 700, backgroundColor: "#ff5656", color: "white", borderRadius: "5px",cursor:"pointer" }}
                                                     onClick={() => sendToCart(dish)}
                                                 >
                                                     ADD 
@@ -100,11 +103,11 @@ function Trending({ home, sendToCart, cart }) {
                                                     cursor: 'pointer', width: '60px', borderRadius: '5px'
                                                 }}>
                                                     <div style={{ display: 'flex', color: '#fff' }}>
-                                                        <div ><RemoveIcon style={{ width: '13px', marginLeft: '5px' }}  /></div>
-                                                        <div style={{ marginTop: '5px', marginLeft: '7px', }} >5</div>
-                                                        <div ><AddIcon style={{ width: '13px', marginLeft: '8px' }}  /></div>
+                                                        <div ><RemoveIcon style={{ width: '13px', marginLeft: '5px' }} onClick={()=>handleDecrease(dish)} /></div>
+                                                        <div style={{ marginTop: '5px', marginLeft: '7px', }} >{cart.items.data.filter(i=>i.name==dish.name).length}</div>
+                                                        <div ><AddIcon style={{ width: '13px', marginLeft: '8px' }} onClick={()=>sendToCart(dish)}   /></div>
                                                     </div>
-    
+                                                
                                                 </div>}
                                             {/* </IconButton> */}
                                         </div>
@@ -126,7 +129,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    sendToCart : (data) => dispatch({type : actionTypes.SEND_TO_CART, payload : data})
+    sendToCart : (data) => dispatch({type : actionTypes.SEND_TO_CART, payload : data}),
+    removeFromCart: (data)=>dispatch({type:actionTypes.REMOVE_FROM_CART,payload:data})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trending)

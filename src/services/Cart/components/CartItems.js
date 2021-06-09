@@ -68,18 +68,18 @@ export const CartItems = ({ cart }) => {
             <div>{item.type === "veg" ?
               <div style={{ marginTop: '20px', marginLeft: '58px', color: '#fff' }}>
                 <div style={{ width: '60px', height: '20px', backgroundColor: '#f5365c', borderRadius: '5px', display: 'flex', justifyContent: 'space-between', marginLeft: '5px' }}>
-                  <div style={{ marginLeft: '11px', marginTop: '2px', }} onClick={handleDecrease}>-</div>
+                  <div style={{ marginLeft: '11px', marginTop: '2px',cursor:"pointer" }} onClick={handleDecrease}>-</div>
                   <div style={{ marginTop: '4px' }}>{value}</div>
-                  <div style={{ marginRight: '10px', marginTop: '2px' }} onChange={handleIncrease}>+</div>
+                  <div style={{ marginRight: '10px', marginTop: '2px',cursor:"pointer" }} onClick={handleIncrease}>+</div>
 
                 </div>
 
               </div> :
               <div style={{ marginTop: '20px', marginLeft: '108px', color: '#fff' }}>
                 <div style={{ width: '60px', height: '20px', backgroundColor: '#f5365c', borderRadius: '5px', display: 'flex', justifyContent: 'space-between' }}>
-                  <div style={{ marginLeft: '10px', marginTop: '2px', }} onClick={handleDecrease}>-</div>
+                  <div style={{ marginLeft: '10px', marginTop: '2px',cursor:"pointer" }} onClick={handleDecrease}>-</div>
                   <div style={{ marginTop: '4px' }}>{value}</div>
-                  <div style={{ marginRight: '10px', marginTop: '2px' }} onChange={handleIncrease}>+</div>
+                  <div style={{ marginRight: '10px', marginTop: '2px',cursor:"pointer" }} onClick={handleIncrease}>+</div>
 
                 </div>
 
@@ -100,7 +100,7 @@ export const CartItems = ({ cart }) => {
       </div>
       </div>
 
-    </div >
+    </div>
   )
 }
 

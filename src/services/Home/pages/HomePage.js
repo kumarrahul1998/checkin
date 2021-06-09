@@ -9,13 +9,12 @@ import Badge from '@material-ui/core/Badge';
 import BillingBottomBar from '../components/BillingBottomBar';
 // import Box from '@material-ui/core/Box'
 import { _load_orders, _load_restaurent_details, _load_trending_dishes } from '../middleware'
-import { connect } from "react-redux"
+import { connect } from "react-redux";
 import {useHistory} from 'react-router-dom';
 
 
 function HomePage(props) {
     const { loadRestaurentDetails, state, loadOrders, loadTrendingDishes } = props
-    //console.log(state);
     const { details } = state
     let windowHeight = window.innerHeight;
     let windowWidth = window.innerWidth;

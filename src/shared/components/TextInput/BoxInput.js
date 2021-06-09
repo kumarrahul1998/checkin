@@ -6,7 +6,6 @@ import {
 import {useLayoutEffect, useRef} from 'react'
 
 function BoxInput({ autoFocus, label,classes, ...rest }) {
-  console.log(autoFocus);
   const CustomTextField = withStyles({
     root: {
       '& input': {
