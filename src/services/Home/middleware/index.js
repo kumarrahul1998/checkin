@@ -62,6 +62,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "89.00"
         ],
+        "price":89.00,
         "tags": [
           "dessert"
         ],
@@ -97,6 +98,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
           "159.00",
           "159.00"
         ],
+        "price":159.00,
         "tags": [],
         "available_meals": [
           "brkfst",
@@ -128,6 +130,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
           "159.00",
           "159.00"
         ],
+        "price":159.00,
         "tags": [],
         "available_meals": [
           "brkfst",
@@ -157,6 +160,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "119.00"
         ],
+        "price":119.00,
         "tags": [
           "na"
         ],
@@ -192,6 +196,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "199.00"
         ],
+        "price":199.00,
         "tags": [],
         "available_meals": [
           "brkfst",
@@ -221,6 +226,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "199.00"
         ],
+        "price":199.00,
         "tags": [],
         "available_meals": [
           "brkfst",
@@ -250,6 +256,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "123.00"
         ],
+        "price":123.00,
         "tags": [
           "na"
         ],
@@ -282,6 +289,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "89.00"
         ],
+        "price":89.00,
         "tags": [],
         "available_meals": [
           "brkfst",
@@ -311,6 +319,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "159.00"
         ],
+        "price":159.00,
         "tags": [],
         "available_meals": [
           "brkfst",
@@ -340,6 +349,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "123.00"
         ],
+        "price":123.00,
         "tags": [
           "na"
         ],
@@ -370,6 +380,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "16.00"
         ],
+        "price":16.00,
         "tags": [
           "r"
         ],
@@ -403,6 +414,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
           "250.00",
           "300.00"
         ],
+        "price":250.00,
         "tags": [],
         "available_meals": [
           "brkfst"
@@ -429,6 +441,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "99.00"
         ],
+        "price":99.00,
         "tags": [],
         "available_meals": [
           "brkfst",
@@ -458,6 +471,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "159.00"
         ],
+        "price":159.00,
         "tags": [],
         "available_meals": [
           "brkfst",
@@ -487,6 +501,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "109.00"
         ],
+        "price":109.00,
         "tags": [],
         "available_meals": [
           "brkfst",
@@ -516,6 +531,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "169.00"
         ],
+        "price":169.00,
         "tags": [],
         "available_meals": [
           "brkfst",
@@ -545,6 +561,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "199.00"
         ],
+        "price":199.00,
         "tags": [],
         "available_meals": [
           "brkfst",
@@ -574,6 +591,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "79.00"
         ],
+        "price":79.00,
         "tags": [],
         "available_meals": [
           "brkfst",
@@ -607,6 +625,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
           "119.00",
           "119.00"
         ],
+        "price": 99.00,
         "tags": [],
         "available_meals": [
           "brkfst",
@@ -636,6 +655,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "costs": [
           "99.00"
         ],
+        "price": 99.00,
         "tags": [],
         "available_meals": [
           "brkfst",

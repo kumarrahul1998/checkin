@@ -1,4 +1,5 @@
-import ACTION from "../actions/actionTypes"
+import ACTION from "../actions/actionTypes";
+import HOMEACTION from '../../Home/actions/actionTypes';
 
 const initialState = {
   items: {
@@ -13,6 +14,15 @@ export default (state = initialState, { type, payload }) => {
 
     case ACTION.SET_STATE:
       return { ...state, ...payload }
+
+    case HOMEACTION.SEND_TO_CART:
+      return {
+        ...state,
+        items: {
+          ...state.items,
+          data: [...state.items.data, payload]
+        }
+      }
 
     case ACTION.ADD_ITEM:
       return {

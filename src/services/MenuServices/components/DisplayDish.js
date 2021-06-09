@@ -9,10 +9,10 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import MenuCustomisation from "./MenuCustomisation"
-import { addItem, removeItem } from "../../Cart/actions/actionCreator"
-import { connect } from 'react-redux'
-import ShowDialog from './ShowDialog'
-import  '../../../stylings/displaydishstyle.css'
+import { addItem, removeItem } from "../../Cart/actions/actionCreator";
+import { connect } from 'react-redux';
+import ShowDialog from './ShowDialog';
+import  '../../../stylings/displaydishstyle.css';
 
 function Displaydish(props) {
     // const [loading, setloading] = useState(true);
@@ -21,19 +21,19 @@ function Displaydish(props) {
     let Width = window.innerWidth;
     const history = useHistory()
     const [Items, setItems] = React.useState(props.obj.data);
-    console.log(Items)
+    //console.log(Items)
     const handleIncrease = (index) => {
-        console.log(Items[index].name)
+        //console.log(Items[index].name)
         const recItems = JSON.parse(JSON.stringify(Items))
         if (recItems[index].isCustomised === true)
             return handleOpenSlides(true)
         const cartValue = recItems[index].cartValue
-        console.log(recItems[index].cartValue)
+        //console.log(recItems[index].cartValue)
         recItems[index].cartValue = cartValue + 1
         setItems(recItems)
         
         _add_item(recItems[index])
-        console.log(Items[index].cartValue) 
+        //console.log(Items[index].cartValue) 
     }
     const handleDecrease = (index) => {
         

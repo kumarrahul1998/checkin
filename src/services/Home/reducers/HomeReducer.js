@@ -37,7 +37,10 @@ const initState = {
         isLoading: true,
         data: [],
         error: ""
-    }
+    },
+    serviceRequest : []
+        
+    
 }
 
 
@@ -59,7 +62,14 @@ export const HomeReducer = (state = initState, action) => {
                     isLoading: true
                 }
             }
-
+        case ACTION.SEND_REQUEST:
+            return {
+                ...state,
+                serviceRequest : [
+                    ...state.serviceRequest,
+                    {request : action.request, status: action.status}
+                ]
+            }
         case ACTION.LOAD_RESTAURENT_DETAILS_SUCCESS:
             return {
                 ...state,

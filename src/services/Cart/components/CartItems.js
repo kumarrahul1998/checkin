@@ -7,7 +7,6 @@ import InputBase from '@material-ui/core/InputBase';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import BrightnessLowIcon from '@material-ui/icons/BrightnessLow';
-import Radium from 'radium';
 
 export const CartItems = ({ cart }) => {
   const items = cart.items.data
@@ -36,9 +35,6 @@ export const CartItems = ({ cart }) => {
     margin: '1vh 4vw',
     border: '1px solid #cdcdcd',
     borderRadius: '1.5vw',
-    ":focus": {
-      outline: 'none'
-    },
     fontSize: '16px',
     fontWeight: '500',
     fontFamily: '"Josefin Sans", sans-serif',
@@ -72,18 +68,18 @@ export const CartItems = ({ cart }) => {
             <div>{item.type === "veg" ?
               <div style={{ marginTop: '20px', marginLeft: '58px', color: '#fff' }}>
                 <div style={{ width: '60px', height: '20px', backgroundColor: '#f5365c', borderRadius: '5px', display: 'flex', justifyContent: 'space-between', marginLeft: '5px' }}>
-                  <div style={{ marginLeft: '11px', marginTop: '2px', }} onClick={handleDecrease}>-</div>
+                  <div style={{ marginLeft: '11px', marginTop: '2px',cursor:"pointer" }} onClick={handleDecrease}>-</div>
                   <div style={{ marginTop: '4px' }}>{value}</div>
-                  <div style={{ marginRight: '10px', marginTop: '2px' }} onClick={handleIncrease}>+</div>
+                  <div style={{ marginRight: '10px', marginTop: '2px',cursor:"pointer" }} onClick={handleIncrease}>+</div>
 
                 </div>
 
               </div> :
               <div style={{ marginTop: '20px', marginLeft: '108px', color: '#fff' }}>
                 <div style={{ width: '60px', height: '20px', backgroundColor: '#f5365c', borderRadius: '5px', display: 'flex', justifyContent: 'space-between' }}>
-                  <div style={{ marginLeft: '10px', marginTop: '2px', }} onClick={handleDecrease}>-</div>
+                  <div style={{ marginLeft: '10px', marginTop: '2px',cursor:"pointer" }} onClick={handleDecrease}>-</div>
                   <div style={{ marginTop: '4px' }}>{value}</div>
-                  <div style={{ marginRight: '10px', marginTop: '2px' }} onClick={handleIncrease}>+</div>
+                  <div style={{ marginRight: '10px', marginTop: '2px',cursor:"pointer" }} onClick={handleIncrease}>+</div>
 
                 </div>
 
@@ -95,35 +91,6 @@ export const CartItems = ({ cart }) => {
 
           <div>
             <input style={cartSearchStyle} type="text" placeholder="Write special instructions..." />
-            {/* {<Paper
-              elevation={0}
-              component="form"
-              style={{
-                borderRadius: '10px',
-                margin: '5px',
-                height: '30px',
-                marginTop: '-10px',
-                border: "1px solid #cdcdcd",
-                marginLeft: '40px',
-                marginRight: '32px'
-
-              }}
-            >
-              <div style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: "2px"
-              }}
-              >
-                <InputBase
-                  placeholder="Write special instructions"
-                  style={{ marginLeft: '10px', fontSize: '13px', color: '#6d6d6d' }}
-                />
-                
-
-
-              </div>
-            </Paper>} */}
           </div>
         </div>
       )}
@@ -145,4 +112,4 @@ const mapDispatchToProps = {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Radium(CartItems))
+export default connect(mapStateToProps,mapDispatchToProps)(CartItems);

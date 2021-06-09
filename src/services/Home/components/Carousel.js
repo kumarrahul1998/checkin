@@ -1,8 +1,4 @@
 import React from 'react';
-import Carousel from 'react-material-ui-carousel'
-import { Paper } from '@material-ui/core'
-// import SpeedDial from '@material-ui/lab/SpeedDial';
-
 
 function Example() {
     var items = [
@@ -45,11 +41,9 @@ function Example() {
 
     return (
         <div className="banner-container">
-             <Carousel style={{ zindex: 1000 }} animation="slide" indicators={false} interval="2500"> 
             {
                 items.map((item, i) => <Item key={i} item={item} />)
             }
-             </Carousel> 
         </div>
     )
 }
@@ -57,7 +51,7 @@ function Example() {
 function Item(props) {
     return (
         <div className="banner-card">
-            <img alt="banner-item" src={props.item.imageURL} style={{ borderRadius: "16px", width: "60vw" }} height={window.innerHeight * 0.2} />
+            <img alt="banner-item" src={props.item.imageURL} style={{ borderRadius: "16px", width: "70vw" }} height={window.innerHeight * 0.2} />
         </div>
 
     )

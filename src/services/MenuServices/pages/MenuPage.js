@@ -8,7 +8,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { useHistory } from 'react-router-dom';
 import { getPromos, loadRecommendedRestaurants } from '../middleware'
 import { connect } from "react-redux"
-import BottomBar from "../components/AbsoluteComponents"
+import BottomBar from "../components/AbsoluteComponents";
 import Divider from '@material-ui/core/Divider';
 import dishes from '../components/Dishes'
 import Displaydish from '../components/DisplayDish'
@@ -68,7 +68,7 @@ function MenuPage(props) {
 
             <div style={{ position: 'absolute', zIndex: 10, width: '100%', }} > <CategoriesMenu /></div>
             <Items />
-            {dishes.map((item, index) => {
+            {dishes.map((item, index) => { 
                 return( 
                     <div>                                                       
                         <Displaydish key={item.categoryName} obj = {JSON.parse(JSON.stringify(item))} index = {index}/>
