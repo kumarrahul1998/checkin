@@ -7,17 +7,18 @@ import InputBase from '@material-ui/core/InputBase';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import BrightnessLowIcon from '@material-ui/icons/BrightnessLow';
+import actionTypes from '../actions/actionTypes';
 
-export const CartItems = ({ cart }) => {
+export const CartItems = ({ cart,sendToCart,removeFromCart }) => {
   const items = cart.items.data
   const width = window.innerWidth
   const [value, setValue] = React.useState(1);
 
-  const handleIncrease = () => {
-    setValue(value + 1)
+  const handleIncrease = (dish) => {
+    sendToCart(dish)
   }
-  const handleDecrease = () => {
-    if (value > 0) { setValue(value - 1) };
+  const handleDecrease = (dish) => {
+  removeFromCart(dish) 
   }
   const handleCustomize = () => {
     console.log("this is customizeable")
@@ -41,7 +42,7 @@ export const CartItems = ({ cart }) => {
     padding: '8px',
     paddingLeft: '15px'
   }
-
+  
   return (
     <div>
       <div>{items.map((item, index) =>
@@ -68,18 +69,18 @@ export const CartItems = ({ cart }) => {
             <div>{item.type === "veg" ?
               <div style={{ marginTop: '20px', marginLeft: '58px', color: '#fff' }}>
                 <div style={{ width: '60px', height: '20px', backgroundColor: '#f5365c', borderRadius: '5px', display: 'flex', justifyContent: 'space-between', marginLeft: '5px' }}>
-                  <div style={{ marginLeft: '11px', marginTop: '2px',cursor:"pointer" }} onClick={handleDecrease}>-</div>
+                  <div style={{ marginLeft: '11px', marginTop: '2px',cursor:"pointer" }} onClick={()=>handleDecrease(item)}>-</div>
                   <div style={{ marginTop: '4px' }}>{value}</div>
-                  <div style={{ marginRight: '10px', marginTop: '2px',cursor:"pointer" }} onClick={handleIncrease}>+</div>
+                  <div style={{ marginRight: '10px', marginTop: '2px',cursor:"pointer" }} onClick={()=>handleIncrease(item)}>+</div>
 
                 </div>
 
               </div> :
               <div style={{ marginTop: '20px', marginLeft: '108px', color: '#fff' }}>
                 <div style={{ width: '60px', height: '20px', backgroundColor: '#f5365c', borderRadius: '5px', display: 'flex', justifyContent: 'space-between' }}>
-                  <div style={{ marginLeft: '10px', marginTop: '2px',cursor:"pointer" }} onClick={handleDecrease}>-</div>
+                  <div style={{ marginLeft: '10px', marginTop: '2px',cursor:"pointer" }} onClick={()=>handleDecrease(item)}>-</div>
                   <div style={{ marginTop: '4px' }}>{value}</div>
-                  <div style={{ marginRight: '10px', marginTop: '2px',cursor:"pointer" }} onClick={handleIncrease}>+</div>
+                  <div style={{ marginRight: '10px', marginTop: '2px',cursor:"pointer" }} onClick={()=>handleIncrease(item)}>+</div>
 
                 </div>
 
@@ -108,8 +109,10 @@ const mapStateToProps = (state) => ({
   cart: state.cart
 })
 
-const mapDispatchToProps = {
 
-}
+const mapDispatchToProps = dispatch => ({
+  sendToCart : (data) => dispatch({type : actionTypes.ADD_ITEM, payload : data}),
+  removeFromCart: (data)=>dispatch({type:actionTypes.REMOVE_ITEM,payload:data})
+})
 
 export default connect(mapStateToProps,mapDispatchToProps)(CartItems);
