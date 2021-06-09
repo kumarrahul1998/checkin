@@ -74,7 +74,7 @@ export const CartItems = ({ cart }) => {
                 <div style={{ width: '60px', height: '20px', backgroundColor: '#f5365c', borderRadius: '5px', display: 'flex', justifyContent: 'space-between', marginLeft: '5px' }}>
                   <div style={{ marginLeft: '11px', marginTop: '2px', }} onClick={handleDecrease}>-</div>
                   <div style={{ marginTop: '4px' }}>{value}</div>
-                  <div style={{ marginRight: '10px', marginTop: '2px' }} onChange={handleIncrease}>+</div>
+                  <div style={{ marginRight: '10px', marginTop: '2px' }} onClick={handleIncrease}>+</div>
 
                 </div>
 
@@ -83,7 +83,7 @@ export const CartItems = ({ cart }) => {
                 <div style={{ width: '60px', height: '20px', backgroundColor: '#f5365c', borderRadius: '5px', display: 'flex', justifyContent: 'space-between' }}>
                   <div style={{ marginLeft: '10px', marginTop: '2px', }} onClick={handleDecrease}>-</div>
                   <div style={{ marginTop: '4px' }}>{value}</div>
-                  <div style={{ marginRight: '10px', marginTop: '2px' }} onChange={handleIncrease}>+</div>
+                  <div style={{ marginRight: '10px', marginTop: '2px' }} onClick={handleIncrease}>+</div>
 
                 </div>
 
@@ -133,7 +133,7 @@ export const CartItems = ({ cart }) => {
       </div>
       </div>
 
-    </div >
+    </div>
   )
 }
 

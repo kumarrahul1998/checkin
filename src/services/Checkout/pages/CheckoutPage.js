@@ -18,7 +18,7 @@ export const CheckoutPage = (props) => {
     <div>
       <div style={{ height: '80px', width: '100%', backgroundColor: '#ececec' }}>
         <div style={{ display: 'flex' }}>
-          <ArrowBackIosIcon style={{ color: '#6d6d6d', margin: '12px 0px 0px 12px' }}
+          <ArrowBackIosIcon style={{ color: '#6d6d6d', margin: '12px 0px 0px 12px',cursor:"pointer" }}
             onClick={() => history.hasOwnProperty("back") ? history.back() : history.push("/viewcart")} />
           <span style={{ color: "#6d6d6d", fontSize: '20px', marginTop: '15px', }}>
             Settle Bill

@@ -26,7 +26,7 @@ export const ViewCartPage = () => {
             >
                 <div style={{ display: 'flex', }}>
                     <div style={{ marginTop: '15px', marginLeft: '10px' }}>
-                        <ArrowBackIosIcon style={{ color: '#6d6d6d' }} onClick={() => history.hasOwnProperty("back") ? history.back() : history.push("/menu")} />
+                        <ArrowBackIosIcon style={{ color: '#6d6d6d',cursor:"pointer" }} onClick={() => history.hasOwnProperty("back") ? history.back() : history.push("/menu")} />
                     </div>
                     <div>
                         <div style={{ color: "#6d6d6d", marginTop: '20px', fontSize: '20px' }}>

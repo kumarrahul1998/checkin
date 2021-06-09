@@ -45,7 +45,7 @@ function AbsoluteItems({ cart }) {
               fontSize: "16px",
               marginRight: '10px',
               marginTop: '15px',
-
+              cursor:"pointer",
             }}
             onClick={handleClick}
           >
