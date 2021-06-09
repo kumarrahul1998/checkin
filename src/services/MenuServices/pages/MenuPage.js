@@ -8,7 +8,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { useHistory } from 'react-router-dom';
 import { getPromos, loadRecommendedRestaurants } from '../middleware'
 import { connect } from "react-redux"
-import BottomBar from "../components/AbsoluteComponents"
+import BottomBar from "../components/AbsoluteComponents";
 import Divider from '@material-ui/core/Divider';
 import dishes from '../components/Dishes'
 import Displaydish from '../components/DisplayDish'

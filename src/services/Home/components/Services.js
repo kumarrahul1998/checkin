@@ -18,7 +18,6 @@ import arrow5 from '../../../assets/home/arrow5.png'
 import { shadows } from '@material-ui/system';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Radium from 'radium';
 import {connect} from 'react-redux';
 import actionTypes from '../actions/actionTypes';
 
@@ -78,9 +77,6 @@ function TextFieldSizes(props) {
         border: '1px solid #cdcdcd',
         borderRadius: '13px',
         fontSize: '14px',
-        ":focus": {
-            outline: 'none'
-        },
         fontWeight: '500',
         fontFamily: '"Josefin Sans", sans-serif',
         paddingTop: '8px',
@@ -182,4 +178,4 @@ const mapStateToProps = state => ({
     requests : state.home.serviceRequest,
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(Radium(TextFieldSizes));
+export default connect(mapStateToProps,mapDispatchToProps)(TextFieldSizes);

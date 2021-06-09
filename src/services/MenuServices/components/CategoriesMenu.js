@@ -11,7 +11,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import cancel from '../../../assets/menu/cancel.png';
-import Radium from 'radium';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -66,9 +65,6 @@ function MenuListComposition() {
         marginTop: '0vh',
         border: '1px solid #cdcdcd',
         borderRadius: '1vw',
-        ":focus": {
-            outline: 'none'
-        },
         fontFamily: '"Josefin Sans", sans-serif',
         minWidth: '55vw',
         padding: '0.6vh 2vw',
@@ -142,4 +138,4 @@ function MenuListComposition() {
     );
 }
 
-export default Radium(MenuListComposition);
+export default MenuListComposition;
