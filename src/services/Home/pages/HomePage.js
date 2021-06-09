@@ -30,7 +30,7 @@ function HomePage(props) {
     const cartStyle = {
         position : 'absolute',
         top: '2vh',
-        right: '5vw'
+        right: '5vw',
     }
 
     const cartLength = props.cart.items.data.length;
@@ -42,7 +42,7 @@ function HomePage(props) {
     //         loadTrendingDishes()
     // }, [details.data.restaurant.pk])
     return (
-        <div >
+        <div>
             <div >
 
                 <div>
@@ -63,7 +63,6 @@ function HomePage(props) {
                 <Services />
                 <OrderStatus />
                 <Trending />
-
                  <MenuItem style={{position: "fixed" ,right:"100px"}}/>
                 <div style={{
                     width: "100%",

@@ -24,7 +24,7 @@ import actionTypes from '../actions/actionTypes';
 function TextFieldSizes(props) {
 
     const history = useHistory()
-    var value = ""
+    var value = "";
 
     let items = [
         {
