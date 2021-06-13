@@ -6,22 +6,23 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FiberNewIcon from '@material-ui/icons/FiberNew';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import MenuCustomisation from "./MenuCustomisation"
 import { addItem, removeItem } from "../../Cart/actions/actionCreator";
 import { connect } from 'react-redux';
 import ShowDialog from './ShowDialog';
 import  '../../../stylings/displaydishstyle.css';
+import {calculateAmount} from "../../Cart/actions/actionCreator"
 
 function Displaydish(props) {
     // const [loading, setloading] = useState(true);
-    const { _add_item, _remove_item } = props
+    const { _add_item, _remove_item,cart,Amount } = props
     const [open,setOpen] = useState(false)
     let Width = window.innerWidth;
     const history = useHistory()
     const [Items, setItems] = React.useState(props.obj.data);
-    //console.log(Items)
+    console.log(props)
     const handleIncrease = (index) => {
         //console.log(Items[index].name)
         const recItems = JSON.parse(JSON.stringify(Items))
@@ -33,7 +34,8 @@ function Displaydish(props) {
         setItems(recItems)
         
         _add_item(recItems[index])
-        //console.log(Items[index].cartValue) 
+        // Amount(cart)
+        // console.log(Items[index].cartValue) 
     }
     const handleDecrease = (index) => {
         
@@ -85,6 +87,17 @@ function Displaydish(props) {
         "BEST SELLER": <FavoriteIcon className="item-type-icon" style={{color: "black"}}/>,
         "NEW ARRIVAL": <FiberNewIcon className = "item-type-icon"/>
     }
+
+    // Making a useeffect to calculate amount 
+    useEffect(
+        () => {
+        console.log("item added")
+          Amount(cart)
+        },
+        [handleIncrease,handleDecrease]
+      )
+    
+
     return (
 
         <div id = {props.obj.categoryName} style={{ marginBottom: '30px', width: "100%"}}>
@@ -148,7 +161,7 @@ function Displaydish(props) {
                                     {item.cartValue === 0 ?
                                         (
                                             item.isCustomised ?
-                                                <MenuCustomisation variants={item.variants} />
+                                                <MenuCustomisation variants={item.variants} dish={item}/>
                                                 :
                                                 (<div><div
                                                     style={{ paddingTop: '5px', paddingLeft: '20px', paddingRight: '20px', fontSize: '14px', color: '#ff5656', fontWeight: 700 }}
@@ -244,12 +257,15 @@ function Displaydish(props) {
 }
 
 const mapStateToProps = (state) => ({
+    cart: state.cart
 
 })
 
 const mapDispatchToProps = (dispatch) => ({
     _add_item: (item) => dispatch(addItem(item)),
-    _remove_item: (id) => dispatch(removeItem(id))
+    _remove_item: (id) => dispatch(removeItem(id)),
+    Amount: (data)=>dispatch(calculateAmount(data))
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Displaydish)

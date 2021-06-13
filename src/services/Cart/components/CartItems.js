@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useCallback, useEffect } from 'react'
 import { connect } from 'react-redux'
 import VegIcon from '../../../assets/home/vegicon.png'
 import NonVegIcon from '../../../assets/home/nonvegicon.jpg'
@@ -8,24 +8,39 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import BrightnessLowIcon from '@material-ui/icons/BrightnessLow';
 import actionTypes from '../actions/actionTypes';
-
-export const CartItems = ({ cart,sendToCart,removeFromCart }) => {
+import {calculateAmount} from "../actions/actionCreator"
+export const CartItems = ({ cart,sendToCart,removeFromCart,Amount }) => {
   const items = cart.items.data
   const width = window.innerWidth
   const [value, setValue] = React.useState(1);
 
   const handleIncrease = (dish) => {
+    console.log('item added')
     sendToCart(dish)
+    // Amount(cart)
+  
   }
+  // Amount(cart)
+
+  
   const handleDecrease = (dish) => {
   removeFromCart(dish) 
   }
   const handleCustomize = () => {
     console.log("this is customizeable")
   }
+  
+  useEffect(
+    () => {
+      Amount(cart)
+      console.log("item added")
+    },
+    [handleIncrease,handleDecrease]
+  )
 
   // console.log(cart)
-  console.log(cart)
+  // console.log(items)
+  // console.log(cart)
   // console.log(items[2].variantId)
   // (cart.items.data) ? console.log(cart.items.data) : console.log(cart)
 
@@ -42,7 +57,6 @@ export const CartItems = ({ cart,sendToCart,removeFromCart }) => {
     padding: '8px',
     paddingLeft: '15px'
   }
-  
   return (
     <div>
       <div>{items.map((item, index) =>
@@ -112,7 +126,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
   sendToCart : (data) => dispatch({type : actionTypes.ADD_ITEM, payload : data}),
-  removeFromCart: (data)=>dispatch({type:actionTypes.REMOVE_ITEM,payload:data})
+  removeFromCart: (data)=>dispatch({type:actionTypes.REMOVE_ITEM,payload:data}),
+  Amount: (data)=>dispatch(calculateAmount(data))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(CartItems);

@@ -49,3 +49,16 @@ export default (state = initialState, { type, payload }) => {
       return state
   }
 }
+const initialAmountState= {
+  Total: 0,
+}
+
+export const AmountReducer = (state=initialAmountState,{type,payload})=>{
+  switch(type){
+    case ACTION.CALCULATE_AMOUNT: return {
+      ...state,
+      ...payload,
+    } 
+    default: return state
+  }
+}

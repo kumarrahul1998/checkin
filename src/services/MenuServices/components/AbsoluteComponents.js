@@ -6,9 +6,9 @@ import { connect } from "react-redux"
 import { useHistory } from 'react-router-dom'
 import cart5 from '../../../assets/home/cart5.png'
 
-function AbsoluteComponents({ cart }) {
+function AbsoluteComponents({ cart,amount }) {
   const history = useHistory()
-  const amount = cart.items.data.reduce((init, item) => init + item.price, 0).toFixed(2)
+  // const amount = cart.items.data.reduce((init, item) => init + item.price, 0).toFixed(2)
   if (cart.items.data.length)
     return (<>
       <div style={{
@@ -32,7 +32,7 @@ function AbsoluteComponents({ cart }) {
                 marginLeft: '2rem',
                 color: '#fff'
               }}>
-                {cart.items.data.length} Items&nbsp;|&nbsp; &#8377;{amount}
+                {cart.items.data.length} Items&nbsp;|&nbsp; &#8377;{amount.Total}
               </div>
             </div>
           </div>
@@ -64,7 +64,8 @@ function AbsoluteComponents({ cart }) {
 }
 
 const mapStateToProps = (state) => ({
-  cart: state.cart
+  cart: state.cart,
+  amount: state.amount
 })
 
 const mapDispatchToProps = {

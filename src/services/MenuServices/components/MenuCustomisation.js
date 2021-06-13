@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     },
 });
 
-function MenuCusomisation({ variants, _add_item, _remove_item }) {
+function MenuCusomisation({variants,dish, _add_item, _remove_item }) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false)
 
@@ -46,11 +46,15 @@ function MenuCusomisation({ variants, _add_item, _remove_item }) {
     let Height = window.innerHeight;
 
     const addToCart = () => {
+        
         selection.forEach(item => {
-            _add_item(item)
+            const temp= dish
+            temp.variants=[item];
+            _add_item(temp)
         })
         toggleDrawer()
     }
+    console.log(dish)
     return (
         <div>
             <div
@@ -70,7 +74,7 @@ function MenuCusomisation({ variants, _add_item, _remove_item }) {
                             <div className="text-center"
                                 style={{ fontSize: '20px', color: '#6d6d6d', marginTop: '13px', fontWeight: 600 }}
                             >
-                                Haka noodle
+                                {dish?.name}
                         </div>
                         </div>
                     </div>
