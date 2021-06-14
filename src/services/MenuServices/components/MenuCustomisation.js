@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     },
 });
 
-function MenuCusomisation({ variants, _add_item, _remove_item }) {
+function MenuCusomisation({variants,dish, _add_item, _remove_item,cart }) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false)
 
@@ -45,12 +45,17 @@ function MenuCusomisation({ variants, _add_item, _remove_item }) {
     let Width = window.innerWidth;
     let Height = window.innerHeight;
 
-    const addToCart = () => {
-        selection.forEach(item => {
-            _add_item(item)
-        })
-        toggleDrawer()
+    const addToCart =() => {
+        selection.forEach( (item)=>{
+            let temp ={...dish};
+            temp.variantChosen=item;
+             _add_item(temp,cart)
+
+    })
+        
+    toggleDrawer()
     }
+    // console.log(dish)
     return (
         <div>
             <div
@@ -70,7 +75,7 @@ function MenuCusomisation({ variants, _add_item, _remove_item }) {
                             <div className="text-center"
                                 style={{ fontSize: '20px', color: '#6d6d6d', marginTop: '13px', fontWeight: 600 }}
                             >
-                                Haka noodle
+                                {dish?.name}
                         </div>
                         </div>
                     </div>
@@ -129,12 +134,12 @@ function MenuCusomisation({ variants, _add_item, _remove_item }) {
 }
 
 const mapStateToProps = (state) => ({
-
+    cart: state.cart
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    _add_item: (item) => dispatch(addItem(item)),
-    _remove_item: (id) => dispatch(removeItem(id))
+    _add_item: (item,cart) => dispatch(addItem(item,cart)),
+    _remove_item: (item,cart) => dispatch(removeItem(item,cart))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuCusomisation)

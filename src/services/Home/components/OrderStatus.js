@@ -18,7 +18,7 @@ const useStyles= makeStyles(theme=>({
         height: "130px",
         backgroundColor: "#ffefef",
         [theme.breakpoints.down('sm')]:{
-            padding: '1rem',
+            padding: '10px',
             height: "160px"
             }
     },
@@ -123,9 +123,9 @@ export default function OrderStatus() {
         </Grid> */}
         <Grid container spacing={0}>
             <Grid item container lg={12} md={12} sm={12} xs={12} className={classes.container} spacing={0}>
-                <Grid item lg={5} md={5} sm={12} xs={12} className={classes.imageContainer} >
+                <Grid item lg={5} md={5} sm={7} xs={7} className={classes.imageContainer} >
                 <Grid style={{ textAlign: "center" }} item xs={4}>
-                        <img src={OrderFirstImage} height="16px" />
+                        <img src={OrderFirstImage} height="32px" />
                         <p style={{ fontSize: 10, marginLeft: "6px", marginTop: "0", color: '#6d6d6d', fontSize: '9px', fontWeight: 600 }}>
                             <span
                                 style={{ color: "red", fontWeight: 600 }}
@@ -136,7 +136,7 @@ export default function OrderStatus() {
                             </p>
                     </Grid>
                     <Grid style={{ textAlign: "center" }} item xs={4}>
-                        <img src={OrderSecondImage} height="16px" />
+                        <img src={OrderSecondImage} height="32px" />
                         <p style={{ fontSize: 9, marginLeft: "6px", marginTop: "0", color: '#6d6d6d', fontSize: '9px', fontWeight: 600 }}>
                             <span
                                 style={{ color: "red", fontWeight: 600 }}
@@ -147,7 +147,7 @@ export default function OrderStatus() {
                             </p>
                     </Grid>
                     <Grid style={{ textAlign: "center" }} item xs={4}>
-                        <img src={OrderThirdImage} height="18px" />
+                        <img src={OrderThirdImage} height="32px" />
                         <p style={{ fontSize: 10, marginLeft: "6px", marginTop: "0", color: '#6d6d6d', fontSize: '8px', fontWeight: 600 }}>
                             <span
                                 style={{ color: "red", fontWeight: 600 }}
@@ -160,9 +160,9 @@ export default function OrderStatus() {
                     </Grid>
                     
                 </Grid>
-                <Grid item lg={4} md={4} sm={12} xs={12} className={classes.buttonContainer}>
+                <Grid item lg={5} md={5} sm={5} xs={5} className={classes.buttonContainer}>
                 
-                    <div style={{ fontSize: 13, color: "#6d6d6d", fontWeight: 800, textAlign: "center" }}>Order Status</div>
+                    <div style={{ fontSize: "14px", color: "#6d6d6d", fontWeight: 800, textAlign: "center" }}>Order Status</div>
                     <div >
                         <RoundedButton
                             size={"small"}
@@ -172,7 +172,7 @@ export default function OrderStatus() {
                             <span
                                 style={{ fontSize: "14px" }}
                             >
-                                View Items
+                                View Order
                                 </span>
                         </RoundedButton>
                     </div>

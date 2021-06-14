@@ -4,14 +4,15 @@ import homeReducer from "../../services/Home/reducers/index"
 import menuReducer from "../../services/MenuServices/reducers/index"
 import cartReducer from "../../services/Cart/reducers/index"
 import checkoutReducer from "../../services/Checkout/reducers/index"
-
+import {AmountReducer} from "../../services/Cart/reducers/index"
 
 const appReducer = combineReducers({
   authentication: authReducer,
   home: homeReducer,
   menu: menuReducer,
   cart: cartReducer,
-  checkout: checkoutReducer
+  checkout: checkoutReducer,
+  amount: AmountReducer,
 })
 
 const rootReducer = (state, action) => {

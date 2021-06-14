@@ -81,6 +81,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         ],
         "item_type": 3,
         "group": 10,
+        "cartValue":0,
         "created": "2019-06-24T12:08:56.796530Z",
         "modified": "2020-11-22T15:22:19.506693Z",
         "menus": [
@@ -113,6 +114,8 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 0,
         "group": 16,
+        "cartValue":0,
+
         "created": "2019-06-24T12:08:56.796836Z",
         "modified": "2020-11-06T14:27:20.329527Z",
         "menus": [
@@ -145,6 +148,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 0,
         "group": 16,
+        "cartValue":0,
         "created": "2019-06-24T12:08:56.796909Z",
         "modified": "2020-11-06T14:27:20.339936Z",
         "menus": [
@@ -181,6 +185,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         ],
         "item_type": 0,
         "group": 16,
+        "cartValue":0,
         "created": "2019-06-24T12:08:56.796969Z",
         "modified": "2020-11-06T14:27:20.349996Z",
         "menus": [
@@ -211,6 +216,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 0,
         "group": 22,
+        "cartValue":0,
         "created": "2019-06-24T12:08:56.797025Z",
         "modified": "2020-11-06T14:14:45.887775Z",
         "menus": [
@@ -241,6 +247,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 0,
         "group": 22,
+        "cartValue":0,
         "created": "2019-06-24T12:08:56.801233Z",
         "modified": "2020-11-06T14:14:45.897832Z",
         "menus": [
@@ -274,6 +281,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         ],
         "item_type": 2,
         "group": 30,
+        "cartValue":0,
         "created": "2020-03-04T14:59:26.672276Z",
         "modified": "2020-11-06T14:35:48.524930Z",
         "menus": [
@@ -304,6 +312,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 0,
         "group": 18,
+        "cartValue":0,
         "created": "2019-06-24T12:08:56.801320Z",
         "modified": "2020-11-06T14:05:09.943294Z",
         "menus": [
@@ -334,6 +343,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 0,
         "group": 16,
+        "cartValue":0,
         "created": "2019-06-24T12:08:56.801379Z",
         "modified": "2020-11-06T14:27:20.360336Z",
         "menus": [
@@ -365,6 +375,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 1,
         "group": 30,
+        "cartValue":0,
         "created": "2020-03-04T12:10:06.799797Z",
         "modified": "2020-11-06T14:36:18.888713Z",
         "menus": [
@@ -397,6 +408,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 2,
         "group": 30,
+        "cartValue":0,
         "created": "2019-11-26T17:30:14.595717Z",
         "modified": "2020-11-06T14:35:48.546279Z",
         "menus": [
@@ -426,6 +438,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 0,
         "group": 8,
+        "cartValue":0,
         "created": "2019-06-24T12:08:56.801437Z",
         "modified": "2020-11-06T14:40:42.477806Z",
         "menus": [
@@ -456,6 +469,8 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 0,
         "group": 19,
+        "cartValue":0,
+
         "created": "2019-06-24T12:08:56.801493Z",
         "modified": "2020-11-06T14:49:19.844235Z",
         "menus": [
@@ -486,6 +501,8 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 0,
         "group": 21,
+        "cartValue":0,
+
         "created": "2019-06-24T12:08:56.801556Z",
         "modified": "2020-11-06T14:31:36.289738Z",
         "menus": [
@@ -516,6 +533,8 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 0,
         "group": 19,
+        "cartValue":0,
+
         "created": "2019-06-24T12:08:56.801612Z",
         "modified": "2020-11-06T14:49:19.854424Z",
         "menus": [
@@ -546,6 +565,8 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 0,
         "group": 21,
+        "cartValue":0,
+
         "created": "2019-06-24T12:08:56.801667Z",
         "modified": "2020-11-06T14:31:36.298747Z",
         "menus": [
@@ -576,6 +597,8 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 0,
         "group": 22,
+        "cartValue":0,
+
         "created": "2019-06-24T12:08:56.801722Z",
         "modified": "2020-11-06T14:14:45.906940Z",
         "menus": [
@@ -606,6 +629,8 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "customizations": [],
         "item_type": 0,
         "group": 20,
+        "cartValue":0,
+
         "created": "2019-06-24T12:08:56.801777Z",
         "modified": "2020-11-06T14:31:33.372501Z",
         "menus": [
@@ -639,6 +664,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "is_available": false,
         "customizations": [],
         "item_type": 0,
+        "cartValue":0,
         "group": 16,
         "created": "2019-06-24T12:08:56.801840Z",
         "modified": "2020-11-06T14:27:20.370306Z",
@@ -669,6 +695,7 @@ export const _load_trending_dishes = () => (dispatch, getState) => {
         "is_available": false,
         "customizations": [],
         "item_type": 0,
+        "cartValue":0,
         "group": 16,
         "created": "2019-06-24T12:08:56.801895Z",
         "modified": "2020-11-06T14:27:20.380217Z",
