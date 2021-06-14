@@ -23,30 +23,11 @@ function Displaydish(props) {
     const history = useHistory()
     const [Items, setItems] = React.useState(props.obj.data);
     console.log(props)
-    const handleIncrease = (index) => {
-        //console.log(Items[index].name)
-        const recItems = JSON.parse(JSON.stringify(Items))
-        if (recItems[index].isCustomised === true)
-            return handleOpenSlides(true)
-        const cartValue = recItems[index].cartValue
-        //console.log(recItems[index].cartValue)
-        recItems[index].cartValue = cartValue + 1
-        setItems(recItems)
-        
-        _add_item(recItems[index])
-        // Amount(cart)
-        // console.log(Items[index].cartValue) 
+    const handleIncrease = (item) => {
+        _add_item(item,cart)
     }
-    const handleDecrease = (index) => {
-        
-        const recItems = JSON.parse(JSON.stringify(Items))
-        const cartValue = recItems[index].cartValue
-        console.log(cartValue)
-        recItems[index].cartValue = cartValue - 1
-        
-        setItems(recItems)
-        console.log(Items[index].cartValue)
-        _remove_item(recItems[index].id)
+    const handleDecrease = (item) => {
+        _remove_item(item,cart)
     }
     const handleOpenSlides = (isCustomised) => {
         if (isCustomised === true) {
@@ -158,14 +139,14 @@ function Displaydish(props) {
                                 }}
 
                                 >
-                                    {item.cartValue === 0 ?
+                                    {cart.items.data?.find(i=>i.name==item.name&&i.variantChosen==item.variantChosen)?.cartValue  == undefined?
                                         (
                                             item.isCustomised ?
                                                 <MenuCustomisation variants={item.variants} dish={item}/>
                                                 :
                                                 (<div><div
                                                     style={{ paddingTop: '5px', paddingLeft: '20px', paddingRight: '20px', fontSize: '14px', color: '#ff5656', fontWeight: 700 }}
-                                                    onClick={() => handleIncrease(index)} 
+                                                    onClick={() => handleIncrease(item)} 
                                                 >
                                                     ADD 
                                                     
@@ -179,11 +160,11 @@ function Displaydish(props) {
                                                 cursor: 'pointer', width: '71px', borderRadius: '5px'
                                             }}>
                                                 <div style={{ display: 'flex', color: '#fff' }}>
-                                                    <div ><RemoveIcon style={{ width: '16px', marginLeft: '5px' }} onClick={() => handleDecrease(index)} /></div>
-                                                    <div style={{ marginTop: '5px', marginLeft: '10px', }} >{item.cartValue}</div>
-                                                    <div ><AddIcon style={{ width: '16px', marginLeft: '10px' }} onClick={() => handleIncrease(index)} /></div>
+                                                    <div ><RemoveIcon style={{ width: '16px', marginLeft: '5px' }} onClick={() => handleDecrease(item)} /></div>
+                                                    <div style={{ marginTop: '5px', marginLeft: '10px', }} >{cart.items.data.find(i=>i.name==item.name)?.cartValue}</div>
+                                                    <div ><AddIcon style={{ width: '16px', marginLeft: '10px' }} onClick={() => handleIncrease(item)} /></div>
                                                 </div>
-
+                                                
                                             </div>
 
                                         )}
@@ -217,14 +198,14 @@ function Displaydish(props) {
                                             }}
 
                                             >
-                                                {item.cartValue === 0 ?
+                                                {cart.items.data?.find(i=>i.name==item.name&&i.variantChosen==item.variantChosen)?.cartValue  == undefined?
                                                     (
                                                         item.isCustomised ?
                                                             <MenuCustomisation variants={item.variants} />
                                                             :
                                                             <div
                                                                 style={{ paddingTop: '5px', paddingLeft: '20px', fontSize: '14px', color: '#ff5656', fontWeight: 700 }}
-                                                                onClick={() => handleIncrease(index)}
+                                                                onClick={() => handleIncrease(item)}
                                                             >
                                                                 ADD 
                                                             </div>
@@ -235,9 +216,9 @@ function Displaydish(props) {
                                                             cursor: 'pointer', width: '71px', borderRadius: '5px'
                                                         }}>
                                                             <div style={{ display: 'flex', color: '#fff' }}>
-                                                                <div onClick={() => handleDecrease(index)}><RemoveIcon style={{ width: '16px', marginLeft: '5px' }} /></div>
-                                                                <div style={{ marginTop: '5px', marginLeft: '10px', }} >{item.cartValue}</div>
-                                                                <div onClick={() => handleIncrease(index)}><AddIcon style={{ width: '16px', marginLeft: '10px' }} /></div>
+                                                                <div onClick={() => handleDecrease(item)}><RemoveIcon style={{ width: '16px', marginLeft: '5px' }} /></div>
+                                                                <div style={{ marginTop: '5px', marginLeft: '10px', }} >{cart.items.data?.find(i=>i.name==item.name)?.cartValue}</div>
+                                                                <div onClick={() => handleIncrease(item)}><AddIcon style={{ width: '16px', marginLeft: '10px' }} /></div>
                                                             </div>
 
                                                         </div>
@@ -262,8 +243,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    _add_item: (item) => dispatch(addItem(item)),
-    _remove_item: (id) => dispatch(removeItem(id)),
+    _add_item: (item,cart) => dispatch(addItem(item,cart)),
+    _remove_item: (item,cart) => dispatch(removeItem(item,cart)),
     Amount: (data)=>dispatch(calculateAmount(data))
 
 })

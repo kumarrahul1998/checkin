@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 import actionTypes from '../actions/actionTypes';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-
+import {addItem,removeItem} from "../../Cart/actions/actionCreator"
 function Trending({ home, sendToCart, cart,removeFromCart }) {
 
     let items = [
@@ -24,33 +24,35 @@ function Trending({ home, sendToCart, cart,removeFromCart }) {
             itemname: "Chicken Biryani",
             imageUrl: "https://www.cubesnjuliennes.com/wp-content/uploads/2020/06/Mutton-Biryani-Recipe.jpg",
             rate: "300",
-            type: "nonveg"
-
+            type: "nonveg",
+          
         },
         {
             itemname: "veg-Biryani",
             imageUrl: "https://i1.wp.com/vegecravings.com/wp-content/uploads/2016/07/veg-biryani-recipe-step-by-step-instructions.jpg?fit=3563%2C2976&quality=65&strip=all&ssl=1",
             rate: "200",
-            type: "veg"
+            type: "veg",
+          
         },
         {
             itemname: "Fried Rise",
             imageUrl: "https://www.licious.in/blog/wp-content/uploads/2020/12/Chicken-Fried-Rice-min.jpg",
             rate: "250",
-            type: "nonveg"
+            type: "nonveg",
+          
         },
         {
             itemname: "Chicken-wings",
             imageUrl: "https://img.taste.com.au/CNP6TO6O/taste/2016/11/crunchy-buttermilk-and-rosemary-chicken-wings-102769-1.jpeg",
             rate: "400",
-            type: "nonveg"
-        },
+            type: "nonveg",
+                  },
 
     ]
 
     const trendingDishes = home.trendingDishes
     const handleDecrease=(dish)=>{
-        removeFromCart(dish);
+        removeFromCart(dish,cart);
     }
     
     return (
@@ -94,7 +96,7 @@ function Trending({ home, sendToCart, cart,removeFromCart }) {
                                             {/* <IconButton color="primary" aria-label="add to shopping cart"> */}
                                             {cart.items&&cart.items.data&&!cart.items.data.find((item)=>item.name==dish.name)?<div style={{marginRight: "5px", marginTop: "-6px"}}>   <div
                                                     style={{ padding: "3px 10px", fontSize: '8px', fontWeight: 700, backgroundColor: "#ff5656", color: "white", borderRadius: "5px",cursor:"pointer" }}
-                                                    onClick={() => sendToCart(dish)}
+                                                    onClick={() => sendToCart(dish,cart)}
                                                 >
                                                     ADD 
                                                     
@@ -104,8 +106,8 @@ function Trending({ home, sendToCart, cart,removeFromCart }) {
                                                 }}>
                                                     <div style={{ display: 'flex', color: '#fff' }}>
                                                         <div ><RemoveIcon style={{ width: '13px', marginLeft: '5px' }} onClick={()=>handleDecrease(dish)} /></div>
-                                                        <div style={{ marginTop: '5px', marginLeft: '7px', }} >{cart.items.data.filter(i=>i.name==dish.name).length}</div>
-                                                        <div ><AddIcon style={{ width: '13px', marginLeft: '8px' }} onClick={()=>sendToCart(dish)}   /></div>
+                                                        <div style={{ marginTop: '5px', marginLeft: '7px', }} >{cart.items.data.find(i=>i.name==dish.name).cartValue}</div>
+                                                        <div ><AddIcon style={{ width: '13px', marginLeft: '8px' }} onClick={()=>sendToCart(dish,cart)}   /></div>
                                                     </div>
                                                 
                                                 </div>}
@@ -129,8 +131,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    sendToCart : (data) => dispatch({type : actionTypes.SEND_TO_CART, payload : data}),
-    removeFromCart: (data)=>dispatch({type:actionTypes.REMOVE_FROM_CART,payload:data})
+    sendToCart : (data,cart) => dispatch(addItem(data,cart)),
+    removeFromCart: (data,cart)=>dispatch(removeItem(data,cart))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trending)

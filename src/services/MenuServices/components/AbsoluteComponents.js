@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 // import RoundedButton from '../../../shared/components/Button/Rounded'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import FastForwardIcon from '@material-ui/icons/FastForward';
@@ -8,6 +8,7 @@ import cart5 from '../../../assets/home/cart5.png'
 
 function AbsoluteComponents({ cart,amount }) {
   const history = useHistory()
+
   // const amount = cart.items.data.reduce((init, item) => init + item.price, 0).toFixed(2)
   if (cart.items.data.length)
     return (<>
@@ -32,7 +33,7 @@ function AbsoluteComponents({ cart,amount }) {
                 marginLeft: '2rem',
                 color: '#fff'
               }}>
-                {cart.items.data.length} Items&nbsp;|&nbsp; &#8377;{amount.Total}
+                { cart.items.data.reduce((init,item)=>init+item.cartValue,0)} Items&nbsp;|&nbsp; &#8377;{amount.Total}
               </div>
             </div>
           </div>

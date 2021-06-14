@@ -4,11 +4,11 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { connect } from "react-redux"
 import { useHistory } from 'react-router-dom';
 
-function AbsoluteItems({ cart }) {
+function AbsoluteItems({ cart,amount }) {
   
   
 
-  const amount = cart.items.data.reduce((init, item) => init + item.price, 0).toFixed(2)
+  // const amount = cart.items.data.reduce((init, item) => init + item.price, 0).toFixed(2)
 
   const history = useHistory()
   const handleClick = () => {
@@ -37,8 +37,8 @@ function AbsoluteItems({ cart }) {
           // marginTop: '5px',
           marginLeft: '10px'
         }}>
-          <div style={{ fontSize: "12px", marginBottom: "5px" }} >4 Items</div>
-          <div> &#8377;&nbsp;{amount}</div>
+          <div style={{ fontSize: "12px", marginBottom: "5px" }} >{cart.items.data.reduce((init,item)=>init+item.cartValue,0)} items</div>
+          <div> &#8377;&nbsp;{amount.Total}</div>
         </div>
         <div
             style={{
@@ -58,7 +58,8 @@ function AbsoluteItems({ cart }) {
 }
 
 const mapStateToProps = (state) => ({
-  cart: state.cart
+  cart: state.cart,
+  amount: state.amount
 })
 
 const mapDispatchToProps = {

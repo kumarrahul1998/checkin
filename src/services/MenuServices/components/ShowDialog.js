@@ -36,7 +36,7 @@ return <Slide direction="up" ref={ref} timeout={1000} {...props} />;
 
 function ShowDialog(props){
     const classes = useStyles();
-    const {image, index, open, onClose:handleClose, onPlus:handleIncrease, onMinus:handleDecrease, openSlides:handleOpenSlides, item} = props;
+    const {image, index, open, onClose:handleClose, onPlus:handleIncrease, onMinus:handleDecrease, openSlides:handleOpenSlides, item,cart} = props;
     console.log(item)
     return(
         <Dialog open={open} onClose={handleClose} classes={{paper: classes.paper}}  variant="outlined" TransitionComponent={Transition} transitionDuration={335} >
@@ -95,14 +95,14 @@ function ShowDialog(props){
                                 }}
 
                                 >
-                                    {item.cartValue === 0 ?
+                                    {cart.items.data?.find(i=>i.name==item.name)?.cartValue==undefined?
                                         (
                                             item.isCustomised ?
                                                 <MenuCustomisation variants={item.variants} />
                                                 :
                                                 <div
                                                     style={{ paddingTop: '5px', paddingLeft: '20px', paddingRight: '20px', fontSize: '14px', color: '#ff5656', fontWeight: 700, marginRight: "10px" }}
-                                                    onClick={() => handleIncrease(index)}
+                                                    onClick={() => handleIncrease(item)}
                                                 >
                                                     ADD
                                                 </div>
@@ -113,9 +113,9 @@ function ShowDialog(props){
                                                 cursor: 'pointer', width: '71px', borderRadius: '5px'
                                             }}>
                                                 <div style={{ display: 'flex', color: '#fff' }}>
-                                                    <div ><RemoveIcon style={{ width: '16px', marginLeft: '5px' }} onClick={() => handleDecrease(index)} /></div>
-                                                    <div style={{ marginTop: '5px', marginLeft: '10px', }} >{item.cartValue}</div>
-                                                    <div ><AddIcon style={{ width: '16px', marginLeft: '10px' }} onClick={() => handleIncrease(index)} /></div>
+                                                    <div ><RemoveIcon style={{ width: '16px', marginLeft: '5px' }} onClick={() => handleDecrease(item)} /></div>
+                                                    <div style={{ marginTop: '5px', marginLeft: '10px', }} >{cart.items.data.find(i=>i.name==item.name)?.cartValue}</div>
+                                                    <div ><AddIcon style={{ width: '16px', marginLeft: '10px' }} onClick={() => handleIncrease(item)} /></div>
                                                 </div>
 
                                             </div>
@@ -131,7 +131,7 @@ function ShowDialog(props){
 }
 
 const mapStateToProps = (state) => ({
-
+ cart: state.cart
 })
 
 const mapDispatchToProps = (dispatch) => ({

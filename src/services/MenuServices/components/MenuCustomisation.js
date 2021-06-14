@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     },
 });
 
-function MenuCusomisation({variants,dish, _add_item, _remove_item }) {
+function MenuCusomisation({variants,dish, _add_item, _remove_item,cart }) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false)
 
@@ -45,16 +45,17 @@ function MenuCusomisation({variants,dish, _add_item, _remove_item }) {
     let Width = window.innerWidth;
     let Height = window.innerHeight;
 
-    const addToCart = () => {
+    const addToCart =() => {
+        selection.forEach( (item)=>{
+            let temp ={...dish};
+            temp.variantChosen=item;
+             _add_item(temp,cart)
+
+    })
         
-        selection.forEach(item => {
-            const temp= dish
-            temp.variants=[item];
-            _add_item(temp)
-        })
-        toggleDrawer()
+    toggleDrawer()
     }
-    console.log(dish)
+    // console.log(dish)
     return (
         <div>
             <div
@@ -133,12 +134,12 @@ function MenuCusomisation({variants,dish, _add_item, _remove_item }) {
 }
 
 const mapStateToProps = (state) => ({
-
+    cart: state.cart
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    _add_item: (item) => dispatch(addItem(item)),
-    _remove_item: (id) => dispatch(removeItem(id))
+    _add_item: (item,cart) => dispatch(addItem(item,cart)),
+    _remove_item: (item,cart) => dispatch(removeItem(item,cart))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuCusomisation)

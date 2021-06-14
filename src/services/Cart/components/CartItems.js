@@ -9,14 +9,15 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import BrightnessLowIcon from '@material-ui/icons/BrightnessLow';
 import actionTypes from '../actions/actionTypes';
 import {calculateAmount} from "../actions/actionCreator"
-export const CartItems = ({ cart,sendToCart,removeFromCart,Amount }) => {
+import {addItem,removeItem} from "../actions/actionCreator"
+export const CartItems = ({ cart,sendToCart,removeFromCart,Amount ,_add_item,_remove_item}) => {
   const items = cart.items.data
   const width = window.innerWidth
   const [value, setValue] = React.useState(1);
 
   const handleIncrease = (dish) => {
     console.log('item added')
-    sendToCart(dish)
+    _add_item(dish,cart)
     // Amount(cart)
   
   }
@@ -24,7 +25,7 @@ export const CartItems = ({ cart,sendToCart,removeFromCart,Amount }) => {
 
   
   const handleDecrease = (dish) => {
-  removeFromCart(dish) 
+    _remove_item(dish,cart)
   }
   const handleCustomize = () => {
     console.log("this is customizeable")
@@ -72,7 +73,7 @@ export const CartItems = ({ cart,sendToCart,removeFromCart,Amount }) => {
 
 
                 <div> {item.variantId ? (<div style={{ fontStyle: 'JosefinSans-Regular', marginTop: '5px', color: '#ff5656', width: '200px', fontSize: '11px' }} onClick={handleCustomize()} >  Customize <BrightnessLowIcon style={{ fontSize: '8px' }} /> <span style={{ marginRight: '80px', fontWeight: 500, color: '#6d6d6d', marginBottom: '50px', fontSize: '15px', marginLeft: '10px' }} > &#8377;&nbsp;{item.price}</span>  </div>) :
-                  <span style={{ marginRight: '100px', fontWeight: 500, color: '#6d6d6d', fontSize: '15px' }} > &#8377;&nbsp;{item.price}</span>}
+                  <span style={{ marginRight: '100px', fontWeight: 500, color: '#6d6d6d', fontSize: '15px' }} > &#8377;&nbsp;{item.variantChosen?item.variantChosen?.price+item.price:item.price} </span>}
                 </div>
 
               </div>
@@ -84,7 +85,7 @@ export const CartItems = ({ cart,sendToCart,removeFromCart,Amount }) => {
               <div style={{ marginTop: '20px', marginLeft: '58px', color: '#fff' }}>
                 <div style={{ width: '60px', height: '20px', backgroundColor: '#f5365c', borderRadius: '5px', display: 'flex', justifyContent: 'space-between', marginLeft: '5px' }}>
                   <div style={{ marginLeft: '11px', marginTop: '2px',cursor:"pointer" }} onClick={()=>handleDecrease(item)}>-</div>
-                  <div style={{ marginTop: '4px' }}>{value}</div>
+                  <div style={{ marginTop: '4px' }}>{item.cartValue}</div>
                   <div style={{ marginRight: '10px', marginTop: '2px',cursor:"pointer" }} onClick={()=>handleIncrease(item)}>+</div>
 
                 </div>
@@ -93,7 +94,7 @@ export const CartItems = ({ cart,sendToCart,removeFromCart,Amount }) => {
               <div style={{ marginTop: '20px', marginLeft: '108px', color: '#fff' }}>
                 <div style={{ width: '60px', height: '20px', backgroundColor: '#f5365c', borderRadius: '5px', display: 'flex', justifyContent: 'space-between' }}>
                   <div style={{ marginLeft: '10px', marginTop: '2px',cursor:"pointer" }} onClick={()=>handleDecrease(item)}>-</div>
-                  <div style={{ marginTop: '4px' }}>{value}</div>
+                  <div style={{ marginTop: '4px' }}>{item.cartValue}</div>
                   <div style={{ marginRight: '10px', marginTop: '2px',cursor:"pointer" }} onClick={()=>handleIncrease(item)}>+</div>
 
                 </div>
@@ -125,9 +126,9 @@ const mapStateToProps = (state) => ({
 
 
 const mapDispatchToProps = dispatch => ({
-  sendToCart : (data) => dispatch({type : actionTypes.ADD_ITEM, payload : data}),
-  removeFromCart: (data)=>dispatch({type:actionTypes.REMOVE_ITEM,payload:data}),
-  Amount: (data)=>dispatch(calculateAmount(data))
+  _add_item: (item,cart) => dispatch(addItem(item,cart)),
+    _remove_item: (item,cart) => dispatch(removeItem(item,cart)),
+    Amount: (data)=>dispatch(calculateAmount(data))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(CartItems);
