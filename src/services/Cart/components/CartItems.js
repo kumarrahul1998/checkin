@@ -91,7 +91,7 @@ export const CartItems = ({ cart,sendToCart,removeFromCart,Amount ,_add_item,_re
                 </div>
 
               </div> :
-              <div style={{ marginTop: '20px', marginLeft: '108px', color: '#fff' }}>
+              <div style={{ marginTop: '20px', marginLeft: '108px', color: '#fff',position: 'absolute',right: '10vw' }}>
                 <div style={{ width: '60px', height: '20px', backgroundColor: '#f5365c', borderRadius: '5px', display: 'flex', justifyContent: 'space-between' }}>
                   <div style={{ marginLeft: '10px', marginTop: '2px',cursor:"pointer" }} onClick={()=>handleDecrease(item)}>-</div>
                   <div style={{ marginTop: '4px' }}>{item.cartValue}</div>
