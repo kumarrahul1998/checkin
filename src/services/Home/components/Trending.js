@@ -91,21 +91,21 @@ function Trending({ home, sendToCart, cart,removeFromCart }) {
 
                                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                                             <div style={{ fontSize: '12px', fontWeight: 600, marginLeft: "20px", marginTop: "5px", color: "#6d6d6d" }}>&#8377; {dish.costs?.[0]}</div>
-                                            {/* <IconButton color="primary" aria-label="add to shopping cart"> */}
+                                            
                                             {cart.items&&cart.items.data&&!cart.items.data.find((item)=>item.name==dish.name)?<div style={{marginRight: "5px", marginTop: "-6px"}}>   <div
-                                                    style={{ padding: "3px 10px", fontSize: '8px', fontWeight: 700, backgroundColor: "#ff5656", color: "white", borderRadius: "5px",cursor:"pointer" }}
+                                                    style={{ paddingTop: '5px', width: '65px' ,fontSize: '14px', color: 'white', fontWeight: 700,backgroundColor: "#ff5656", marginTop:"1vh", border: '1px solid #ff5656', borderRadius: '5px', textAlign: 'center'}}
                                                     onClick={() => sendToCart(dish)}
                                                 >
                                                     ADD 
                                                     
                                                 </div> </div>:<div style={{
-                                                    backgroundColor: '#ff5656', height: '21px', marginRight: '5px',
-                                                    cursor: 'pointer', width: '60px', borderRadius: '5px'
+                                                    backgroundColor: '#ff5656', height: '22px', marginRight: '4px',
+                                                    cursor: 'pointer', width: '65px', borderRadius: '5px'
                                                 }}>
                                                     <div style={{ display: 'flex', color: '#fff' }}>
-                                                        <div ><RemoveIcon style={{ width: '13px', marginLeft: '5px' }} onClick={()=>handleDecrease(dish)} /></div>
-                                                        <div style={{ marginTop: '5px', marginLeft: '7px', }} >{cart.items.data.filter(i=>i.name==dish.name).length}</div>
-                                                        <div ><AddIcon style={{ width: '13px', marginLeft: '8px' }} onClick={()=>sendToCart(dish)}   /></div>
+                                                        <div ><RemoveIcon style={{ width: '16px', marginLeft: '5px' }} onClick={()=>handleDecrease(dish)} /></div>
+                                                        <div style={{ marginTop: '5px', marginLeft: '8px', }} >{cart.items.data.filter(i=>i.name==dish.name).length}</div>
+                                                        <div ><AddIcon style={{ width: '16px', marginLeft: '10px' }}onClick={()=>sendToCart(dish)}   /></div>
                                                     </div>
                                                 
                                                 </div>}

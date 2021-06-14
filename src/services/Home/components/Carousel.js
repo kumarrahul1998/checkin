@@ -50,8 +50,8 @@ function Example() {
 
 function Item(props) {
     return (
-        <div style={{width: '100vw'}} className="banner-card">
-            <img alt="banner-item" src={props.item.imageURL} style={{ borderRadius: "16px", width: "70vw" }} height={window.innerHeight * 0.2} />
+        <div style={{width: '72vw'}} className="banner-card">
+            <img alt="banner-item" src={props.item.imageURL} style={{ borderRadius: "16px", width: "68vw" }} height={window.innerHeight * 0.2} />
         </div>
 
     )

@@ -8,9 +8,9 @@ function MyRequest(props) {
         paddingBottom: "1.2vh",
         paddingRight: "2.34vw",
         paddingLeft: "3.75vw",
-        border: "1px solid #bebebe",
+        border: "1px solid rgb(140,140,140,0.1)",
         borderRadius : "1.25vw",
-        boxShadow: "0 0 0.625vw 0px #bebebe",
+        boxShadow: "0 0 0.625vw 0px rgb(140,140,140,0.5)",
         display: 'flex',
         justifyContent: 'space-between'
     }
@@ -31,7 +31,8 @@ function MyRequest(props) {
     const requestStyle = {
         marginRight: '12.81vw',
         color: '#6d6d6d',
-        fontSize: '3.125vw'
+        fontSize: '3.125vw',
+        fontFamily: "josefin_sans_semibold",
     }
 
     const requestsContainerStyle = {

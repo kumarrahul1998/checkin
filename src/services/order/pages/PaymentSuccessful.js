@@ -5,7 +5,8 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import share from '../../../assets/order/share.png'
 import icon from '../../../assets/order/icon.png'
 import { useState } from 'react';
-import veg from '../../../assets/order/veg.png'
+import veg from '../../../assets/order/veg.png';
+import { useHistory } from "react-router";
 
 const useStyles= makeStyles(theme=>({
   mainContainer:{
@@ -227,13 +228,15 @@ function PaymentSuccessful() {
   const handleOrderClick=()=>{
     setOrder((val)=>!val);
   }
+
+  const history = useHistory();
   return (
     <div>
     <Grid container className={classes.mainContainer}>
       <Grid  item lg={12} md={12} sm={12} xs={12}>
         <Grid container>
         <Grid className={classes.arrowContainer} item lg={1} md={1} sm={2} xs={3}>
-          <ArrowBackIcon className={classes.arrow} />
+          <ArrowBackIcon onClick={() => history.goBack()} className={classes.arrow} />
           
         </Grid>
         <Grid item  lg={9} md={9} sm={8} xs={6}>

@@ -65,15 +65,15 @@ function TextFieldSizes(props) {
     const pointerStyle = {
         color: '#ff5656',
         position: 'absolute',
-        right: '6vw',
+        right: '3.75vw',
         top: '28%',
         cursor: 'pointer',
     }
 
     const serviceSearchStyle = {
-        width: '85vw',
+        width: '90vw',
         height: '4vh',
-        margin: '0 5vw',
+        margin: '0 10px',
         border: '1px solid #cdcdcd',
         borderRadius: '13px',
         fontSize: '14px',
@@ -126,7 +126,7 @@ function TextFieldSizes(props) {
         <div style={{ width: "100%" }} >
             <div style={{ display: "flex", justifyContent: 'space-between' }}>
                 <div style={{ marginLeft: '10px', color: '#6d6d6d', fontSize: '14px', letterSpacing: '0.8px', marginBottom: '20px' }}><h3>Services</h3></div>
-                <div style={{ marginTop: '-16px' }} >
+                <div style={{ marginTop: '-16px', marginRight: '10px' }} >
                     <Badge style={{ marginBottom: "-40px", marginLeft: "100px" }} badgeContent={"!"} color="error">
                     </Badge>
                     <RoundedButton onClick={goBack} size="small" style={{ backgroundColor: "#0295aa", marginBottom: '25px' }}>My Requests</RoundedButton>
@@ -147,19 +147,18 @@ function TextFieldSizes(props) {
 
             </form>
 
-            <div style={{ display: "flex", overflow: "scroll", marginTop: "0px" }} >
+            <div style={{ display: "flex", overflow: "scroll", marginTop: "0px"}} >
 
                 <ScrollMenu
-
                     data={items.map(res =>
                         <Box onClick={() => handleService(res.serviceText)} boxShadow={1} style={{ height: "90px", width: "100px", margin: "20px", marginRight: "10px", borderRadius: '10px' }}>
                             <CardMedia
-                                style={{ height: "45px", marginTop: '10px', width: '50px', marginLeft: '25px', marginBottom: "0", }}
+                                style={{ height: "65px", marginTop: '10px', width: '70px', marginLeft: '15px', marginBottom: "0", }}
                                 image={res.imageUrl}
                                 title="services"
                             />
                             <Typography>
-                                <p style={{ fontSize: '12px', fontWeight: 600, textAlign: 'center', marginLeft: "6px", color: '#6d6d6c' }}>  {res.services}</p>
+                                <p style={{ fontSize: '12px', fontWeight: 600, textAlign: 'center', marginLeft: "5px", marginTop: '5px',color: '#6d6d6c' }}>  {res.services}</p>
                             </Typography>
                         </Box>
                     )} />

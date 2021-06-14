@@ -23,7 +23,15 @@ function LandingPage(props) {
       askingOTP: false
     })
   }
-  document.body.style.backgroundColor = "#ff5656"
+  document.body.style.backgroundColor = "#ff5656";
+  
+  const mobileImageStyle = {
+    position: 'fixed',
+    bottom: '-1vh',
+    left: '20vw',
+    minWidth: '60vw',
+    maxWidth: '60vw'
+  }
 
   return (
     <div className="h-100 text-light" >
@@ -71,7 +79,7 @@ function LandingPage(props) {
               </Grid>
             </Grid>
             <br />
-            <div className="text-center" id="mobile-image-container" >
+            <div style={mobileImageStyle} className="text-center" id="mobile-image-container" >
               <img
                 src={MobileApp}
                 id="mobile-image"

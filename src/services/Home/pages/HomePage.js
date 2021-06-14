@@ -29,8 +29,8 @@ function HomePage(props) {
 
     const cartStyle = {
         position : 'absolute',
-        top: '2vh',
-        right: '5vw',
+        top: '1.5vh',
+        right: '4vw',
     }
 
     const cartLength = props.cart.items.data.length;
@@ -49,10 +49,12 @@ function HomePage(props) {
                     <div
                         style={{ width: '100vw', borderBottom: "1px solid grey" }}
                     >
-                        <div style={{ margin: '15px' }}><div style={{ color: "#ff5656", fontWeight: 600 }}>Room  301</div>
-                            <div style={{ fontSize: '10px', fontWeight: 600, marginTop: '5px', color: '#6d6d6d' }}> {details.data.restaurant.display_name ? <h3>{details.data.restaurant.display_name}</h3> : <h3>Oyo Townhouse 032</h3>}  </div>
+                        <div style={{ margin: '15px',marginLeft: '10px' }}><div style={{ color: "#ff5656", fontWeight: 600, marginBottom: '0' }}>Room  301</div>
+                            <div style={{ fontSize: '10px', fontWeight: 600, marginTop: '0px', color: '#6d6d6d' }}> 
+                                {details.data.restaurant.display_name ? <h3>{details.data.restaurant.display_name}</h3> : <h3 style={{marginTop : '4px'}}>Oyo Townhouse 032</h3>}
+                            </div>
                             <div style={cartStyle} onClick={() => history.push('/viewcart')}>
-                                <Badge style={{ marginBottom: "10vh", marginRight: "-12vw" }} badgeContent={cartLength} color="error">
+                                <Badge style={{ marginBottom: "10vh", marginRight: "-10vw" }} badgeContent={cartLength} color="error">
                                 </Badge>
                                 <img src={CartIcon} alt="cart icon"/>
                             </div>
