@@ -40,7 +40,7 @@ function Example() {
     ]
 
     return (
-        <div className="banner-container">
+        <div className="banner-container" style={{marginTop: '1vh'}}>
             {
                 items.map((item, i) => <Item key={i} item={item} />)
             }
@@ -50,8 +50,8 @@ function Example() {
 
 function Item(props) {
     return (
-        <div style={{width: '72vw'}} className="banner-card">
-            <img alt="banner-item" src={props.item.imageURL} style={{ borderRadius: "16px", width: "68vw" }} height={window.innerHeight * 0.2} />
+        <div style={{width: '68vw',marginBottom: '0'}} className="banner-card">
+            <img alt="banner-item" src={props.item.imageURL} style={{ borderRadius: "16px", width: "69vw" }} height={window.innerHeight * 0.16} />
         </div>
 
     )

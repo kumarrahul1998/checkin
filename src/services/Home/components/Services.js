@@ -65,18 +65,18 @@ function TextFieldSizes(props) {
     const pointerStyle = {
         color: '#ff5656',
         position: 'absolute',
-        right: '3.75vw',
+        right: '4vw',
         top: '28%',
         cursor: 'pointer',
     }
 
     const serviceSearchStyle = {
-        width: '90vw',
-        height: '4vh',
+        width: '89vw',
+        height: '3vh',
         margin: '0 10px',
         border: '1px solid #cdcdcd',
         borderRadius: '13px',
-        fontSize: '14px',
+        fontSize: '18px',
         fontWeight: '500',
         fontFamily: '"Josefin Sans", sans-serif',
         paddingTop: '8px',
@@ -125,7 +125,7 @@ function TextFieldSizes(props) {
         
         <div style={{ width: "100%" }} >
             <div style={{ display: "flex", justifyContent: 'space-between' }}>
-                <div style={{ marginLeft: '10px', color: '#6d6d6d', fontSize: '14px', letterSpacing: '0.8px', marginBottom: '20px' }}><h3>Services</h3></div>
+                <div style={{ marginLeft: '10px', color: '#6d6d6d', fontSize: '14px', letterSpacing: '0.8px', marginBottom: '0px' }}><h3>Services</h3></div>
                 <div style={{ marginTop: '-16px', marginRight: '10px' }} >
                     <Badge style={{ marginBottom: "-40px", marginLeft: "100px" }} badgeContent={"!"} color="error">
                     </Badge>

@@ -17,3 +17,21 @@
 }
 @media screen and (max-height: 570px) {
 }
+
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: white;
+  -webkit-box-shadow: none;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: none;
+}
