@@ -7,13 +7,14 @@ const useStyles= makeStyles(theme=>({
     container:{
         padding: "1rem 4rem",
         [theme.breakpoints.down('sm')]:{
-            padding: '2rem',
+            padding: '0rem 2rem',
         }
     },
     heading:{
         color: "#6d6d6d",
         [theme.breakpoints.down('sm')]:{
             fontSize: '2rem',
+            marginTop: '1.125rem'
         }
     }
 }))
