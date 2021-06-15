@@ -15,7 +15,8 @@ export const ViewCartPage = () => {
 
     const cartNavStyle = {
         width: '100vw',
-        borderBottom: "1px solid grey",
+        borderBottom: "1px solid lightgrey",
+        boxShadow: '0px 1.5px 1px 0px lightgrey',
         backgroundColor: '#ececec',
         height: '50px',
         position: 'fixed',

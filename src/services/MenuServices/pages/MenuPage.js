@@ -34,7 +34,8 @@ function MenuPage(props) {
 
     const menuNavBarStyle = {
         width: "100vw",
-        borderBottom: "1px solid grey",
+        borderBottom: "1px solid lightgrey",
+        boxShadow: '0px 1.5px 1px 0px lightgrey',
         position: 'fixed',
         top: '0',
         left: '0',
