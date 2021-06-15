@@ -20,7 +20,8 @@ export const ViewCartPage = () => {
         height: '50px',
         position: 'fixed',
         top: '0',
-        left: '0'
+        left: '0',
+        zIndex:"20",
     }
 
     return (
@@ -45,7 +46,7 @@ export const ViewCartPage = () => {
             
             <div style={{
                 width: "100%",
-                height: "45px",
+                height: "5.5vh",
                 overflow: "hidden",
                 position: "sticky",
                 bottom: 0,
