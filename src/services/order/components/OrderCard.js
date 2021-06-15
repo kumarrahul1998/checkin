@@ -5,7 +5,8 @@ const useStyles=makeStyles(theme=>({
     card:{
         padding: "1rem 2rem",
         borderRadius: "1rem",
-        boxShadow: "1px 1px 5px #bebebe",
+        border: "1px solid rgb(140,140,140,0.1)",
+        boxShadow: "0 0 0.625vw 0px rgb(140,140,140,0.5)",
         [theme.breakpoints.down('sm')]:{
             padding: "1rem",
         },
@@ -17,23 +18,24 @@ const useStyles=makeStyles(theme=>({
     },
     chip:{
         fontFamily: "Arial",
-        fontSize:"0.8rem",
+        fontSize: "0.6rem",
+        padding: '0',
         color: "#fff",
-        backgroundColor:"#6d6d6d",
+        backgroundColor: "#6d6d6d",
     },
     pending:{
         fontWeight:"600 !important",
         textTransform: "uppercase",
         color: "#fff",
         backgroundColor: "#e88e45",
-
+        fontSize: '0.7rem'
     },
     progress:{
         fontWeight:"600 !important",
         textTransform: "uppercase",
         color: "#fff",
         backgroundColor: "#0295AA",
-
+        fontSize: '0.7rem'
     },
     delivered:{
         backgroundColor: "#32c282",
@@ -41,7 +43,7 @@ const useStyles=makeStyles(theme=>({
         textTransform: "uppercase",
         color: "#fff",
         backgroundColor: "#32c282",
-
+        fontSize: '0.7rem'
     },
     cancelled:{
         backgroundColor: "#32c282",
@@ -49,6 +51,7 @@ const useStyles=makeStyles(theme=>({
         textTransform: "uppercase",
         color: "#fff",
         backgroundColor: "#FF5656",
+        fontSize: '0.7rem'
     },
     heading:{
         color:"#ff5656",
@@ -101,7 +104,7 @@ const OrderCard = ({data}) => {
             <Card variant="outlined" className={classes.card}>
                 <Grid container>
                     <Grid item lg={10} md={10} sm={10} xs={8}>
-                        <Typography className={isActive200?classes.name200:classes.name} variant="h6">{data.name} &nbsp; <Chip className={classes.chip}  label={`QTY: ${data.quantity}`} /></Typography>
+                        <Typography className={isActive200?classes.name200:classes.name} variant="h6">{data.name} &nbsp; <Chip className={classes.chip} size="small"  label={`QTY: ${data.quantity}`} /></Typography>
                     </Grid>
                     <Grid style={{display:"flex",justifyContent:"flex-end"}} item lg={2} md={2} sm={2} xs={isActive?12:4}>
                         {data.status==="pending"?<Chip className={classes.pending} label={data.status}></Chip>:null}
