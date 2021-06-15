@@ -19,7 +19,7 @@ const useStyles= makeStyles(theme=>({
         backgroundColor: "#ffefef",
         [theme.breakpoints.down('sm')]:{
             padding: '10px',
-            height: "160px"
+            height: "18vh"
             }
     },
     imageContainer:{
@@ -125,8 +125,8 @@ export default function OrderStatus() {
             <Grid item container lg={12} md={12} sm={12} xs={12} className={classes.container} spacing={0}>
                 <Grid item lg={5} md={5} sm={7} xs={7} className={classes.imageContainer} >
                 <Grid style={{ textAlign: "center" }} item xs={4}>
-                        <img src={OrderFirstImage} height="32px" />
-                        <p style={{ fontSize: 10, marginLeft: "6px", marginTop: "0", color: '#6d6d6d', fontSize: '9px', fontWeight: 600 }}>
+                        <img src={OrderFirstImage} height="32px" style={{marginTop: '5px'}}/>
+                        <p style={{ marginLeft: "2px", marginTop: "5px", color: '#6d6d6d', fontSize: '10px', fontWeight: 600 }}>
                             <span
                                 style={{ color: "red", fontWeight: 600 }}
                             >
@@ -136,8 +136,8 @@ export default function OrderStatus() {
                             </p>
                     </Grid>
                     <Grid style={{ textAlign: "center" }} item xs={4}>
-                        <img src={OrderSecondImage} height="32px" />
-                        <p style={{ fontSize: 9, marginLeft: "6px", marginTop: "0", color: '#6d6d6d', fontSize: '9px', fontWeight: 600 }}>
+                        <img src={OrderSecondImage} height="32px"  style={{marginTop: '5px'}} />
+                        <p style={{ marginLeft: "2px", marginTop: "5px", color: '#6d6d6d', fontSize: '10px', fontWeight: 600 }}>
                             <span
                                 style={{ color: "red", fontWeight: 600 }}
                             >
@@ -147,8 +147,8 @@ export default function OrderStatus() {
                             </p>
                     </Grid>
                     <Grid style={{ textAlign: "center" }} item xs={4}>
-                        <img src={OrderThirdImage} height="32px" />
-                        <p style={{ fontSize: 10, marginLeft: "6px", marginTop: "0", color: '#6d6d6d', fontSize: '8px', fontWeight: 600 }}>
+                        <img src={OrderThirdImage} height="32px"  style={{marginTop: '5px'}} />
+                        <p style={{ fontSize: 10, marginLeft: "4px", marginTop: "5px", color: '#6d6d6d', fontSize: '10px', fontWeight: 600 }}>
                             <span
                                 style={{ color: "red", fontWeight: 600 }}
                             >
@@ -166,11 +166,11 @@ export default function OrderStatus() {
                     <div >
                         <RoundedButton
                             size={"small"}
-                            style={{width: "96%"}}
+                            style={{width: "73%",marginLeft: '15%'}}
                             onClick={handleClick}
                         >
                             <span
-                                style={{ fontSize: "14px" }}
+                                style={{ fontSize: "14px",fontWeight: 'bold' }}
                             >
                                 View Order
                                 </span>

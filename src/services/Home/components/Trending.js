@@ -57,7 +57,7 @@ function Trending({ home, sendToCart, cart,removeFromCart }) {
     
     return (
         <div >
-            <div style={{ marginLeft: '10px', color: '#6d6d6d', marginTop: '40px', fontSize: '14px' }}>
+            <div style={{ marginLeft: '10px', color: '#6d6d6d', marginTop: '3vh', fontSize: '14px' }}>
                 <h3>Trending Dishes</h3>
             </div>
             {
@@ -85,14 +85,14 @@ function Trending({ home, sendToCart, cart,removeFromCart }) {
                                         title="Item"
                                     />
                                     <div variant="subtitle1" color="textSecondary">
-                                        <div style={{ display: "flex", bottom: 0 }}>
-                                            <div >{dish.item_type === 0 ? (<img style={{ height: "10px", width: "10px", marginLeft: "5px" }} src={Veg} />) : (<img style={{ height: "10px", width: "10px", marginLeft: "5px" }} src={nonVeg} />)}</div>
-                                            <div style={{ fontSize: '10px', marginLeft: "6px", marginTop: "5px", marginBottom: "0", color: "#6d6d6d" }}> {dish.name}</div>
+                                        <div style={{ display: "flex", bottom: 0, marginTop: '1vh' }}>
+                                            <div >{dish.item_type === 0 ? (<img style={{ height: "10px", width: "10px", marginLeft: "5px",paddingTop: '0.5vh'  }} src={Veg} />) : (<img style={{ height: "10px", width: "10px", marginLeft: "5px",paddingTop: '0.5vh' }} src={nonVeg} />)}</div>
+                                            <div style={{ fontSize: '14px', marginLeft: "6px", marginTop: "5px", marginBottom: "0", color: "#6d6d6d" }}> {dish.name}</div>
 
                                         </div>
 
                                         <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                            <div style={{ fontSize: '12px', fontWeight: 600, marginLeft: "20px", marginTop: "5px", color: "#6d6d6d" }}>&#8377; {dish.costs?.[0]}</div>
+                                            <div style={{ fontSize: '16px', fontWeight: 600, marginLeft: "20px", marginTop: "5px", color: "#6d6d6d" }}>&#8377; {dish.costs?.[0]}</div>
                                             
                                             {cart.items&&cart.items.data&&!cart.items.data.find((item)=>item.name==dish.name)?<div style={{marginRight: "5px", marginTop: "-6px"}}>   <div
                                                    style={{ paddingTop: '5px', width: '65px' ,fontSize: '14px', color: 'white', fontWeight: 700,backgroundColor: "#ff5656", marginTop:"1vh", border: '1px solid #ff5656', borderRadius: '5px', textAlign: 'center'}}

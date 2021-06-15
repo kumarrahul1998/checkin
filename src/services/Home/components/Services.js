@@ -20,6 +20,12 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import {connect} from 'react-redux';
 import actionTypes from '../actions/actionTypes';
+import WaterBottle from '../../../assets/home/services/water_bottle.png';
+import Towel from '../../../assets/home/services/group_2.png';
+import Bed from '../../../assets/home/services/group_3.png';
+import Tissue from '../../../assets/home/services/napkin.png';
+import Shaving from '../../../assets/home/services/shaving_cream.png';
+import Dental from '../../../assets/home/services/tooth_paste.png';
 
 function TextFieldSizes(props) {
 
@@ -30,33 +36,33 @@ function TextFieldSizes(props) {
         {
 
             services: "Room Service",
-            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/C9479B3F-4E34-4794-BA30-4C139B82D6D2.svg",
+            imageUrl: Bed,
             serviceText : 'Please send a person to clean the room.'
 
         },
         {
             services: "Dental Kit",
-            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/1726C101-BBE7-47C5-9F1A-A0E99736588B.svg",
+            imageUrl: Dental,
             serviceText : 'I need a Dental Kit. Please send it quickly.'
         },
         {
             services: "Shaving Kit",
-            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/A7289ADA-DA04-462B-8BB3-0C94B470877E.svg",
+            imageUrl: Shaving,
             serviceText : 'I need a Shaving Kit. Please send it quickly.'
         },
         {
             services: "Fresh towels",
-            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/A2E5D614-E32B-4D8A-B76D-67DAC4DD235F.svg",
+            imageUrl: Towel,
             serviceText : 'Fresh towels are needed. Please send it.'
         },
         {
             services: "Water",
-            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/4C1DBA35-E7E2-4986-A7BE-8A3B13A38B11.svg",
+            imageUrl: WaterBottle,
             serviceText : 'Please refill mini bar with packaged water bottles'
         },
         {
             services: "Tissue",
-            imageUrl: "https://cdn.zeplin.io/5af42663188049271b3ae959/assets/2AD1B33C-A68B-4625-9767-707F22AACE59.svg",
+            imageUrl: Tissue,
             serviceText : 'Please send Tissues.'
         }
     ]
@@ -76,8 +82,8 @@ function TextFieldSizes(props) {
         margin: '0 10px',
         border: '1px solid #cdcdcd',
         borderRadius: '13px',
-        fontSize: '18px',
-        fontWeight: '500',
+        fontSize: '14px',
+        fontWeight: '400',
         fontFamily: '"Josefin Sans", sans-serif',
         paddingTop: '8px',
         paddingBottom: '8px',
@@ -147,13 +153,13 @@ function TextFieldSizes(props) {
 
             </form>
 
-            <div style={{ display: "flex", overflow: "scroll", marginTop: "0px"}} >
+            <div style={{ display: "flex", overflow: "scroll", marginTop: "5px"}} >
 
                 <ScrollMenu
                     data={items.map(res =>
-                        <Box onClick={() => handleService(res.serviceText)} boxShadow={1} style={{ height: "90px", width: "100px", margin: "20px", marginRight: "10px", borderRadius: '10px' }}>
+                        <Box onClick={() => handleService(res.serviceText)} boxShadow={1} style={{ height: "25vw", width: "26vw", margin: "20px", marginRight: "10px", borderRadius: '10px' }}>
                             <CardMedia
-                                style={{ height: "65px", marginTop: '10px', width: '70px', marginLeft: '15px', marginBottom: "0", }}
+                                style={{ height: "18vw", marginTop: '10px', width: '21.5vw', marginLeft: '10px', marginBottom: "0", }}
                                 image={res.imageUrl}
                                 title="services"
                             />
