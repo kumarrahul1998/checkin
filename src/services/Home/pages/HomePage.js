@@ -49,9 +49,9 @@ function HomePage(props) {
                     <div
                         style={{ width: '100vw', borderBottom: "1px solid lightgrey", boxShadow: '0px 1.5px 1px 0px lightgrey'}}
                     >
-                        <div style={{ margin: '15px',marginLeft: '10px' ,marginBottom: '0'}}><div style={{ color: "#ff5656", fontWeight: 600, marginBottom: '0' }}>Room  301</div>
+                        <div style={{ margin: '15px',marginLeft: '10px' ,marginBottom: '0'}}><div style={{ color: "#ff5656", fontWeight: 600, marginBottom: '0',fontSize: '14px' }}>Room  301</div>
                             <div style={{ fontSize: '10px', fontWeight: 600, marginTop: '0px', color: '#6d6d6d' }}> 
-                                {details.data.restaurant.display_name ? <h3>{details.data.restaurant.display_name}</h3> : <h3 style={{marginTop : '4px',marginBottom: '1vh'}}>Oyo Townhouse 032</h3>}
+                                {details.data.restaurant.display_name ? <h3>{details.data.restaurant.display_name}</h3> : <h3 style={{marginTop : '4px',marginBottom: '1vh',fontSize: '12px'}}>Oyo Townhouse 032</h3>}
                             </div>
                             <div style={cartStyle} onClick={() => history.push('/viewcart')}>
                                 <Badge style={{ marginBottom: "7vh", marginRight: "-9vw" }} badgeContent={cartLength} color="error">
