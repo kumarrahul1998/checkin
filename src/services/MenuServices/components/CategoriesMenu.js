@@ -62,13 +62,13 @@ function MenuListComposition() {
     const [buttonClicked, setButtonClicked] = React.useState(false);
 
     const searchStyle = {
-        marginTop: '0vh',
+        marginTop: '2vh',
         border: '1px solid #cdcdcd',
-        borderRadius: '1vw',
+        borderRadius: '10vw',
         fontFamily: '"Josefin Sans", sans-serif',
-        minWidth: '55vw',
-        padding: '0.6vh 2vw',
-        maxWidth: '40vw'
+        minWidth: '82vw',
+        padding: '1.5vh 2vw 1.5vh 10vw',
+        marginLeft:'3vw'
     }
 
     const closeIconStyle = {
@@ -82,58 +82,20 @@ function MenuListComposition() {
     }
 
     const searchIconStyle = {
-        cursor: 'pointer'
+        position:"absolute",
+        cursor: 'pointer',
+        left:"5vw",
+        top: "3vh",
+        color:"#bebebe"
     }
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between', width: "100%" }}>
+        <div style={{  width: "100%" }}>
 
-            <div>
-                <Button
-                    ref={anchorRef}
-                    aria-controls={open ? 'menu-list-grow' : undefined}
-                    aria-haspopup="true"
-                    onClick={handleToggle}
-                    PaperProps={{
-                        style: {
-                            maxHeight: ITEM_HEIGHT * 4.5,
-                            width: '20ch',
-                        },
-                    }}
-                >
-                    All
-            <div style={{ marginBottom: '.5px' }}>     {open ? (<ArrowDropUpIcon />) : (<ArrowDropDownIcon />)}</div>
-
-                </Button>
-                <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-                    {({ TransitionProps, placement }) => (
-                        <Grow
-                            {...TransitionProps}
-                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                        >
-                            <Paper>
-                                <ClickAwayListener onClickAway={handleClose}>
-                                    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                        <MenuItem onClick={handleClose}>Food</MenuItem>
-                                        <MenuItem onClick={handleClose}>Drink</MenuItem>
-                                        <MenuItem onClick={handleClose}>Special</MenuItem>
-                                    </MenuList>
-                                </ClickAwayListener>
-                            </Paper>
-                        </Grow>
-                    )}
-                </Popper>
-            </div>
-            <div style={{ margin: '10px' }}>
-                {buttonClicked ? 
-                    (<div style={{position: 'relative'}}>
-                        <input style={searchStyle} type="text" placeholder="Start typing to search..." />
-                        <img src={cancel} style={closeIconStyle} onClick={() => setButtonClicked(false)}/>
-                    </div>):
-                    (<div style={searchIconStyle} ><SearchIcon onClick={() => setButtonClicked(true)}/></div>)
-                }
-                
-            </div>
+                    
+                        <input style={searchStyle} type="text" placeholder="Search across catalog" />
+                     <SearchIcon style={searchIconStyle}  onClick={() => setButtonClicked(true)}/>
+            
         </div>
     );
 }

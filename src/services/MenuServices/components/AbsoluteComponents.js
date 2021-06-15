@@ -14,7 +14,7 @@ function AbsoluteComponents({ cart,amount }) {
     return (<>
       <div style={{
         width: "100%",
-        height: "5%",
+        height: "4vh",
         overflow: "hidden",
         position: "fixed",
         bottom: 0,

@@ -19,17 +19,19 @@ function AbsoluteItems({ cart,amount }) {
   return (
     <div style={{
       width: "100%",
-      height: "45px",
+      height: "4.5vh",
       overflow: "hidden",
       position: "sticky",
       bottom: 0,
       backgroundColor: "#32c282",
+      
 
     }}>
       <div style={{
         justifyContent: 'space-between',
         display: 'flex',
         color: '#fff',
+        height:"100%"
         // bottom: 0
       }}>
         <div style={{

@@ -23,10 +23,10 @@ function Offers(props) {
     console.log(promos)
     return (
         <div>
-            <div style={{marginLeft: "10px"}}> <ScrollMenu
-
+            <div style={{marginLeft: "3vw"}}> <ScrollMenu
+                alignCente={false}
                 data={promos.map((res,index) =>
-                    <Card key={index} variant="outlined" style={{ height: "60px", width: "160px", margin: "20px", marginRight: "10px", display: 'flex' }}>
+                    <Card key={index} variant="outlined" style={index===0?{ height: "60px", width: "160px", margin: "20px 20 20px 0px", marginRight: "10px", display: 'flex' }:{ height: "60px", width: "160px", margin: "20px", marginRight: "10px", display: 'flex' }}>
 
                         <Typography>
                             <p style={{ display: 'flex', marginBottom: '0', marginLeft: '6px', fontSize: '14px' }}>
@@ -35,7 +35,7 @@ function Offers(props) {
                         </Typography>
                     </Card>
                 )} /></div>
-            <Divider style={{ height: '10px', width: "100%" }} />
+            <Divider style={{ height: '5px', width: "100%" }} />
 
         </div>)
 }

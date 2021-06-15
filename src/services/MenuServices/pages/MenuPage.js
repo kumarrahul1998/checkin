@@ -47,7 +47,7 @@ function MenuPage(props) {
     return (
         <div style={{width: '100vw'}} id="container">
             <div style={menuNavBarStyle} id="MenuNav">
-                <div style={{ margin: '15px', display: 'flex' }}>
+                <div style={{ margin: '15px 2vw 15px 15px', display: 'flex' }}>
                     <div style={{cursor: 'pointer'}}>
                         <ArrowBackIosIcon onClick={handleChange} />
                     </div>
@@ -72,7 +72,7 @@ function MenuPage(props) {
                 return( 
                     <div>                                                       
                         <Displaydish key={item.categoryName} obj = {JSON.parse(JSON.stringify(item))} index = {index}/>
-                        <Divider style={{ height: '10px', width: "100%" }} />             
+                        <Divider style={{ height: '5px', width: "100%" }} />             
                     </div>
                 )
             })}

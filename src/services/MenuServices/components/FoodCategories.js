@@ -14,12 +14,12 @@ let categories = [{
 },
 {
     image: 'https://cdn.zeplin.io/5af42663188049271b3ae959/assets/56BF08BE-83AA-4350-92F2-235CAB742E2B.svg',
-    title: 'Special'
+    title: 'Desert'
 },
 {
     image: 'https://cdn.zeplin.io/5af42663188049271b3ae959/assets/56BF08BE-83AA-4350-92F2-235CAB742E2B.svg',
-    title: 'Desert'
-}
+    title: 'Special'
+},
 
 
 ]
@@ -30,14 +30,24 @@ function Items() {
         <div style={{width: "100%"}}>
             <br />
 
-            <div ><ScrollMenu
-
+            {/* <div style={{marginTop:"5vh"}}><ScrollMenu
+                style={{marginLeft:"2vw"}}
                 data={categories.map(res =>
                     <div key={res.title} style={{ height: '90px', width: '60px', margin: '20px' }}>
                         <img style={{ height: '60px', width: '40px' }} src={res.image} />
                         <div style={{ color: '#6d6d6d' }}>{res.title}</div>
                     </div>
-                )} /></div>
+                )}  />
+            </div> */}
+            <div style={{marginTop:"5vh",display:"flex",justifyContent:"space-between",width:"96vw",marginLeft:"2vw"}}>
+                {/* style={{marginLeft:"2vw"}} */}
+                {categories.map(res =>
+                    <div key={res.title} style={{display:"inline-flex",justifyContent:"center",flexDirection:"column",alignItems:"center", height: '90px', width: '60px',marginTop:"10px",marginBottom:"10px"}}>
+                        <img style={{ height: '60px', width: '40px' }} src={res.image} />
+                        <div style={res.title==="Special"?{ color: '#ff5656' }:{ color: '#6d6d6d' }}>{res.title}</div>
+                    </div>
+                )}  
+            </div>
 
             <div style={{ marginLeft: windowWidth * 0.08 + 'px', marginRight: windowWidth * 0.09 + 'px' }}>  <Divider /></div>
         </div>)
