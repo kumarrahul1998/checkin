@@ -27,10 +27,9 @@ function LandingPage(props) {
   
   const mobileImageStyle = {
     position: 'fixed',
-    bottom: '-1vh',
-    left: '20vw',
-    minWidth: '60vw',
-    maxWidth: '60vw'
+    bottom: '0vh',
+    left: '15vw',
+    width: '70vw'
   }
 
   return (
@@ -79,10 +78,11 @@ function LandingPage(props) {
               </Grid>
             </Grid>
             <br />
-            <div style={mobileImageStyle} className="text-center" id="mobile-image-container" >
+            <div  className="text-center" id="mobile-image-container" >
               <img
                 src={MobileApp}
                 id="mobile-image"
+                style={mobileImageStyle}
               />
             </div>
 
