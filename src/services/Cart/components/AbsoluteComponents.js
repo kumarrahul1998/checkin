@@ -3,7 +3,7 @@ import React from 'react'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { connect } from "react-redux"
 import { useHistory } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
 function AbsoluteItems({ cart,amount }) {
   
   
@@ -12,7 +12,10 @@ function AbsoluteItems({ cart,amount }) {
 
   const history = useHistory()
   const handleClick = () => {
-    history.push("/settlebill")
+    toast('Order placed')
+    setTimeout(()=>
+    history.push("/home")
+    ,5000)
   }
 
  

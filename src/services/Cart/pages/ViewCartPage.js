@@ -4,6 +4,8 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { useHistory } from 'react-router-dom';
 import AbsoluteItems from '../components/AbsoluteComponents'
 import CartItems from '../components/CartItems';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ViewCartPage = () => {
     const history = useHistory()
@@ -26,7 +28,8 @@ export const ViewCartPage = () => {
     }
 
     return (
-        <div >
+        <div ><ToastContainer position="bottom-center"
+        autoClose={5000} />
             <div
                 style={cartNavStyle}
             >

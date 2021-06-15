@@ -72,8 +72,8 @@ export const CartItems = ({ cart,sendToCart,removeFromCart,Amount ,_add_item,_re
                 {item.name}
 
 
-                <div> {item.variantId ? (<div style={{ fontStyle: 'JosefinSans-Regular', marginTop: '10px', color: '#ff5656', width: '200px', fontSize: '11px' }} onClick={handleCustomize()} >  Customize <BrightnessLowIcon style={{ fontSize: '8px' }} /> <span style={{ marginRight: '80px', fontWeight: 500, color: '#6d6d6d', marginBottom: '50px', fontSize: '15px', marginLeft: '10px' }} > &#8377;&nbsp;{item.price}</span>  </div>) :
-                  <span style={{ marginRight: '100px', fontWeight: 500, color: '#6d6d6d', fontSize: '15px' }} > &#8377;&nbsp;{item.variantChosen?item.variantChosen?.price+item.price:item.price} </span>}
+                <div style={{marginTop:"7px"}}> {item.variantId ? (<div style={{ fontStyle: 'JosefinSans-Regular', marginTop: '5px', color: '#ff5656', width: '200px', fontSize: '11px' }} onClick={handleCustomize()} >  Customize <BrightnessLowIcon style={{ fontSize: '8px' }} /> <span style={{ marginRight: '80px', fontWeight: 500, color: '#6d6d6d', marginBottom: '50px', fontSize: '15px', marginLeft: '10px' }} > &#8377;&nbsp;{item.price}</span>  </div>) :
+                  <span style={{ marginRight: '100px',marginTop:"10px", fontWeight: 500, color: '#6d6d6d', fontSize: '15px' }} > &#8377;&nbsp;{item.variantChosen?item.variantChosen?.price+item.price:item.price} </span>}
                 </div>
 
               </div>
