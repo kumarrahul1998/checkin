@@ -4,8 +4,16 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { useHistory } from 'react-router-dom';
 import AbsoluteItems from '../components/AbsoluteComponents'
 import CartItems from '../components/CartItems';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import complete from "../../../assets/order/complete.gif"
+import { makeStyles } from '@material-ui/core';
+
+const useStyles= makeStyles({
+    completeImage:{
+        height:"40vh",
+        width:"100vw",
+    }
+})
+
 
 export const ViewCartPage = () => {
     const history = useHistory()
@@ -15,6 +23,7 @@ export const ViewCartPage = () => {
         console.log(history);
     })
 
+    // console.log(completeImage)
     const cartNavStyle = {
         width: '100vw',
         borderBottom: "1px solid lightgrey",
@@ -26,10 +35,14 @@ export const ViewCartPage = () => {
         left: '0',
         zIndex:"20",
     }
-
+    const classes = useStyles();
     return (
-        <div ><ToastContainer position="bottom-center"
-        autoClose={5000} />
+        <div >
+            <div id="complete" style={{display:"none",position:"absolute"}}>
+            <div style={{display:"flex" ,alignItems:"center",height:"90vh",justifyContent:"center",background:"#ffffff",zIndex:"1000"}}>
+            <img className={classes.completeImage} src={complete} width={100} height={100}    />
+            </div>
+            </div>
             <div
                 style={cartNavStyle}
             >

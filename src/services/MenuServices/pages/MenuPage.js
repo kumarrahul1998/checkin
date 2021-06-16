@@ -49,14 +49,14 @@ function MenuPage(props) {
         <div style={{width: '100vw'}} id="container">
             <div style={menuNavBarStyle} id="MenuNav">
                 <div style={{ margin: '15px 2vw 15px 15px', display: 'flex' }}>
-                    <div style={{cursor: 'pointer'}}>
+                    <div style={{cursor: 'pointer',color:"#6d6d6d"}}>
                         <ArrowBackIosIcon onClick={handleChange} />
                     </div>
                     <div>
                         <div style={{ color: "#ff5656" }}>
                             Menu 
                         </div>
-                        <div style={{ fontSize: '10px', marginTop: '5px' }}>
+                        <div style={{ fontSize: '10px', marginTop: '5px' ,color:"#6d6d6d"}}>
                             Grey Orange - Lavel Road
                         </div>
                     </div>

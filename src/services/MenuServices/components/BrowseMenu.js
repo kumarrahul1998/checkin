@@ -5,11 +5,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {fade, makeStyles} from '@material-ui/core/styles'
+import { connect } from "react-redux"
 
 
-export default function BrowseMenu(props) {
+function BrowseMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const { ids: data } = props; 
+    const { ids: data,cart } = props; 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
         
@@ -24,7 +25,7 @@ export default function BrowseMenu(props) {
     };
     const Space = () => <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
     return (
-        <div style={{ bottom: 50, right: 0, position: 'fixed', zIndex: 1000,  }}>
+        <div style={cart.items.data.length>0?{ bottom: 50, right: 0, position: 'fixed', zIndex: 1000,  }:{ bottom: 5, right: 0, position: 'fixed', zIndex: 1000,  }}>
             <RoundedButton onClick={handleClick} style={{ backgroundColor: '#0295aa', textTransform: 'uppercase', fontSize: '13px'}} >
                 <span style={{display: "block",marginBottom: "-2px"}}>Browse Menu</span>
             </RoundedButton>
@@ -46,3 +47,12 @@ export default function BrowseMenu(props) {
         </div>
     )
 }
+
+const mapStateToProps = (state) => ({
+    cart: state.cart,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(BrowseMenu)    // redux

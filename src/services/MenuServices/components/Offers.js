@@ -29,9 +29,9 @@ function Offers(props) {
                     <Card key={index} variant="outlined" style={index===0?{ height: "60px", width: "160px", margin: "20px 20 20px 0px", marginRight: "10px", display: 'flex' }:{ height: "60px", width: "160px", margin: "20px", marginRight: "10px", display: 'flex' }}>
 
                         <Typography>
-                            <p style={{ display: 'flex', marginBottom: '0', marginLeft: '6px', fontSize: '14px' }}>
-                                <img src={Percentage} />&nbsp;Get&nbsp;<div style={{ whiteSpace: 'pre-line', fontSize: '11px' }} > {parser(res.name)}</div> </p>
-                            <p style={{ marginTop: '0px', marginLeft: '6px', fontSize: '10px', marginLeft: '30px', }}>Code:{res.code} </p>
+                            <p style={{ display: 'flex',color:"#6d6d6d", marginBottom: '0', marginLeft: '6px', fontSize: '14px' }}>
+                                <img src={Percentage} />&nbsp;Get&nbsp;<div style={{ whiteSpace: 'pre-line', fontSize: '11px',color:"#ff4f19" }} > {parser(res.name)}</div> </p>
+                            <p style={{ marginTop: '0px',color:"#6d6d6d", marginLeft: '6px', fontSize: '10px', marginLeft: '30px', }}>Code:{res.code} </p>
                         </Typography>
                     </Card>
                 )} /></div>
