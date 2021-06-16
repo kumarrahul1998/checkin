@@ -86,9 +86,9 @@ function Trending({ home, sendToCart, cart,removeFromCart,Amount }) {
                         }
                     </div>
                     :
-                    <div style={{ display: "flex", overflow: "scroll", marginLeft: "0" }} >
+                    <div style={{ display: "flex", overflow: "scroll", marginLeft: "10px" }} >
                         <ScrollMenu
-
+                            alignCenter={false}
                             data={trendingDishes.data.map((dish,index )=>
                                 <Card key={index} style={{ height: "170px", width: "180px", marginRight: "5px", marginLeft: "3px", }}>
                                     <CardMedia

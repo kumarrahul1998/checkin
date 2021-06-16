@@ -12,7 +12,7 @@ function AbsoluteItems({ cart,amount }) {
    completeImage.style.display="block"; 
     setTimeout(()=>
     history.push("/home")
-    ,2000)
+    ,750)
   }
 
  

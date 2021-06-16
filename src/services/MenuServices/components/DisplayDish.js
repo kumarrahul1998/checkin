@@ -82,10 +82,10 @@ function Displaydish(props) {
     return (
 
         <div id = {props.obj.categoryName} style={{ marginBottom: '30px', width: "100%"}}>
-            <h3 style={{ color: '#6d6d6d', marginLeft: "5px" }}>&nbsp;{props.obj.categoryName}</h3>
+            <h3 style={{ color: '#6d6d6d', marginLeft: "10px" }}>&nbsp;{props.obj.categoryName}</h3>
 
             {Items.map((item, index) =>
-                <div style={{ height: '150px', width: "100%", marginLeft: "2px"}}>
+                <div style={{ height: '150px', width: "100%", marginLeft: "8px"}}>
                     <div style={{ display: 'flex', justifyContent: "space-between" }}>
                         <div style={{ display: 'flex', marginLeft: "5px" }} >
                             <div>  {item.mealtype === "veg" ?
@@ -122,7 +122,7 @@ function Displaydish(props) {
 
                                         {item.description} 
                                     </div> {item.description.length > 60? 
-                                    (<span style={{color: "#ff5656"}} id="more" onClick={(event) => showFullDescription(event, props.obj.categoryName,index)} >more...</span>) : (<> </>)}
+                                    (<span style={{color: "#ff5656"}} id="more" onClick={(event) => showFullDescription(event, props.obj.categoryName,index)} >...more</span>) : (<> </>)}
                                 </div>
                             </div>
                             

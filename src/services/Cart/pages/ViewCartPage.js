@@ -53,7 +53,7 @@ export const ViewCartPage = () => {
                 style={cartNavStyle}
             >
                 <div style={{ display: 'flex', }}>
-                    <div style={{ marginTop: '15px', marginLeft: '10px' }}>
+                    <div style={{ marginTop: '15px', marginLeft: '20px' }}>
                         <ArrowBackIosIcon style={{ color: '#6d6d6d',cursor:"pointer" }} onClick={() => history.hasOwnProperty("goBack") ? history.goBack() : history.push("/menu")} />
                     </div>
                     <div>

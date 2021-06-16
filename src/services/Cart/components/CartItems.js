@@ -68,7 +68,7 @@ export const CartItems = ({ cart,sendToCart,removeFromCart,Amount ,_add_item,_re
                 <img src={NonVegIcon} style={{ height: "10px", width: "10px", marginLeft: "5px", marginTop: "5px" }} />
               </div>) : (<div style={{ marginTop: '20px', marginLeft: '20px' }} ><img src={VegIcon} style={{ height: "11px", width: "11px", marginTop: "5px" }} /></div>)}
 
-              <div style={{ marginTop: '22px', color: '#6d6d6d', fontSize: '14px', marginLeft: '10px', fontWeight: 500 }}>
+              <div style={{ marginTop: '22px', color: '#6d6d6d', fontSize: '14px', marginLeft: '10px', fontWeight: 500, width: '37vw' }}>
                 {item.name}
 
 
@@ -82,7 +82,7 @@ export const CartItems = ({ cart,sendToCart,removeFromCart,Amount ,_add_item,_re
             </div>
 
             <div>{item.type === "veg" ?
-              <div style={{ marginTop: '20px', marginLeft: '58px', color: '#fff' }}>
+              <div style={{ marginTop: '20px', marginLeft: '108px', color: '#fff' }}>
                 <div style={{ width: '60px', height: '20px', backgroundColor: '#f5365c', borderRadius: '5px', display: 'flex', justifyContent: 'space-between', marginLeft: '5px' }}>
                   <div style={{ marginLeft: '11px', marginTop: '2px',cursor:"pointer" }} onClick={()=>handleDecrease(item)}>-</div>
                   <div style={{ marginTop: '4px' }}>{item.cartValue}</div>

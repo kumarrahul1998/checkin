@@ -135,7 +135,7 @@ const ApplyPrommos = (props) => {
                 <div >
                     <div style={{position: 'fixed',height: '4vh',paddingTop: '0.65vh' ,top: '0', left : '0', width: '100vw', zIndex: '100', background: '#ececec', paddingBottom: '2vh'}}>
                     <ArrowBackIosIcon style={{ color: '#6d6d6d', margin: '12px 0px -5px 3vw' }}
-                        onClick={() => history.hasOwnProperty("back") ? history.back() : history.push("/settlebill")} />
+                        onClick={() => history.hasOwnProperty("goBack") ? history.goBack() : history.push("/settlebill")} />
                     <span style={{ color: "#6d6d6d", fontSize: '20px', marginTop: '15px', }}>
                         Apply Coupons
                     </span></div>
