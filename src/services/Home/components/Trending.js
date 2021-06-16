@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
@@ -17,7 +17,9 @@ import actionTypes from '../actions/actionTypes';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import {addItem,removeItem} from "../../Cart/actions/actionCreator"
-function Trending({ home, sendToCart, cart,removeFromCart }) {
+import {calculateAmount} from "../../Cart/actions/actionCreator"
+
+function Trending({ home, sendToCart, cart,removeFromCart,Amount }) {
 
     let items = [
         {
@@ -54,6 +56,16 @@ function Trending({ home, sendToCart, cart,removeFromCart }) {
     const handleDecrease=(dish)=>{
         removeFromCart(dish,cart);
     }
+    const handleIncrease =(dish)=>{
+        sendToCart(dish,cart)
+    }
+    useEffect(
+        () => {
+          Amount(cart)
+        },
+        [handleIncrease,handleDecrease]
+      )
+    
     
     return (
         <div >
@@ -96,7 +108,7 @@ function Trending({ home, sendToCart, cart,removeFromCart }) {
                                             
                                             {cart.items&&cart.items.data&&!cart.items.data.find((item)=>item.name==dish.name)?<div style={{marginRight: "5px", marginTop: "-6px"}}>   <div
                                                    style={{ paddingTop: '5px', width: '65px' ,fontSize: '14px', color: 'white', fontWeight: 700,backgroundColor: "#ff5656", marginTop:"1vh", border: '1px solid #ff5656', borderRadius: '5px', textAlign: 'center'}}
-                                                    onClick={() => sendToCart(dish,cart)}
+                                                    onClick={() => handleIncrease(dish)}
                                                 >
                                                     ADD 
                                                     
@@ -107,7 +119,7 @@ function Trending({ home, sendToCart, cart,removeFromCart }) {
                                                     <div style={{ display: 'flex', color: '#fff' }}>
                                                         <div ><RemoveIcon style={{ width: '16px', marginLeft: '5px' }} onClick={()=>handleDecrease(dish)} /></div>
                                                         <div style={{ marginTop: '5px', marginLeft: '8px', }} >{cart.items.data.find(i=>i.name==dish.name).cartValue}</div>
-                                                        <div ><AddIcon style={{ width: '16px', marginLeft: '10px' }} onClick={()=>sendToCart(dish,cart)}   /></div>
+                                                        <div ><AddIcon style={{ width: '16px', marginLeft: '10px' }} onClick={()=>handleIncrease(dish)}   /></div>
                                                     </div>
                                                 
                                                 </div>}
@@ -127,12 +139,15 @@ function Trending({ home, sendToCart, cart,removeFromCart }) {
 
 const mapStateToProps = (state) => ({
     home: state.home,
-    cart: state.cart
+    cart: state.cart,
+
 })
 
 const mapDispatchToProps = dispatch => ({
     sendToCart : (data,cart) => dispatch(addItem(data,cart)),
-    removeFromCart: (data,cart)=>dispatch(removeItem(data,cart))
+    removeFromCart: (data,cart)=>dispatch(removeItem(data,cart)),
+    Amount: (data)=>dispatch(calculateAmount(data))
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trending)
