@@ -53,12 +53,12 @@ const ApplyPrommos = (props) => {
     //  Offers By Ronit
 
     const offers = [
-        {offerFrom: 'Check-In', desc: 'Get 50% Off', condition: 'Above Orders of 150'},
-        {offerFrom: 'Check-In', desc: 'Get 40% Off', condition: 'Above Orders of 100'},
-        {offerFrom: 'Check-In', desc: 'Get 20% Off', condition: 'Above Orders of 500'},
-        {offerFrom: 'Check-In', desc: 'Get 20% Off with SBI Credit Cards', condition: 'Above Orders of 450'},
-        {offerFrom: 'Check-In', desc: 'Flat 10% Off', condition: 'Above Orders of 200'},
-        {offerFrom: 'Check-In', desc: 'Get 30% Off', condition: 'Above Orders of 1000'},
+        {offerFrom: 'Checkout', desc: 'Get 50% Off', condition: 'Above Orders of 150'},
+        {offerFrom: 'Checkout', desc: 'Get 40% Off', condition: 'Above Orders of 100'},
+        {offerFrom: 'Checkout', desc: 'Get 20% Off', condition: 'Above Orders of 500'},
+        {offerFrom: 'Checkout', desc: 'Get 20% Off with SBI Credit Cards', condition: 'Above Orders of 450'},
+        {offerFrom: 'Checkout', desc: 'Flat 10% Off', condition: 'Above Orders of 200'},
+        {offerFrom: 'Checkout', desc: 'Get 30% Off', condition: 'Above Orders of 1000'},
     ];
 
     const offerLogo = {
@@ -69,9 +69,11 @@ const ApplyPrommos = (props) => {
 
     const offerFromStyle = {
         color: '#ff5656',
-        fontSize: '4.5vw',
-        fontWeight: 800,
+        fontSize: '4vw',
+        fontWeight: 600,
         marginRight:"5vw",
+        fontFamily:"Arial",
+        textTransform:"uppercase",
         // verticalAlign: 'top'
     }
 
