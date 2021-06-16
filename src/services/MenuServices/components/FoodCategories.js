@@ -44,7 +44,7 @@ function Items() {
                 {categories.map(res =>
                     <div key={res.title} style={{display:"inline-flex",justifyContent:"center",flexDirection:"column",alignItems:"center", height: '90px', width: '60px',marginTop:"10px",marginBottom:"10px"}}>
                         <img style={{ height: '60px', width: '40px' }} src={res.image} />
-                        <div style={res.title==="Special"?{ color: '#ff5656' }:{ color: '#6d6d6d' }}>{res.title}</div>
+                        <div style={{ color: '#6d6d6d' }}>{res.title}</div>
                     </div>
                 )}  
             </div>

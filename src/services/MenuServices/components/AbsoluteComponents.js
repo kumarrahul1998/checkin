@@ -17,9 +17,10 @@ function AbsoluteComponents({ cart,amount }) {
         height: "4vh",
         overflow: "hidden",
         position: "fixed",
-        bottom: 0,
+        bottom: "0",
         backgroundColor: "#32c282",
         padding: "0.5rem",
+        overscrollBehavior: "contain" ,
       }}>
         <div className="d-flex justify-content-between" style={{ color: "#fff", width: "100%",alignItems:"center" }}>
           <div className="d-flex" style={{alignItems:"center"}}>

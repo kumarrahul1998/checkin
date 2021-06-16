@@ -43,7 +43,7 @@ export const getPromos = (id) => (dispatch) => {
       {
         "code": "CHECKOUT",
         "icon": null,
-        "name": "<font color=\"#af1014\"><b>40%</b> discount</font>",
+        "name": "<font color=\"#ff4f19\"><b>40%</b> discount</font>",
         "summary": "Get 40% discount upto Rs. 100 on your first 3 orders.",
         "terms": "Applicable for orders above  Rs. 99.",
         "expires": null,

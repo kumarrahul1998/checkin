@@ -5,12 +5,17 @@ import { useHistory } from 'react-router-dom';
 import AbsoluteItems from '../components/AbsoluteComponents'
 import CartItems from '../components/CartItems';
 import complete from "../../../assets/order/complete.gif"
-import { makeStyles } from '@material-ui/core';
+import { makeStyles,Typography } from '@material-ui/core';
 
 const useStyles= makeStyles({
     completeImage:{
-        height:"40vh",
+        height:"auto",
         width:"100vw",
+        // display:"block",
+        // margin: "0 auto"
+    },
+    orderText:{
+        color:"#6d6d6d"
     }
 })
 
@@ -39,8 +44,9 @@ export const ViewCartPage = () => {
     return (
         <div >
             <div id="complete" style={{display:"none",position:"absolute"}}>
-            <div style={{display:"flex" ,alignItems:"center",height:"90vh",justifyContent:"center",background:"#ffffff",zIndex:"1000"}}>
-            <img className={classes.completeImage} src={complete} width={100} height={100}    />
+            <div style={{display:"flex" ,alignItems:"center",height:"90vh",justifyContent:"center",flexDirection:"column",background:"#ffffff",zIndex:"1000"}}>
+            <img className={classes.completeImage} src={complete} width={50} height={50}    />
+            <Typography variant="h6" className={classes.orderText}>Order Placed</Typography>
             </div>
             </div>
             <div

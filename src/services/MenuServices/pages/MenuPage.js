@@ -77,8 +77,8 @@ function MenuPage(props) {
                     </div>
                 )
             })}
-             <BottomBar /> 
             <BrowseMenu ids={ids}/>
+             <BottomBar /> 
         </div>
     )
 
