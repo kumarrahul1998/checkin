@@ -20,9 +20,15 @@ import Typography from '@material-ui/core/Typography';
 import Percentage from '../../../assets/menu/percentageicon.svg';
 import parser from 'html-react-parser'
 import { blue } from '@material-ui/core/colors';
-
 import CategoriesMore from '../../Checkout/components/CategoriesMore';
+import { makeStyles } from '@material-ui/core';
 
+const useStyles = makeStyles({
+    toggleDiv:{
+        display:"none"
+    },
+    
+})
 
 const ApplyPrommos = (props) => {
 
@@ -35,7 +41,7 @@ const ApplyPrommos = (props) => {
         console.log("more")
 
     }
-
+    const classes = useStyles();
     // console.log(props)
     const { menu } = props;
     const promos = menu.promos.data;
@@ -49,37 +55,38 @@ const ApplyPrommos = (props) => {
     const offers = [
         {offerFrom: 'Check-In', desc: 'Get 50% Off', condition: 'Above Orders of 150'},
         {offerFrom: 'Check-In', desc: 'Get 40% Off', condition: 'Above Orders of 100'},
-        {offerFrom: 'PayPal', desc: 'Get 20% Off', condition: 'Above Orders of 500'},
-        {offerFrom: 'SBI', desc: 'Get 20% Off with SBI Credit Cards', condition: 'Above Orders of 450'},
-        {offerFrom: 'ICICI BANK', desc: 'Flat 10% Off', condition: 'Above Orders of 200'},
-        {offerFrom: 'ICICI BANK', desc: 'Get 30% Off', condition: 'Above Orders of 1000'},
+        {offerFrom: 'Check-In', desc: 'Get 20% Off', condition: 'Above Orders of 500'},
+        {offerFrom: 'Check-In', desc: 'Get 20% Off with SBI Credit Cards', condition: 'Above Orders of 450'},
+        {offerFrom: 'Check-In', desc: 'Flat 10% Off', condition: 'Above Orders of 200'},
+        {offerFrom: 'Check-In', desc: 'Get 30% Off', condition: 'Above Orders of 1000'},
     ];
 
     const offerLogo = {
         height : '8vw',
         borderRadius : '25%',
-        marginLeft: '2vw'
+        // marginLeft: '2vw'
     }
 
     const offerFromStyle = {
         color: '#ff5656',
         fontSize: '4.5vw',
         fontWeight: 800,
-        verticalAlign: 'top'
+        marginRight:"5vw",
+        // verticalAlign: 'top'
     }
 
     const offerDescStyle = {
-        color: 'rgb(60,60,60)',
+        color: '#6d6d6d',
         fontSize: '3.5vw',
-        marginLeft: '2vw',
-        marginTop: '0.5vh',
+        // marginLeft: '2vw',
+        marginTop: '1.5vh',
         marginBottom: '0',
     }
 
     const offerConditionStyle = {
-        color: '#6d6d6d',
-        fontSize: '3vw',
-        marginLeft: '2vw',
+        color: '#bebebe',
+        fontSize: '3.5vw',
+        // marginLeft: '2vw',
         marginTop: '0.4vh',
         marginBottom: '0.5vh'
     }
@@ -88,9 +95,9 @@ const ApplyPrommos = (props) => {
         color: 'white',
         background: '#0295aa',
         width: 'fit-content',
-        padding: '1vh 1.5vw',
+        padding: '0.5vh 1.5vw',
         fontSize: '3vw',
-        marginLeft: '2vw',
+        // marginLeft: '2vw',
         marginTop: '1vh',
         marginBottom: '1vh',
         borderRadius: '5%',
@@ -98,9 +105,9 @@ const ApplyPrommos = (props) => {
     }
 
     const promoSearchStyle = {
-        width: '80vw',
+        width: '89vw',
         height: '2.5vh',
-        margin: '0 1vw',
+        margin: '0 3vw',
         border: '1px solid #cdcdcd',
         borderRadius: '13px',
         fontSize: '16px',
@@ -113,13 +120,19 @@ const ApplyPrommos = (props) => {
         paddingLeft: '10px'
     }
 
+    const handleClick=(index)=>{
+        const element = document.getElementById(`${index}toggle`);
+        const bttn= document.getElementById(`${index}button`)
+        element.style.display="block";
+        bttn.style.display="none";
+    }
 
     return (
         <div>
             <div style={{ height: '130px', width: '100%', backgroundColor: '#ececec' }}>
                 <div >
                     <div style={{position: 'fixed',height: '4vh',paddingTop: '0.65vh' ,top: '0', left : '0', width: '100vw', zIndex: '100', background: '#ececec', paddingBottom: '2vh'}}>
-                    <ArrowBackIosIcon style={{ color: '#6d6d6d', margin: '12px 0px -5px 12px' }}
+                    <ArrowBackIosIcon style={{ color: '#6d6d6d', margin: '12px 0px -5px 3vw' }}
                         onClick={() => history.hasOwnProperty("back") ? history.back() : history.push("/settlebill")} />
                     <span style={{ color: "#6d6d6d", fontSize: '20px', marginTop: '15px', }}>
                         Apply Coupons
@@ -155,14 +168,15 @@ const ApplyPrommos = (props) => {
 
                         </div>
                     </Paper> */}
-                <div style={{width: '100vw', marginTop: '5.5vh', background : 'rgb(236, 236, 236)',paddingTop: '4vh'}}>
+                <div style={{width: '100vw',display:"flex",alignItems:"center",marginTop: '5.5vh', background : 'rgb(236, 236, 236)',paddingTop: '4vh'}}>
                     <input type="text" style={promoSearchStyle} placeholder="Search for Promo code" />
+                   <Typography variant="span" style={{position:"absolute",right:"5vw",color:"#ff5656"}}>Apply</Typography>
                 </div>
 
 
                 </div>
-                <div style={{ color: "#6d6d6d", fontSize: '15px', margin: '15px 0px 6vh 15px'}}>
-                    Available Promos
+                <div style={{ color: "#6d6d6d", fontSize: '15px', margin: '15px 0px 6vh 3vw'}}>
+                    Available Promo
                 </div>
 
                 <div>
@@ -184,19 +198,28 @@ const ApplyPrommos = (props) => {
                             <img src={line5} style={{ marginLeft: '10px', width: '350px' }}></img>
                         </div>
                     )*/}
-                    {offers.map(offer => (
-                        <div style={{marginTop: '2vh'}}>
-                            <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                                <div>
+                    {offers.map((offer,index) => (
+                        <div style={{marginTop: '2vh',marginLeft:"3vw"}}>
+                            <div style={{display: 'flex', justifyContent: 'space-between',alignItems:"center"}}>
+                                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",border:"1px solid #bebebe",width:"35vw",height:"8vw",borderRadius:"2vw",padding:"0"}}>
                                     <img src={promo5} style={offerLogo}/>
                                     <span style={offerFromStyle}>&nbsp;&nbsp;{offer.offerFrom}</span>
                                 </div>
-                                <span style={{marginRight: '4vw', color: '#ff5656', fontWeight: '900', verticalAlign : 'bottom', marginTop: '5vw', fontSize: '5vw'}}>Apply</span>
+                                <span style={{marginRight: '3vw', color: '#ff5656', fontWeight: '900', verticalAlign : 'bottom',marginRight:"3.4vw",  fontSize: '5vw'}}>Apply</span>
                             </div>
                             <p style={offerDescStyle}>{offer.desc}</p>
                             <p style={offerConditionStyle}>{offer.condition}</p>
-                            <p style={offerButtonStyle}>More Details</p>
-                            <img src={line5} style={{ marginLeft: '2vw', width: '94vw', marginRight: '5vw' }}></img>
+                            <p style={offerButtonStyle} id={`${index}button`} onClick={()=>handleClick(index)} className={classes.moreBtn}>More</p>
+                            <div id={`${index}toggle`} className={classes.toggleDiv}>
+                            <img src={line5} style={{ width: '94vw'}}></img>
+                            <p  style={{color:"#bebebe",fontSize:"2.5vw",fontFamily:"Josefin Sans"}}>Terms and Condition</p>
+                                <ul style={{color:"#6d6d6d",fontSize:"3.5vw",fontFamily:"Josefin Sans",padding:"0",marginLeft:"3vw"}}>
+                                    <li>Statement 1</li>
+                                    <li>Statement 2</li>
+                                    <li>Statement 3</li>
+                                </ul>
+                            </div>
+                            <img src={line5} style={{ width: '94vw'}}></img>
                         </div>
                     ))
                     }
