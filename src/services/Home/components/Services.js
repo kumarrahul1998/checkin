@@ -158,11 +158,7 @@ function TextFieldSizes(props) {
                 <ScrollMenu
                     data={items.map(res =>
                         <Box onClick={() => handleService(res.serviceText)} boxShadow={1} style={{ height: "25vw", width: "26vw", margin: "20px", marginRight: "10px", borderRadius: '10px' }}>
-                            <CardMedia
-                                style={{ height: "18vw", marginTop: '10px', width: '21.5vw', marginLeft: '10px', marginBottom: "0", }}
-                                image={res.imageUrl}
-                                title="services"
-                            />
+                            <img src={res.imageUrl} style={{height: '15.5vw',margin: '0px auto 0 auto', display: 'block', paddingTop: '10px'}}/>
                             <Typography>
                                 <p style={{ fontSize: '12px', fontWeight: 600, textAlign: 'center', marginLeft: "5px", marginTop: '5px',color: '#6d6d6c' }}>  {res.services}</p>
                             </Typography>
