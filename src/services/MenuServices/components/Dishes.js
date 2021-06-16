@@ -181,16 +181,8 @@ const dishes = [
                 price: 175.00,
                 description: 'Lettuce, tomato, caramelized onion, veggie, cheddar cheese.',
                 image: 'https://hips.hearstapps.com/hmg-prod/images/190416-chicken-burger-082-1556204252.jpg',
-                isCustomised: true,
-                variants: [
-                    {
-                        name: "Orange",
-                        price: 123.00,
-                        type: "veg",
-                        variantId: "orangejuice",
-                        id: "orangej"
-                    }
-                ],
+                isCustomised:false,
+                
                 cartValue: 0,
                 id: "JUICE"
             },

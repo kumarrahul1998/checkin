@@ -6,13 +6,9 @@ import { useHistory } from 'react-router-dom';
 function AbsoluteItems({ cart,amount }) {
 
   const history = useHistory()
-  const completeImage= document.getElementById('complete');
-
+  
   const handleClick = () => {
-   completeImage.style.display="block"; 
-    setTimeout(()=>
-    history.push("/home")
-    ,750)
+    history.push("/order-successful")
   }
 
  

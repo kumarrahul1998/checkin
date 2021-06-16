@@ -14,6 +14,7 @@ import MyRequestPage from './services/RoomServices/pages/RoomServicesPage';
 import ViewOrders from "./services/order/pages/ViewOrders";
 import PaymentSuccessful from "./services/order/pages/PaymentSuccessful";
 import ScrollToTop from 'react-router-scroll-top';
+import OrderSuccessful from "./services/order/pages/OrderSuccessful"
 // import { useSelector } from "react-redux"
 // import axios from "axios";
 function App(props) {
@@ -40,6 +41,8 @@ function App(props) {
                   <Route path="/requests" component={MyRequestPage} />
                   <Route path="/order" component={ViewOrders} />
                   <Route path="/payment" component={PaymentSuccessful} />
+                  <Route path="/order-successful" component={OrderSuccessful} />
+                  
                 </>
                 :
                 <>

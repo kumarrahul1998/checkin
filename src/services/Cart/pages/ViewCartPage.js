@@ -7,17 +7,6 @@ import CartItems from '../components/CartItems';
 import complete from "../../../assets/order/complete.gif"
 import { makeStyles,Typography } from '@material-ui/core';
 
-const useStyles= makeStyles({
-    completeImage:{
-        height:"auto",
-        width:"100vw",
-        // display:"block",
-        // margin: "0 auto"
-    },
-    orderText:{
-        color:"#6d6d6d"
-    }
-})
 
 
 export const ViewCartPage = () => {
@@ -40,20 +29,14 @@ export const ViewCartPage = () => {
         left: '0',
         zIndex:"20",
     }
-    const classes = useStyles();
     return (
         <div >
-            <div id="complete" style={{display:"none",position:"absolute"}}>
-            <div style={{display:"flex" ,alignItems:"center",height:"90vh",justifyContent:"center",flexDirection:"column",background:"#ffffff",zIndex:"1000"}}>
-            <img className={classes.completeImage} src={complete} width={50} height={50}    />
-            <Typography variant="h6" className={classes.orderText}>Order Placed</Typography>
-            </div>
-            </div>
+            
             <div
                 style={cartNavStyle}
             >
                 <div style={{ display: 'flex', }}>
-                    <div style={{ marginTop: '15px', marginLeft: '20px' }}>
+                    <div style={{ marginTop: '15px', marginLeft: '10px' }}>
                         <ArrowBackIosIcon style={{ color: '#6d6d6d',cursor:"pointer" }} onClick={() => history.hasOwnProperty("goBack") ? history.goBack() : history.push("/menu")} />
                     </div>
                     <div>
