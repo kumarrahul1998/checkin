@@ -6,7 +6,7 @@ import Items from '../components/FoodCategories'
 import BrowseMenu from '../components/BrowseMenu'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { useHistory } from 'react-router-dom';
-import { getPromos, loadRecommendedRestaurants } from '../middleware'
+import { getPromos, loadRecommendedRestaurants, _load_menu } from '../middleware'
 import { connect } from "react-redux"
 import BottomBar from "../components/AbsoluteComponents";
 import Divider from '@material-ui/core/Divider';
@@ -17,7 +17,8 @@ function MenuPage(props) {
     const {
         _load_recommended_restaurants,
         _get_promos,
-
+        _get_Menu,
+        menu,
     } = props
     const history = useHistory()
     const handleChange = () => {
@@ -27,6 +28,7 @@ function MenuPage(props) {
     useEffect(() => {
         _load_recommended_restaurants()
         _get_promos("11")
+        _get_Menu()
     }, [])
     const windowWidth = window.innerWidth;
     const ids=dishes.map((dish) => ({name: dish.categoryName, href: dish.id, ndish: dish.data.length}))
@@ -44,6 +46,7 @@ function MenuPage(props) {
         height: 'auto',
         background: 'white'
     }
+    console.log(menu.menudata.data.groups);
 
     return (
         <div style={{width: '100vw'}} id="container">
@@ -69,10 +72,10 @@ function MenuPage(props) {
 
             <div style={{ position: 'absolute', zIndex: 10, width: '100%', }} > <CategoriesMenu /></div>
             <Items />
-            {dishes.map((item, index) => { 
+            {(menu.menudata.isLoading==false)&&menu.menudata.data.groups.map((item, index) => { 
                 return( 
                     <div>                                                       
-                        <Displaydish key={item.categoryName} obj = {JSON.parse(JSON.stringify(item))} index = {index}/>
+                        <Displaydish key={item.name} obj = {JSON.parse(JSON.stringify(item))} index = {index}/>
                         <Divider style={{ height: '5px', width: "100%" }} />             
                     </div>
                 )
@@ -90,6 +93,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     _load_recommended_restaurants: () => dispatch(loadRecommendedRestaurants()),
     _get_promos: (id) => dispatch(getPromos(id)),
+    _get_Menu: ()=>dispatch(_load_menu()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuPage)    // redux

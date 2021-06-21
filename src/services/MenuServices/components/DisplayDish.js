@@ -21,7 +21,7 @@ function Displaydish(props) {
     const [open,setOpen] = useState(false)
     let Width = window.innerWidth;
     const history = useHistory()
-    const [Items, setItems] = React.useState(props.obj.data);
+    const [Items, setItems] = React.useState(props.obj.items);
     console.log(props)
     const handleIncrease = (item) => {
         _add_item(item,cart)
@@ -77,12 +77,11 @@ function Displaydish(props) {
         },
         [handleIncrease,handleDecrease]
       )
-    
 
     return (
 
-        <div id = {props.obj.categoryName} style={{ marginBottom: '30px', width: "100%"}}>
-            <h3 style={{ color: '#6d6d6d', marginLeft: "10px" }}>&nbsp;{props.obj.categoryName}</h3>
+        <div id = {props.obj.name} style={{ marginBottom: '30px', width: "100%"}}>
+            <h3 style={{ color: '#6d6d6d', marginLeft: "10px" }}>&nbsp;{props.obj.name}</h3>
 
             {Items.map((item, index) =>
                 <div style={{ height: '150px', width: "100%", marginLeft: "8px"}}>
@@ -96,7 +95,7 @@ function Displaydish(props) {
 
                                     style={{
                                         height: '18px',
-                                        width: `${5.3*(item.type.length) + 25 + 3*(item.type.length)}px`,
+                                        // width: `${5.3*(item.type.length) + 25 + 3*(item.type.length)}px`,
                                         marginLeft: '12px',
                                         borderRadius: '10px 4px 4px 10px',
                                         marginBottom: '10px',
@@ -115,7 +114,7 @@ function Displaydish(props) {
                                 <div style={{ marginLeft: '-16px' }} onClick={() => handleOpenSlides(item.isCustomised)}>
                                     <div style={{ marginTop: '0', color: '#6d6d6d' }} >{item.name}</div>
                                     <div style={{ marginTop: '10px', color: '#6d6d6d' }}> &#8377;{item.price}</div>
-                                    <div style={{color: "grey", opacity: "0.8", fontSize: "0.8em", marginTop: "5px"}} id={`${props.obj.categoryName} ${index} desc`} className="description">
+                                    <div style={{color: "grey", opacity: "0.8", fontSize: "0.8em", marginTop: "5px"}} id={`${props.obj.name} ${index} desc`} className="description">
 
                                     {/* Here the id of description div consist of the category name plus the index of the dish inside that collection of dishes
                                         so that we easily get the correct div for expanding it on the click on more button for displaying whole description*/ }
