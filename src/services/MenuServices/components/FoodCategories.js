@@ -14,16 +14,16 @@ let categories = [{
 },
 {
     image: 'https://cdn.zeplin.io/5af42663188049271b3ae959/assets/56BF08BE-83AA-4350-92F2-235CAB742E2B.svg',
-    title: 'Desert'
+    title: 'Deserts'
 },
 {
     image: 'https://cdn.zeplin.io/5af42663188049271b3ae959/assets/56BF08BE-83AA-4350-92F2-235CAB742E2B.svg',
-    title: 'Special'
+    title: 'Specials'
 },
 
 
 ]
-function Items() {
+function Items({handleCategoryClick,currentCategory}) {
     let windowHeight = window.innerHeight;
     let windowWidth = window.innerWidth;
     return (
@@ -42,9 +42,9 @@ function Items() {
             <div style={{marginTop:"5vh",display:"flex",justifyContent:"space-between",width:"96vw",marginLeft:"2vw"}}>
                 {/* style={{marginLeft:"2vw"}} */}
                 {categories.map(res =>
-                    <div key={res.title} style={{display:"inline-flex",justifyContent:"center",flexDirection:"column",alignItems:"center", height: '90px', width: '60px',marginTop:"10px",marginBottom:"10px"}}>
+                    <div key={res.title} onClick={()=>handleCategoryClick(res.title)} style={{display:"inline-flex",justifyContent:"center",flexDirection:"column",alignItems:"center", height: '90px', width: '60px',marginTop:"10px",marginBottom:"10px"}}>
                         <img style={{ height: '60px', width: '40px' }} src={res.image} />
-                        <div style={{ color: '#6d6d6d' }}>{res.title}</div>
+                        <div style={currentCategory===res.title?{ color: '#ff5656' }:{ color: '#6d6d6d' }}>{res.title}</div>
                     </div>
                 )}  
             </div>

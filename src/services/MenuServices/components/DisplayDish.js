@@ -123,7 +123,7 @@ function Displaydish(props) {
 
                                         {item.description} 
                                     </div> {item.description.length > 60? 
-                                    (<span style={{color: "#ff5656"}} id="more" onClick={(event) => showFullDescription(event, props.obj.categoryName,index)} >...more</span>) : (<> </>)}
+                                    (<span style={{color: "#ff5656"}} id="more" onClick={(event) => showFullDescription(event, props.obj.name,index)} >...more</span>) : (<> </>)}
                                 </div>
                             </div>
                             

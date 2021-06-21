@@ -10,7 +10,7 @@ import { connect } from "react-redux"
 
 function BrowseMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const { ids: data,cart } = props; 
+    const { ids: data,cart,menu } = props; 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
         
@@ -37,9 +37,9 @@ function BrowseMenu(props) {
                 onClose={handleClose}
                 style={{overflow: 'auto', backgroundColor: "rgb(0, 0, 0, 0.5)"}}
             >   
-                {data.map((obj) => {
+                {menu.menudata.isLoading===false&&menu.menudata.data.groups.map((obj) => {
                     return(
-                        <a href={obj.href} style={{textDecoration: "none", color: "#343a40", boxShadow:" 0px 0px 5px #fff"}} onClick={handleClose}><MenuItem className="d-flex justify-content-between"><span>{obj.name}</span>&nbsp; &nbsp; <span>{obj.ndish}</span></MenuItem></a>
+                        <a href={`#${obj.name}`} style={{textDecoration: "none", color: "#343a40", boxShadow:" 0px 0px 5px #fff"}} onClick={handleClose}><MenuItem className="d-flex justify-content-between"><span>{obj.name}</span>&nbsp; &nbsp; <span>{obj.ndish}</span></MenuItem></a>
                     )
                 })}
                 
@@ -50,6 +50,7 @@ function BrowseMenu(props) {
 
 const mapStateToProps = (state) => ({
     cart: state.cart,
+    menu : state.menu,
 })
 
 const mapDispatchToProps = (dispatch) => ({
