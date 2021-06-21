@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import NonVegIcon from '../../../assets/home/nonvegicon.jpg';
 import Checkbox from '@material-ui/core/Checkbox';
 import VegIcon from '../../../assets/home/vegicon.png'
@@ -14,9 +14,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-
+import Radio from '@material-ui/core/Radio';
 import { addItem, removeItem } from "../../Cart/actions/actionCreator"
 import { connect } from 'react-redux'
+import CustomizationItem from './CustomizationItem';
 const useStyles = makeStyles({
     list: {
         width: 250,
@@ -26,8 +27,10 @@ const useStyles = makeStyles({
     },
 });
 
-function MenuCusomisation({variants,dish, _add_item, _remove_item,cart }) {
+function MenuCusomisation({dish, _add_item, _remove_item,cart }) {
     const classes = useStyles();
+    // my code 
+    const [selectedType,setSelectedType]= useState(null);
     const [open, setOpen] = React.useState(false)
 
     const [selection, setSelection] = React.useState([])
@@ -56,6 +59,9 @@ function MenuCusomisation({variants,dish, _add_item, _remove_item,cart }) {
     toggleDrawer()
     }
     // console.log(dish)
+    const handleTypeChange=(e)=>{
+        setSelectedType(e.target.value);
+    }
     return (
         <div>
             <div
@@ -69,7 +75,7 @@ function MenuCusomisation({variants,dish, _add_item, _remove_item,cart }) {
                     style={{ height: window.innerHeight * 0.6 }}
                 >
                     <div
-                        style={{ width: '100%', height: '50px' }}
+                        style={{ width: '100%', height: '50px',overflow:"scroll",marginBottom:"20px" }}
                     >
                         <div >
                             <div className="text-center"
@@ -79,39 +85,46 @@ function MenuCusomisation({variants,dish, _add_item, _remove_item,cart }) {
                         </div>
                         </div>
                     </div>
-                    <div style={{ margin: "20px", color: '#6d6d6d', }}><b>Choose Add-Ons&nbsp;</b> (1/5)</div>
-                    <div>
-                        {variants.map(item =>
+                    {dish.types.length>1?<>
+                    <div style={{ margin: "20px", color: '#6d6d6d', }}><b>Choose Type&nbsp;</b></div>
+                        {dish.types.map((element,index)=>
                             <div style={{ display: 'flex', justifyContent: 'space-between', }}>
-                                <div style={{ marginTop: '15px' }}>   <div style={{ display: 'flex' }}><div style={{ marginLeft: '10px', marginRight: '10px' }}>
-                                    {item.type === "nonveg" ? (<img style={{ height: '12px', marginLeft: '5px' }} src={NonVegIcon} />) : (<img style={{ height: '12px', marginLeft: '10px' }} src={VegIcon} />)}
-                                </div>
-                                    <div style={{ color: '#6d6d6d' }}>{item.name}</div></div>
+                                <div style={{ marginTop: '15px',marginLeft:"20px" }}>   
+                                    <div style={{ color: '#6d6d6d' }}>{element}</div>
                                 </div>
                                 <div style={{ display: 'flex', }}>
-                                    <div style={{ marginTop: '15px', color: '#6d6d6d' }}> &#8377;&nbsp; {item.price}</div>
+                                    <div style={{ marginTop: '15px', color: '#6d6d6d' }}> &#8377;&nbsp; {dish.costs[index]}</div>
                                     <div style={{ margin: '0', }}>
-                                        <Checkbox
-                                            checked={selection.some(t => t.variantId === item.variantId)}
-                                            onChange={(e) => e.target.checked ? setSelection((prevState) => [...prevState, item]) : setSelection((prevState) => prevState.filter(t => t.variantId !== item.variantId))}
-                                            inputProps={{ 'aria-label': 'success checkbox' }}
-                                            style={{ color: 'red' }}
-                                        /></div>
+                                    <Radio
+                                    checked={selectedType === element}
+                                    onChange={handleTypeChange}
+                                    value={element}
+                                    style={{color:"#ff5656"}}
+                                    />
                                 </div>
 
                             </div>
+                            </div>
 
+                        )}
+                    </>:null}
+
+                    {dish.customizations.length>1?<><div style={{ margin: "20px", color: '#6d6d6d', }}><b>Choose Add-Ons&nbsp;</b> </div>
+                    <div >
+                        {dish.customizations.map((item,i) =>
+                        <CustomizationItem item={item} i={i} dish={dish}/>                            
                         )
 
-                        }
+                    }
                     </div>
-                    <div style={{ margin: "20px", color: '#6d6d6d', }}><b>Other Beverages Add On&nbsp;</b>(1/5)</div>
+                    </>:null}
+                    {/* <div style={{ margin: "20px", color: '#6d6d6d', }}><b>Other Beverages Add On&nbsp;</b>(1/5)</div> */}
                     <div style={{
                         height: Height * 0.07 + 'px',
                         width: Width * 0.85 + 'px',
                         background: '#32c282',
                         marginTop: Height * 0.48 + 'px',
-                        position: 'absolute',
+                        position: 'fixed',
                         marginLeft: '7.75%',
                         zIndex: 1000,
                         borderRadius: '5px',

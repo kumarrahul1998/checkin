@@ -87,7 +87,7 @@ function Displaydish(props) {
                 <div style={{ height: '150px', width: "100%", marginLeft: "8px"}}>
                     <div style={{ display: 'flex', justifyContent: "space-between" }}>
                         <div style={{ display: 'flex', marginLeft: "5px" }} >
-                            <div>  {item.mealtype === "veg" ?
+                            <div>  {item.isVegetarian === "veg" ?
                                 (<img style={{ height: "15px", width: "15px", marginLeft: "5px" }} src={Veg} />)
                                 : (<img style={{ height: "15px", width: "15px", marginLeft: "5px" }} src={nonVeg} />)}</div>
                             <div style={{ width: "160px"}} >
@@ -99,21 +99,23 @@ function Displaydish(props) {
                                         marginLeft: '12px',
                                         borderRadius: '10px 4px 4px 10px',
                                         marginBottom: '10px',
-                                        backgroundColor: itemTypeColors[item.type]
+                                        backgroundColor: 'red'
                                     }}>
                                          {/* here in the width, i calculated an approx width per letter because the tags for the dishes can be anything other than
                                             must try or recommended and the tag width must adjust according to that so i ended up at an approx relationship */}
                                     <div >
 
-                                        <div><div style={{ height: '2px' }}>{itemTypeIcons[item.type]}
-                                        </div> <span style={{ color: '#fff', marginBottom: '10px', marginLeft: '25px', fontSize: 10 }}>  {item.type}</span> </div>
+                                        <div><div style={{ height: '2px' }}>{itemTypeIcons["RECOMMENDED"]}
+                                        </div> <span style={{ color: '#fff', marginBottom: '10px', marginLeft: '25px', fontSize: 10 }}>  {item.tags[0]}</span> </div>
                                     </div>
 
                                 </div>
 
-                                <div style={{ marginLeft: '-16px' }} onClick={() => handleOpenSlides(item.isCustomised)}>
+                                <div style={{ marginLeft: '-16px' }} >
                                     <div style={{ marginTop: '0', color: '#6d6d6d' }} >{item.name}</div>
-                                    <div style={{ marginTop: '10px', color: '#6d6d6d' }}> &#8377;{item.price}</div>
+                                    {item.costs.length>1? null:
+                                    <div style={{ marginTop: '10px', color: '#6d6d6d' }}> &#8377;{item.costs[0]}</div>
+                                    }
                                     <div style={{color: "grey", opacity: "0.8", fontSize: "0.8em", marginTop: "5px"}} id={`${props.obj.name} ${index} desc`} className="description">
 
                                     {/* Here the id of description div consist of the category name plus the index of the dish inside that collection of dishes
@@ -127,7 +129,7 @@ function Displaydish(props) {
                             
                         </div>
                         <div style = {{ paddingTop: "95px", marginRight: "20px"}}>
-                            {item.image === "" ? (<div style={{marginLeft: "100px", marginTop: "-95px"}} id="add-button-container-without-image">
+                            {item.image === null? (<div style={{marginLeft: "100px", marginTop: "-95px"}} id="add-button-container-without-image">
                                 <div style={{
                                     height: '20px',
                                     width: '70px',
@@ -140,8 +142,8 @@ function Displaydish(props) {
                                 >
                                     {cart.items.data?.find(i=>i.name==item.name&&i.variantChosen==item.variantChosen)?.cartValue  == undefined?
                                         (
-                                            item.isCustomised ?
-                                                <MenuCustomisation variants={item.variants} dish={item}/>
+                                            item.types.length!==1||item.customizations.length>=1?
+                                                <MenuCustomisation dish={item}/>
                                                 :
                                                 (<div><div
                                                     style={{ paddingTop: '5px', paddingLeft: '20px', paddingRight: '20px', fontSize: '14px', color: '#ff5656', fontWeight: 700 }}
@@ -199,8 +201,8 @@ function Displaydish(props) {
                                             >
                                                 {cart.items.data?.find(i=>i.name==item.name&&i.variantChosen==item.variantChosen)?.cartValue  == undefined?
                                                     (
-                                                        item.isCustomised ?
-                                                            <MenuCustomisation variants={item.variants} />
+                                                        item.types.length!==1||item.customizations.length>=1?
+                                                         <MenuCustomisation dish={item}/>
                                                             :
                                                             <div
                                                                 style={{ paddingTop: '5px', paddingLeft: '20px', fontSize: '14px', color: '#ff5656', fontWeight: 700 }}
