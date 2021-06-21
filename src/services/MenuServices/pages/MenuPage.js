@@ -11,7 +11,7 @@ import { connect } from "react-redux"
 import BottomBar from "../components/AbsoluteComponents";
 import Divider from '@material-ui/core/Divider';
 import dishes from '../components/Dishes'
-import Displaydish from '../components/DisplayDish'
+import Displaydish from '../components/DisplayDish';
 
 function MenuPage(props) {
     const {
@@ -27,7 +27,9 @@ function MenuPage(props) {
     useEffect(() => {
         _load_recommended_restaurants()
         _get_promos("11")
+        
     }, [])
+
     const windowWidth = window.innerWidth;
     const ids=dishes.map((dish) => ({name: dish.categoryName, href: dish.id, ndish: dish.data.length}))
     // console.log(Dishes);

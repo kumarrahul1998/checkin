@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.headers.common["Authorization"] = `Token 491420064a24034ddce326f9e74d431403a5c171e40c462d67c1053f4404662e`
+axios.defaults.headers.common["Authorization"] = `Token 1f069eed0fd30ba9912af2ddf7063e50c68ec78dabda0f480dd3356418d721ef`
 axios.defaults.baseURL = "https://dev.api.check-in.in"
 const make_API_call = (req_method, path, data = {}) => {
   switch (req_method) {
@@ -8,7 +8,7 @@ const make_API_call = (req_method, path, data = {}) => {
         .get(path)
         .then((res) => res.data)
         .catch((err) => {
-          // console.log(err.response);
+          console.log(err.response);
           throw err.response.data;
         });
 
@@ -17,7 +17,7 @@ const make_API_call = (req_method, path, data = {}) => {
         .post(path, data)
         .then((res) => res.data)
         .catch((err) => {
-          // console.log(err.response);
+          console.log(err.response);
           throw err.response.data;
         });
 
@@ -26,7 +26,7 @@ const make_API_call = (req_method, path, data = {}) => {
         .put(path, data)
         .then((res) => res.data)
         .catch((err) => {
-          // console.log(err.response);
+          console.log(err.response);
           throw err.response.data;
         });
 
@@ -35,7 +35,7 @@ const make_API_call = (req_method, path, data = {}) => {
         .delete(path)
         .then((res) => res.data)
         .catch((err) => {
-          // console.log(err.response);
+          console.log(err.response);
           throw err.response.data;
         });
   }
