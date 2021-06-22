@@ -140,9 +140,9 @@ function Displaydish(props) {
                                 }}
 
                                 >
-                                    {cart.items.data?.find(i=>i.name==item.name&&i.variantChosen==item.variantChosen)?.cartValue  == undefined?
+                                    {cart.items.data?.find(i=>i.pk==item.pk&&i.variantChosen==item.variantChosen)?.quantity  == undefined?
                                         (
-                                            item.types.length!==1||item.customizations.length>=1?
+                                            item.types.length>1||item.customizations.length>=1?
                                                 <MenuCustomisation dish={item}/>
                                                 :
                                                 (<div><div
@@ -162,7 +162,7 @@ function Displaydish(props) {
                                             }}>
                                                 <div style={{ display: 'flex', color: '#fff' }}>
                                                     <div ><RemoveIcon style={{ width: '16px', marginLeft: '5px' }} onClick={() => handleDecrease(item)} /></div>
-                                                    <div style={{ marginTop: '5px', marginLeft: '10px', }} >{cart.items.data.find(i=>i.name==item.name)?.cartValue}</div>
+                                                    <div style={{ marginTop: '5px', marginLeft: '10px', }} >{cart.items.data.find(i=>i.pk==item.pk)?.quantity}</div>
                                                     <div ><AddIcon style={{ width: '16px', marginLeft: '10px' }} onClick={() => handleIncrease(item)} /></div>
                                                 </div>
                                                 
@@ -199,9 +199,9 @@ function Displaydish(props) {
                                             }}
 
                                             >
-                                                {cart.items.data?.find(i=>i.name==item.name&&i.variantChosen==item.variantChosen)?.cartValue  == undefined?
+                                                {cart.items.data?.find(i=>i.pk==item.pk&&i.variantChosen==item.variantChosen)?.quantity  == undefined?
                                                     (
-                                                        item.types.length!==1||item.customizations.length>=1?
+                                                        item.types.length>1||item.customizations.length>=1?
                                                          <MenuCustomisation dish={item}/>
                                                             :
                                                             <div
@@ -218,7 +218,7 @@ function Displaydish(props) {
                                                         }}>
                                                             <div style={{ display: 'flex', color: '#fff' }}>
                                                                 <div onClick={() => handleDecrease(item)}><RemoveIcon style={{ width: '16px', marginLeft: '5px' }} /></div>
-                                                                <div style={{ marginTop: '5px', marginLeft: '10px', }} >{cart.items.data?.find(i=>i.name==item.name)?.cartValue}</div>
+                                                                <div style={{ marginTop: '5px', marginLeft: '10px', }} >{cart.items.data?.find(i=>i.pk==item.pk)?.quantity}</div>
                                                                 <div onClick={() => handleIncrease(item)}><AddIcon style={{ width: '16px', marginLeft: '10px' }} /></div>
                                                             </div>
 
