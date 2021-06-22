@@ -59,7 +59,7 @@ export const calculateAmount = (cart)=>{
       if(item.variantChosen){
           total = total+((item.variantChosen.price+item.price)*item.quantity)
       }else{
-        total=total+(item.price*item.quantity)
+        total=total+(item.costs[0]*item.quantity)
         
       }
     

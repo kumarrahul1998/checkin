@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const ITEM_HEIGHT = 48;
 
-function MenuListComposition() {
+function MenuListComposition({handleSearch,searchTerm}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
@@ -93,7 +93,7 @@ function MenuListComposition() {
         <div style={{  width: "100%" }}>
 
                     
-                        <input style={searchStyle} type="text" placeholder="Search across catalog" />
+                        <input style={searchStyle} value={searchTerm} onChange={handleSearch} type="text" placeholder="Search across catalog" />
                      <SearchIcon style={searchIconStyle}  onClick={() => setButtonClicked(true)}/>
             
         </div>

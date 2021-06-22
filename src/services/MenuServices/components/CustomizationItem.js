@@ -1,9 +1,31 @@
-import React from 'react'
+import React,{useState} from 'react'
 import NonVegIcon from '../../../assets/home/nonvegicon.jpg';
 import VegIcon from '../../../assets/home/vegicon.png'
 import Checkbox from '@material-ui/core/Checkbox';
+import { useEffect } from 'react';
 
-const CustomizationItem = ({item,i,dish}) => {
+const CustomizationItem = ({item,i,dish,selectedCustomization,handleAddonChange}) => {
+    
+    // const checkState=(subitem)=>{
+    //     if(selectedCustomization.find(t=>t.pk==item.pk)!=undefined){
+    //         console.log('outer if===>')
+    //         if(selectedCustomization.find(t=>t.pk==item.pk).fields.find(q=>q.pk==subitem.pk))
+    //         { console.log("inner if==>",selectedCustomization.find(t=>t.pk==item.pk).fields.find(q=>q.pk==subitem.pk))
+    //             return true;
+    //         }else{
+    //             return false;
+    //         }
+    //     }else{
+    //         return false;
+    //     }
+    // }
+    // const [checkArr,setCheckArr]= useState([])
+    // useEffect(()=>{
+    //     item.fields.forEach(elem=>{
+    //         setCheckArr(prev=>[...prev,{checked: false,pk:elem.pk}])
+    //     })
+
+    // },[])
     return (
         <div style={i===dish.customizations.length-1?{paddingBottom:"60px"}:{}}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', }}>
@@ -12,7 +34,7 @@ const CustomizationItem = ({item,i,dish}) => {
                                 </div>
                             </div>
 
-                        {item.fields.map(subitem=>
+                        {item.fields.map((subitem,ind)=>
                         <div style={{ display: 'flex', justifyContent: 'space-between', }}>
                                 <div style={{ marginTop: '15px' }}>   <div style={{ display: 'flex' }}><div style={{ marginLeft: '10px', marginRight: '10px' }}>
                                     {subitem.is_vegetarian? (<img style={{ height: '12px', marginLeft: '10px' }} src={VegIcon} />):(<img style={{ height: '12px', marginLeft: '5px' }} src={NonVegIcon} />)}
@@ -26,8 +48,13 @@ const CustomizationItem = ({item,i,dish}) => {
                                             // checked={selection.some(t => t.variantId === item.variantId)}
                                             // onChange={(e) => e.target.checked ? setSelection((prevState) => [...prevState, item]) : setSelection((prevState) => prevState.filter(t => t.variantId !== item.variantId))}
                                             // inputProps={{ 'aria-label': 'success checkbox' }}
+                                            checked={!!selectedCustomization.find(t=>t.pk==item.pk)?.fields.includes(subitem)}
+                                            // checked={!!checkArr[ind].checked}
+                                            // checked={selectedCustomization.length>item.max_select?false:null}
+                                            onChange={(e)=>handleAddonChange(e,item,subitem,item.max_select)}
                                             style={{ color: 'red' }}
                                         />
+                                        {/* <input type="checkbox" onChange={(e)=>handleAddonChange(e,item,subitem,item.max_select)}  checked={selectedCustomization.find(t=>t.pk==item.pk)?.fields.includes(subitem)}  /> */}
                                         </div>
                                 </div>
                             </div>

@@ -31,6 +31,7 @@ function MenuCusomisation({dish, _add_item, _remove_item,cart }) {
     const classes = useStyles();
     // my code 
     const [selectedType,setSelectedType]= useState(null);
+    const [selectedCustomization,setSelectedCustomization]= useState([]);
     const [open, setOpen] = React.useState(false)
 
     const [selection, setSelection] = React.useState([])
@@ -49,12 +50,12 @@ function MenuCusomisation({dish, _add_item, _remove_item,cart }) {
     let Height = window.innerHeight;
 
     const addToCart =() => {
-        selection.forEach( (item)=>{
-            let temp ={...dish};
-            temp.variantChosen=item;
-             _add_item(temp,cart)
+        // selection.forEach( (item)=>{
+        //     let temp ={...dish};
+        //     temp.variantChosen=item;
+        //      _add_item(temp,cart)
 
-    })
+    // })
         
     toggleDrawer()
     }
@@ -62,6 +63,38 @@ function MenuCusomisation({dish, _add_item, _remove_item,cart }) {
     const handleTypeChange=(e)=>{
         setSelectedType(e.target.value);
     }
+
+    const handleAddonChange=(e,item,subitem,max_select)=>{
+           if(e.target.checked===true){
+               console.log('true executed==>',e.target.checked);
+            if(selectedCustomization.find(i=>i.pk===item.pk)){
+              const index= selectedCustomization.findIndex(i=>i.pk===item.pk)
+              if(selectedCustomization[index].fields.length<=max_select){
+                  selectedCustomization[index].fields.push(subitem);
+                 }else{
+                    console.log("inside else block executed==>");
+                const popElem = selectedCustomization[index].fields.pop();
+                selectedCustomization[index].fields.push(subitem);
+                
+              }  
+            }else{
+                const temp = {...item};
+                temp.fields=[subitem];
+                selectedCustomization.push(temp);
+              }
+           }else{
+               console.log('false executed===>',e.target.checked)
+               if(selectedCustomization.find(i=>i.pk===item.pk)){
+                const index= selectedCustomization.findIndex(i=>i.pk===item.pk)
+                  selectedCustomization[index].fields.pop(subitem);
+                    if(selectedCustomization[index].fields.length===0){
+                        selectedCustomization.pop(selectedCustomization[index]);
+                    }
+                }  
+             
+            }
+            console.log('selected checkboxes ===>',selectedCustomization);
+        }
     return (
         <div>
             <div
@@ -112,7 +145,7 @@ function MenuCusomisation({dish, _add_item, _remove_item,cart }) {
                     {dish.customizations.length>1?<><div style={{ margin: "20px", color: '#6d6d6d', }}><b>Choose Add-Ons&nbsp;</b> </div>
                     <div >
                         {dish.customizations.map((item,i) =>
-                        <CustomizationItem item={item} i={i} dish={dish}/>                            
+                        <CustomizationItem item={item} i={i} dish={dish} selectedCustomization={selectedCustomization} handleAddonChange={handleAddonChange}/>                            
                         )
 
                     }

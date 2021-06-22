@@ -26,6 +26,7 @@ function MenuPage(props) {
     }
     const [dishArr,setDishArr]= useState([]);
     const [currentCategory,setCurrentCategory]= useState('default');
+    const [searchTerm,setSearchTerm]= useState('');
     useEffect(() => {
         _load_recommended_restaurants()
         _get_promos("11")
@@ -64,6 +65,9 @@ function MenuPage(props) {
             setCurrentCategory(category);
         }
     }
+    const handleSearch =(e)=>{
+        setSearchTerm(e.target.value);
+    }
     return (
         <div style={{width: '100vw'}} id="container">
             <div style={menuNavBarStyle} id="MenuNav">
@@ -86,12 +90,12 @@ function MenuPage(props) {
             </div>
             
 
-            <div style={{ position: 'absolute', zIndex: 10, width: '100%', }} > <CategoriesMenu /></div>
+            <div style={{ position: 'absolute', zIndex: 10, width: '100%', }} > <CategoriesMenu handleSearch={handleSearch} searchTerm={searchTerm} /></div>
             <Items handleCategoryClick={handleCategoryClick} currentCategory={currentCategory}/>
             {currentCategory==='default'?(menu.menudata.isLoading==false)&&menu.menudata?.data?.groups.map((item, index) => { 
                 return( 
                     <div>                                                       
-                        <Displaydish key={item.name} obj = {JSON.parse(JSON.stringify(item))} index = {index}/>
+                        <Displaydish key={item.name} obj = {JSON.parse(JSON.stringify(item))} searchTerm={searchTerm} index = {index}/>
                         <Divider style={{ height: '5px', width: "100%" }} />             
                     </div>
                 )
@@ -100,7 +104,7 @@ function MenuPage(props) {
             dishArr.map((item, index) => { 
                 return( 
                     <div>                                                       
-                        <Displaydish key={item.name} obj = {JSON.parse(JSON.stringify(item))} index = {index}/>
+                        <Displaydish key={item.name} obj = {JSON.parse(JSON.stringify(item))} searchTerm={searchTerm} index = {index}/>
                         <Divider style={{ height: '5px', width: "100%" }} />             
                     </div>
                 )
