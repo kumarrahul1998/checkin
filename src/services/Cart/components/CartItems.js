@@ -64,7 +64,7 @@ export const CartItems = ({ cart,sendToCart,removeFromCart,Amount ,_add_item,_re
         <div>
           <div style={{ display: 'flex', }}>
             <div style={{ display: 'flex' }}>
-              {item.type === "veg" ? (<div style={{ marginTop: '20px', marginLeft: '15px' }}>
+              {item.is_vegetarian === "veg" ? (<div style={{ marginTop: '20px', marginLeft: '15px' }}>
                 <img src={NonVegIcon} style={{ height: "10px", width: "10px", marginLeft: "5px", marginTop: "5px" }} />
               </div>) : (<div style={{ marginTop: '20px', marginLeft: '20px' }} ><img src={VegIcon} style={{ height: "11px", width: "11px", marginTop: "5px" }} /></div>)}
 
@@ -81,11 +81,11 @@ export const CartItems = ({ cart,sendToCart,removeFromCart,Amount ,_add_item,_re
               {/* marginLeft: width * 0.15 + 'px' */}
             </div>
 
-            <div>{item.type === "veg" ?
+            <div>{item.is_vegetarian === "veg" ?
               <div style={{ marginTop: '20px', marginLeft: '108px', color: '#fff' }}>
                 <div style={{ width: '60px', height: '20px', backgroundColor: '#f5365c', borderRadius: '5px', display: 'flex', justifyContent: 'space-between', marginLeft: '5px' }}>
                   <div style={{ marginLeft: '11px', marginTop: '2px',cursor:"pointer" }} onClick={()=>handleDecrease(item)}>-</div>
-                  <div style={{ marginTop: '4px' }}>{item.cartValue}</div>
+                  <div style={{ marginTop: '4px' }}>{item.quantity}</div>
                   <div style={{ marginRight: '10px', marginTop: '2px',cursor:"pointer" }} onClick={()=>handleIncrease(item)}>+</div>
 
                 </div>
@@ -94,7 +94,7 @@ export const CartItems = ({ cart,sendToCart,removeFromCart,Amount ,_add_item,_re
               <div style={{ marginTop: '20px', marginLeft: '108px', color: '#fff'}}>
                 <div style={{ width: '60px', height: '20px', backgroundColor: '#f5365c', borderRadius: '5px', display: 'flex', justifyContent: 'space-between' }}>
                   <div style={{ marginLeft: '10px', marginTop: '2px',cursor:"pointer" }} onClick={()=>handleDecrease(item)}>-</div>
-                  <div style={{ marginTop: '4px' }}>{item.cartValue}</div>
+                  <div style={{ marginTop: '4px' }}>{item.quantity}</div>
                   <div style={{ marginRight: '10px', marginTop: '2px',cursor:"pointer" }} onClick={()=>handleIncrease(item)}>+</div>
 
                 </div>

@@ -2,7 +2,7 @@ import ACTION from "../actions/actionTypes"
 
 const initState = {
     menudata: {
-        isLoading: false,
+        isLoading: 'idle',
         data: [],
         error: ""
     },

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import AbsoluteItems from '../components/AbsoluteComponents'
 import Offers from '../components/Offers'
 import CategoriesMenu from '../components/CategoriesMenu'
@@ -6,7 +6,7 @@ import Items from '../components/FoodCategories'
 import BrowseMenu from '../components/BrowseMenu'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { useHistory } from 'react-router-dom';
-import { getPromos, loadRecommendedRestaurants } from '../middleware'
+import { getPromos, loadRecommendedRestaurants, _load_menu } from '../middleware'
 import { connect } from "react-redux"
 import BottomBar from "../components/AbsoluteComponents";
 import Divider from '@material-ui/core/Divider';
@@ -17,16 +17,19 @@ function MenuPage(props) {
     const {
         _load_recommended_restaurants,
         _get_promos,
-
+        _get_Menu,
+        menu,
     } = props
     const history = useHistory()
     const handleChange = () => {
         history.push("/home")
     }
-
+    const [dishArr,setDishArr]= useState([]);
+    const [currentCategory,setCurrentCategory]= useState('default');
     useEffect(() => {
         _load_recommended_restaurants()
         _get_promos("11")
+        _get_Menu()
         
     }, [])
 
@@ -46,7 +49,22 @@ function MenuPage(props) {
         height: 'auto',
         background: 'white'
     }
-
+    // console.log(menu.menudata.data.groups);
+    const handleCategoryClick=(category)=>{
+        if(currentCategory==='default'){
+            // console.log('category clicked==>',category)
+            setDishArr(menu.menudata.data.groups.filter(i=>i.category==category))
+            setCurrentCategory(category);
+        }
+        else if(currentCategory===category){
+            // setDishArr(menu.menudata.data.groups)
+            setCurrentCategory('default');
+        }
+        else if(currentCategory!==category){
+            setDishArr(menu.menudata.data.groups.filter(i=>i.category==category))
+            setCurrentCategory(category);
+        }
+    }
     return (
         <div style={{width: '100vw'}} id="container">
             <div style={menuNavBarStyle} id="MenuNav">
@@ -70,11 +88,20 @@ function MenuPage(props) {
             
 
             <div style={{ position: 'absolute', zIndex: 10, width: '100%', }} > <CategoriesMenu /></div>
-            <Items />
-            {dishes.map((item, index) => { 
+            <Items handleCategoryClick={handleCategoryClick} currentCategory={currentCategory}/>
+            {currentCategory==='default'?(menu.menudata.isLoading==false)&&menu.menudata?.data?.groups.map((item, index) => { 
                 return( 
                     <div>                                                       
-                        <Displaydish key={item.categoryName} obj = {JSON.parse(JSON.stringify(item))} index = {index}/>
+                        <Displaydish key={item.name} obj = {JSON.parse(JSON.stringify(item))} index = {index}/>
+                        <Divider style={{ height: '5px', width: "100%" }} />             
+                    </div>
+                )
+            })
+            :
+            dishArr.map((item, index) => { 
+                return( 
+                    <div>                                                       
+                        <Displaydish key={item.name} obj = {JSON.parse(JSON.stringify(item))} index = {index}/>
                         <Divider style={{ height: '5px', width: "100%" }} />             
                     </div>
                 )
@@ -92,6 +119,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     _load_recommended_restaurants: () => dispatch(loadRecommendedRestaurants()),
     _get_promos: (id) => dispatch(getPromos(id)),
+    _get_Menu: ()=>dispatch(_load_menu()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuPage)    // redux

@@ -11,7 +11,7 @@ import BillingBottomBar from '../components/BillingBottomBar';
 import { _load_orders, _load_restaurent_details, _load_trending_dishes } from '../middleware'
 import { connect } from "react-redux";
 import {useHistory} from 'react-router-dom';
-
+import make_API_call from "../../../providers/REST_API";
 
 function HomePage(props) {
     const { loadRestaurentDetails, state, loadOrders, loadTrendingDishes } = props
@@ -24,7 +24,7 @@ function HomePage(props) {
         loadRestaurentDetails()
         loadOrders()
         loadTrendingDishes()
-
+        // make_API_call('get','/menus/restaurants/11/available/')
     }, [])
 
     const cartStyle = {

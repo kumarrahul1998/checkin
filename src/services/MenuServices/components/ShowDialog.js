@@ -47,7 +47,7 @@ function ShowDialog(props){
             <div style={{ height: '100px', width: "100%", marginLeft: "10px", marginTop: "10px", marginBottom: "10px"}}>
                     <div style={{ display: 'flex', justifyContent: "space-between" }}>
                         <div style={{ display: 'flex', marginLeft: "5px" }} >
-                            <div>  {item.mealtype === "veg" ?
+                            <div>  {item.is_vegetarian === "veg" ?
                                 (<img style={{ height: "15px", width: "15px", marginLeft: "5px" }} src={Veg} />)
                                 : (<img style={{ height: "15px", width: "15px", marginLeft: "5px" }} src={nonVeg} />)}</div>
                             <div style={{ width: "160px"}} >
@@ -75,8 +75,9 @@ function ShowDialog(props){
 
                                 <div style={{ marginLeft: '-16px' }} onClick={() => handleOpenSlides(item.isCustomised)}>
                                     <div style={{ marginTop: '0', color: '#6d6d6d' }} >{item.name}</div>
-                                    <div style={{ marginTop: '10px', color: '#6d6d6d' }}> &#8377;{item.price}</div>
-                                    <div style={{color: "grey", opacity: "0.8", fontSize: "0.8em", marginTop: "5px"}}>
+                                    {item.costs.length>1? null:
+                                    <div style={{ marginTop: '10px', color: '#6d6d6d' }}> &#8377;{item.costs[0]}</div>
+                                    }<div style={{color: "grey", opacity: "0.8", fontSize: "0.8em", marginTop: "5px"}}>
                                         {item.description}
                                     </div>
                                 </div>
@@ -95,10 +96,10 @@ function ShowDialog(props){
                                 }}
 
                                 >
-                                    {cart.items.data?.find(i=>i.name==item.name)?.cartValue==undefined?
+                                    {cart.items.data?.find(i=>i.pk==item.pk)?.quantity==undefined?
                                         (
-                                            item.isCustomised ?
-                                                <MenuCustomisation variants={item.variants} />
+                                            item.types.length>0||item.customizations.length>=1?
+                                             <MenuCustomisation dish={item}/>    
                                                 :
                                                 <div
                                                     style={{ paddingTop: '5px', paddingLeft: '20px', paddingRight: '20px', fontSize: '14px', color: '#ff5656', fontWeight: 700, marginRight: "10px" }}
@@ -114,7 +115,7 @@ function ShowDialog(props){
                                             }}>
                                                 <div style={{ display: 'flex', color: '#fff' }}>
                                                     <div ><RemoveIcon style={{ width: '16px', marginLeft: '5px' }} onClick={() => handleDecrease(item)} /></div>
-                                                    <div style={{ marginTop: '5px', marginLeft: '10px', }} >{cart.items.data.find(i=>i.name==item.name)?.cartValue}</div>
+                                                    <div style={{ marginTop: '5px', marginLeft: '10px', }} >{cart.items.data.find(i=>i.pk==item.pk)?.quantity}</div>
                                                     <div ><AddIcon style={{ width: '16px', marginLeft: '10px' }} onClick={() => handleIncrease(item)} /></div>
                                                 </div>
 

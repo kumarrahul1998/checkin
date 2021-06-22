@@ -21,7 +21,7 @@ function Displaydish(props) {
     const [open,setOpen] = useState(false)
     let Width = window.innerWidth;
     const history = useHistory()
-    const [Items, setItems] = React.useState(props.obj.data);
+    const [Items, setItems] = React.useState(props.obj.items);
     console.log(props)
     const handleIncrease = (item) => {
         _add_item(item,cart)
@@ -77,18 +77,17 @@ function Displaydish(props) {
         },
         [handleIncrease,handleDecrease]
       )
-    
 
     return (
 
-        <div id = {props.obj.categoryName} style={{ marginBottom: '30px', width: "100%"}}>
-            <h3 style={{ color: '#6d6d6d', marginLeft: "10px" }}>&nbsp;{props.obj.categoryName}</h3>
+        <div id = {props.obj.name} style={{ marginBottom: '30px', width: "100%"}}>
+            <h3 style={{ color: '#6d6d6d', marginLeft: "10px" }}>&nbsp;{props.obj.name}</h3>
 
             {Items.map((item, index) =>
                 <div style={{ height: '150px', width: "100%", marginLeft: "8px"}}>
                     <div style={{ display: 'flex', justifyContent: "space-between" }}>
                         <div style={{ display: 'flex', marginLeft: "5px" }} >
-                            <div>  {item.mealtype === "veg" ?
+                            <div>  {item.isVegetarian === "veg" ?
                                 (<img style={{ height: "15px", width: "15px", marginLeft: "5px" }} src={Veg} />)
                                 : (<img style={{ height: "15px", width: "15px", marginLeft: "5px" }} src={nonVeg} />)}</div>
                             <div style={{ width: "160px"}} >
@@ -96,39 +95,41 @@ function Displaydish(props) {
 
                                     style={{
                                         height: '18px',
-                                        width: `${5.3*(item.type.length) + 25 + 3*(item.type.length)}px`,
+                                        // width: `${5.3*(item.type.length) + 25 + 3*(item.type.length)}px`,
                                         marginLeft: '12px',
                                         borderRadius: '10px 4px 4px 10px',
                                         marginBottom: '10px',
-                                        backgroundColor: itemTypeColors[item.type]
+                                        backgroundColor: 'red'
                                     }}>
                                          {/* here in the width, i calculated an approx width per letter because the tags for the dishes can be anything other than
                                             must try or recommended and the tag width must adjust according to that so i ended up at an approx relationship */}
                                     <div >
 
-                                        <div><div style={{ height: '2px' }}>{itemTypeIcons[item.type]}
-                                        </div> <span style={{ color: '#fff', marginBottom: '10px', marginLeft: '25px', fontSize: 10 }}>  {item.type}</span> </div>
+                                        <div><div style={{ height: '2px' }}>{itemTypeIcons["RECOMMENDED"]}
+                                        </div> <span style={{ color: '#fff', marginBottom: '10px', marginLeft: '25px', fontSize: 10 }}>  {item.tags[0]}</span> </div>
                                     </div>
 
                                 </div>
 
-                                <div style={{ marginLeft: '-16px' }} onClick={() => handleOpenSlides(item.isCustomised)}>
+                                <div style={{ marginLeft: '-16px' }} >
                                     <div style={{ marginTop: '0', color: '#6d6d6d' }} >{item.name}</div>
-                                    <div style={{ marginTop: '10px', color: '#6d6d6d' }}> &#8377;{item.price}</div>
-                                    <div style={{color: "grey", opacity: "0.8", fontSize: "0.8em", marginTop: "5px"}} id={`${props.obj.categoryName} ${index} desc`} className="description">
+                                    {item.costs.length>1? null:
+                                    <div style={{ marginTop: '10px', color: '#6d6d6d' }}> &#8377;{item.costs[0]}</div>
+                                    }
+                                    <div style={{color: "grey", opacity: "0.8", fontSize: "0.8em", marginTop: "5px"}} id={`${props.obj.name} ${index} desc`} className="description">
 
                                     {/* Here the id of description div consist of the category name plus the index of the dish inside that collection of dishes
                                         so that we easily get the correct div for expanding it on the click on more button for displaying whole description*/ }
 
                                         {item.description} 
                                     </div> {item.description.length > 60? 
-                                    (<span style={{color: "#ff5656"}} id="more" onClick={(event) => showFullDescription(event, props.obj.categoryName,index)} >...more</span>) : (<> </>)}
+                                    (<span style={{color: "#ff5656"}} id="more" onClick={(event) => showFullDescription(event, props.obj.name,index)} >...more</span>) : (<> </>)}
                                 </div>
                             </div>
                             
                         </div>
                         <div style = {{ paddingTop: "95px", marginRight: "20px"}}>
-                            {item.image === "" ? (<div style={{marginLeft: "100px", marginTop: "-95px"}} id="add-button-container-without-image">
+                            {item.image === null? (<div style={{marginLeft: "100px", marginTop: "-95px"}} id="add-button-container-without-image">
                                 <div style={{
                                     height: '20px',
                                     width: '70px',
@@ -139,10 +140,10 @@ function Displaydish(props) {
                                 }}
 
                                 >
-                                    {cart.items.data?.find(i=>i.name==item.name&&i.variantChosen==item.variantChosen)?.cartValue  == undefined?
+                                    {cart.items.data?.find(i=>i.pk==item.pk&&i.variantChosen==item.variantChosen)?.quantity  == undefined?
                                         (
-                                            item.isCustomised ?
-                                                <MenuCustomisation variants={item.variants} dish={item}/>
+                                            item.types.length>1||item.customizations.length>=1?
+                                                <MenuCustomisation dish={item}/>
                                                 :
                                                 (<div><div
                                                     style={{ paddingTop: '5px', paddingLeft: '20px', paddingRight: '20px', fontSize: '14px', color: '#ff5656', fontWeight: 700 }}
@@ -161,7 +162,7 @@ function Displaydish(props) {
                                             }}>
                                                 <div style={{ display: 'flex', color: '#fff' }}>
                                                     <div ><RemoveIcon style={{ width: '16px', marginLeft: '5px' }} onClick={() => handleDecrease(item)} /></div>
-                                                    <div style={{ marginTop: '5px', marginLeft: '10px', }} >{cart.items.data.find(i=>i.name==item.name)?.cartValue}</div>
+                                                    <div style={{ marginTop: '5px', marginLeft: '10px', }} >{cart.items.data.find(i=>i.pk==item.pk)?.quantity}</div>
                                                     <div ><AddIcon style={{ width: '16px', marginLeft: '10px' }} onClick={() => handleIncrease(item)} /></div>
                                                 </div>
                                                 
@@ -198,10 +199,10 @@ function Displaydish(props) {
                                             }}
 
                                             >
-                                                {cart.items.data?.find(i=>i.name==item.name&&i.variantChosen==item.variantChosen)?.cartValue  == undefined?
+                                                {cart.items.data?.find(i=>i.pk==item.pk&&i.variantChosen==item.variantChosen)?.quantity  == undefined?
                                                     (
-                                                        item.isCustomised ?
-                                                            <MenuCustomisation variants={item.variants} />
+                                                        item.types.length>1||item.customizations.length>=1?
+                                                         <MenuCustomisation dish={item}/>
                                                             :
                                                             <div
                                                                 style={{ paddingTop: '5px', paddingLeft: '20px', fontSize: '14px', color: '#ff5656', fontWeight: 700 }}
@@ -217,7 +218,7 @@ function Displaydish(props) {
                                                         }}>
                                                             <div style={{ display: 'flex', color: '#fff' }}>
                                                                 <div onClick={() => handleDecrease(item)}><RemoveIcon style={{ width: '16px', marginLeft: '5px' }} /></div>
-                                                                <div style={{ marginTop: '5px', marginLeft: '10px', }} >{cart.items.data?.find(i=>i.name==item.name)?.cartValue}</div>
+                                                                <div style={{ marginTop: '5px', marginLeft: '10px', }} >{cart.items.data?.find(i=>i.pk==item.pk)?.quantity}</div>
                                                                 <div onClick={() => handleIncrease(item)}><AddIcon style={{ width: '16px', marginLeft: '10px' }} /></div>
                                                             </div>
 
