@@ -12,9 +12,9 @@ import { _load_orders, _load_restaurent_details, _load_trending_dishes } from '.
 import { connect } from "react-redux";
 import {useHistory} from 'react-router-dom';
 import make_API_call from "../../../providers/REST_API";
-
+import {loadRequestData} from '../actions/actionCreator';
 function HomePage(props) {
-    const { loadRestaurentDetails, state, loadOrders, loadTrendingDishes } = props
+    const { loadRestaurentDetails, state, loadOrders, loadTrendingDishes ,loadRequestData_} = props
     const { details } = state
     let windowHeight = window.innerHeight;
     let windowWidth = window.innerWidth;
@@ -25,6 +25,7 @@ function HomePage(props) {
         loadOrders()
         loadTrendingDishes()
         // make_API_call('get','/menus/restaurants/11/available/')
+        loadRequestData_();
     }, [])
 
     const cartStyle = {
@@ -51,7 +52,7 @@ function HomePage(props) {
                     >
                         <div style={{ margin: '15px',marginLeft: '10px' ,marginBottom: '0'}}><div style={{ color: "#ff5656", fontWeight: 600, marginBottom: '0',fontSize: '14px' }}>Room  301</div>
                             <div style={{ fontSize: '10px', fontWeight: 600, marginTop: '0px', color: '#6d6d6d' }}> 
-                                {details.data.restaurant.display_name ? <h3>{details.data.restaurant.display_name}</h3> : <h3 style={{marginTop : '4px',marginBottom: '1vh',fontSize: '12px'}}>Oyo Townhouse 032</h3>}
+                                {details.data.name ? <h3>{details.data.name}</h3> : <h3 style={{marginTop : '4px',marginBottom: '1vh',fontSize: '12px'}}>Oyo Townhouse 032</h3>}
                             </div>
                             <div style={cartStyle} onClick={() => history.push('/viewcart')}>
                                 <Badge style={{ marginBottom: "7vh", marginRight: "-9vw" }} badgeContent={cartLength} color="error">
@@ -61,7 +62,7 @@ function HomePage(props) {
                         </div>
                     </div>
                 </div>
-                <Carousel />
+                <Carousel details={details}/>
                 <Services />
                 <OrderStatus />
                 <Trending />
@@ -90,5 +91,6 @@ const mapDispatchToProps = (dispatch) => ({
     loadRestaurentDetails: () => dispatch(_load_restaurent_details()),
     loadOrders: () => dispatch(_load_orders()),
     loadTrendingDishes: () => dispatch(_load_trending_dishes()),
+    loadRequestData_: ()=>dispatch(loadRequestData()),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

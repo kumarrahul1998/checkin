@@ -1,9 +1,10 @@
 import React from 'react';
+import { useEffect } from 'react';
 import {useHistory} from 'react-router-dom';
-
+import { connect } from "react-redux";
 import BackButton from '../../../assets/RoomServices/BackButton.svg';
 import MyRequest from '../components/MyRequest';
-
+import { loadRequestData } from '../../Home/actions/actionCreator';
 const RoomServicesPage = props => {
 
     const navBarStyle = {
@@ -38,7 +39,10 @@ const RoomServicesPage = props => {
     const goBack = () => {
         history.goBack()
     }
-
+    const {state} =props;
+    useEffect(()=>{
+        props.loadRequestData_();
+    },[])
 
     return (
         <React.Fragment>
@@ -46,9 +50,15 @@ const RoomServicesPage = props => {
                 <img onClick={goBack} src={BackButton} alt="Back Button" style={backButtonStyle} />
                 <p style={headingStyle}>My Request</p>
             </div>
-            <MyRequest />
+            <MyRequest state={state}/>
         </React.Fragment>
     );
 }
+const mapStateToProps = (state) => ({
+    state: state.home,
+})
 
-export default RoomServicesPage;
+const mapDispatchToProps = (dispatch) => ({
+    loadRequestData_: ()=>dispatch(loadRequestData()),
+})
+export default connect(mapStateToProps, mapDispatchToProps)(RoomServicesPage)

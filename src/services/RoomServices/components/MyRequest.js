@@ -47,14 +47,41 @@ function MyRequest(props) {
         marginTop: '25vh'
     }
 
+    // const eventTypes={
+    //             400: "EVENT_NONE",
+    //             401:'EVENT_SESSION_CHECKIN',
+    //             409:'EVENT_SESSION_CHECKOUT',
+    //             451:'EVENT_SCHEDULED_SESSION_NEW',
+    //             453:'EVENT_SCHEDULED_SESSION_PENDING',
+    //      455:'EVENT_SCHEDULED_SESSION_ACCEPTED',
+    //      459:'EVENT_SCHEDULED_SESSION_CANCELLED',
+    //      460:'EVENT_SCHEDULED_SESSION_DONE',
+    //      462:'EVENT_SCHEDULED_SESSION_CLOSE',
+
+    //     EVENT_MEMBER_ADD = 411
+    //     EVENT_MEMBER_REMOVE = 412
+    //     EVENT_HOST_ASSIGNED = 415
+
+    //     EVENT_REQUEST_CHECKOUT = 421
+    //     EVENT_REQUEST_SERVICE = 422
+
+    // }
+    const eventStatus={
+        0:'STATUS_NONE',
+        1:'STATUS_OPEN',
+        5:'STATUS_PROGRESS',
+        6:'STATUS_COOKED',
+        10:'STATUS_DONE',
+        9:'STATUS_CANCELLED',
+    }
     return (
             <div style={requestsContainerStyle}>
-                {props.requests.length > 0 ? props.requests.map(ele => {
+                {props.state.requestData.data.length > 0 ? props.state.requestData.data.map(ele => {
                     return ( 
                     <div style={{...divStyle,marginTop: '2.87vh'}}>
-                        <span style={requestStyle}>{ele.request}</span>
-                        {ele.status === 'PENDING'?
-                            <span style={statusButtonStyle}>{ele.status}</span>:
+                        <span style={requestStyle}>{ele.message}</span>
+                        {ele.status === 1?
+                            <span style={statusButtonStyle}>{eventStatus[ele.status]}</span>:
                             <span style={{...statusButtonStyle,background: '#32c282'}}>{ele.status}</span>
                         }
                     </div>

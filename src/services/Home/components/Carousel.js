@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Example() {
+function Example({details}) {
     var items = [
         {
             name: "Random Name #1",
@@ -42,7 +42,7 @@ function Example() {
     return (
         <div className="banner-container" style={{marginTop: '1vh'}}>
             {
-                items.map((item, i) => <Item key={i} item={item} />)
+               details.isLoading===false&&details.data.covers.map((item, i) => <Item key={i} item={item} />)
             }
         </div>
     )
@@ -51,7 +51,7 @@ function Example() {
 function Item(props) {
     return (
         <div style={{width: '68vw',marginBottom: '0'}} className="banner-card">
-            <img alt="banner-item" src={props.item.imageURL} style={{ borderRadius: "10px", width: "69vw" }} height={window.innerHeight * 0.18} />
+            <img alt="banner-item" src={props.item} style={{ borderRadius: "10px", width: "69vw" }} height={window.innerHeight * 0.18} />
         </div>
 
     )

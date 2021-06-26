@@ -19,7 +19,7 @@ export const _set_state = (obj) => (dispatch) => {
 
 export const _load_restaurent_details = () => (dispatch, getState) => {
   dispatch(loadRestaurentDetailsReq())
-  return make_API_call("get", "/sessions/active")
+  return make_API_call("get", "/restaurants/11/")
     .then(res => {
       console.log(res);
       dispatch(loadRestaurentDetailsSuccess(res))
