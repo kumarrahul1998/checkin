@@ -29,48 +29,16 @@ export const _load_menu = () => (dispatch) => {
 
 export const getPromos = (id) => (dispatch) => {
   dispatch(getpromosReq())
-  // return make_API_call("get", `/promos/active/restaurants/${id}/`)
-  //   .then(res => {
-  //     dispatch(getpromosSuccess(res))
-  //   })
-  //   .catch(err => {
-  //     const msg = 'Failed to get promos'
-  //     dispatch(getpromosFailure(msg))
-  //   })
-
-  setTimeout(() => {
-    const payload = [
-      {
-        "code": "CHECKOUT",
-        "icon": null,
-        "name": "<font color=\"#ff4f19\"><b>40%</b> discount</font>",
-        "summary": "Get 40% discount upto Rs. 100 on your first 3 orders.",
-        "terms": "Applicable for orders above  Rs. 99.",
-        "expires": null,
-        "filter_choice": "rest.all"
-      },
-      {
-        "code": "HOOKAH",
-        "icon": null,
-        "name": "Testing of Hookah",
-        "summary": "dsfsd",
-        "terms": "dsfdsfds",
-        "expires": null,
-        "filter_choice": "rest.all"
-      },
-      {
-        "code": "DESSERT50",
-        "icon": null,
-        "name": "DESSERT50",
-        "summary": "Get 50% off on desserts!",
-        "terms": "TEST",
-        "expires": null,
-        "filter_choice": "rest.all"
-      }
-    ]
-    dispatch(getpromosSuccess(payload))
-  }, 2000);
+  return make_API_call('get',`/promos/active/restaurants/${id}`)
+    .then(res => {
+      dispatch(getpromosSuccess(res))
+    })
+    .catch(err => {
+      const msg = 'Failed to get promos'
+      dispatch(getpromosFailure(msg))
+    })
 }
+
 export const loadRecommendedRestaurants = (restaurant_id) => (dispatch) => {
   dispatch(loadRecommendedRestaurantsReq())
   // return make_API_call("get", `/menus/items/recommended/restaurants/${restaurant_id}/`)

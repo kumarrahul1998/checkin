@@ -12,15 +12,13 @@ import Divider from '@material-ui/core/Divider';
 import { connect } from "react-redux"
 import parser from 'html-react-parser'
 
-
-
-
 function Offers(props) {
     const { menu } = props;
     let windowHeight = window.innerHeight;
     let windowWidth = window.innerWidth;
     const promos = menu.promos.data;
-    console.log(promos)
+    console.log(promos);
+    
     return (
         <div>
             <div style={{marginLeft: "0vw"}}> <ScrollMenu

@@ -1,3 +1,3 @@
 export default {
-  
+    GET_SETTLEBILL_DEATILS: 'GET_SETTLEBILL_DEATILS'
 }

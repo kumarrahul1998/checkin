@@ -1,10 +1,15 @@
 import React from 'react'
 import VegIcon from '../../../assets/home/vegicon.png'
 import NonVegIcon from '../../../assets/home/nonvegicon.jpg'
+import { connect } from 'react-redux';
+import {SEND_SETTLE_BILL_DETAILS_REQ} from '../middleware/index';
 
-export default function SettleBill() {
+function SettleBill(props) {
 
-
+    React.useEffect(() => {
+        props.fetchSettleBillDetails("11");
+        console.log('[SettleBill]',props.getSettleBillDeatils)
+    },[]);
 
     const billdetails = [
         {
@@ -70,3 +75,13 @@ export default function SettleBill() {
         </div>
     )
 }
+
+const mapStateToProps = state => ({
+    getSettleBillDeatils: state.checkout.settleBillDetails
+});
+
+const mapDispatchToProps = dispatch => ({
+    fetchSettleBillDetails : (id) => dispatch(SEND_SETTLE_BILL_DETAILS_REQ(id)),
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(SettleBill);

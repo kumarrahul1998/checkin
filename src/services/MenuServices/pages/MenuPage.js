@@ -122,4 +122,4 @@ const mapDispatchToProps = (dispatch) => ({
     _get_Menu: ()=>dispatch(_load_menu()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(MenuPage)    // redux
+export default connect(mapStateToProps, mapDispatchToProps)(MenuPage)

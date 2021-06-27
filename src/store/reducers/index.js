@@ -4,7 +4,8 @@ import homeReducer from "../../services/Home/reducers/index"
 import menuReducer from "../../services/MenuServices/reducers/index"
 import cartReducer from "../../services/Cart/reducers/index"
 import checkoutReducer from "../../services/Checkout/reducers/index"
-import {AmountReducer} from "../../services/Cart/reducers/index"
+import {AmountReducer} from "../../services/Cart/reducers/index";
+import orderReducer from '../../services/order/reducers/index';
 
 const appReducer = combineReducers({
   authentication: authReducer,
@@ -13,6 +14,7 @@ const appReducer = combineReducers({
   cart: cartReducer,
   checkout: checkoutReducer,
   amount: AmountReducer,
+  order: orderReducer,
 })
 
 const rootReducer = (state, action) => {

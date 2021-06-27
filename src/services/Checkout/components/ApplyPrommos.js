@@ -22,6 +22,7 @@ import parser from 'html-react-parser'
 import { blue } from '@material-ui/core/colors';
 import CategoriesMore from '../../Checkout/components/CategoriesMore';
 import { makeStyles } from '@material-ui/core';
+import { getPromos } from '../../MenuServices/middleware/index';
 
 const useStyles = makeStyles({
     toggleDiv:{
@@ -31,6 +32,10 @@ const useStyles = makeStyles({
 })
 
 const ApplyPrommos = (props) => {
+
+    React.useEffect(() => {
+        props._get_promos("11")
+    }, [])
 
     const handleApply = () => {
         history.push("/settlebill")
@@ -49,17 +54,6 @@ const ApplyPrommos = (props) => {
     const history = useHistory()
     let windowWidth = window.innerWidth;
 
-
-    //  Offers By Ronit
-
-    const offers = [
-        {offerFrom: 'Checkout', desc: 'Get 50% Off', condition: 'Above Orders of 150'},
-        {offerFrom: 'Checkout', desc: 'Get 40% Off', condition: 'Above Orders of 100'},
-        {offerFrom: 'Checkout', desc: 'Get 20% Off', condition: 'Above Orders of 500'},
-        {offerFrom: 'Checkout', desc: 'Get 20% Off with SBI Credit Cards', condition: 'Above Orders of 450'},
-        {offerFrom: 'Checkout', desc: 'Flat 10% Off', condition: 'Above Orders of 200'},
-        {offerFrom: 'Checkout', desc: 'Get 30% Off', condition: 'Above Orders of 1000'},
-    ];
 
     const offerLogo = {
         height : '8vw',
@@ -129,6 +123,8 @@ const ApplyPrommos = (props) => {
         bttn.style.display="none";
     }
 
+    
+
     return (
         <div>
             <div style={{ height: '130px', width: '100%', backgroundColor: '#ececec' }}>
@@ -183,34 +179,17 @@ const ApplyPrommos = (props) => {
 
                 <div>
                     <br></br>
-                    {/*promos.map(res =>
-                        <div >
-                            <img src={promo5} style={{ borderTopRightRadius: '5px', borderBottomRightRadius: '5px', borderTopLeftRadius: '5px', borderBottomLeftRadius: '5px', marginLeft: '10px', margin: '12px 0px -10px 12px' }} width="30" height="30"></img>
-                            <span style={{ color: '#ff5656', fontSize: '12px', marginLeft: '5px', fontWeight: 800 }} onClick={() => history.push("/settlebill")}>CHECKOUT</span>
-
-                            <span style={{ marginLeft: '200px', color: '#ff5656', fontSize: '15px', fontWeight: 800 }} onClick={handleApply}>Apply</span>
-                            <p style={{ display: 'flex', marginBottom: '0', marginLeft: '6px', fontSize: '14px', color: '#6d6d6d' }}>
-
-                                &nbsp;Get&nbsp;<div style={{ whiteSpace: 'pre-line', fontSize: '11px' }} > {parser(res.name)}</div>
-                            </p>
-
-                            <p style={{ color: '#bebebe', marginTop: '0px', marginLeft: '6px', fontSize: '10px', marginLeft: '10px', marginTop: '1px' }}>Applicable for orders above  99 </p>
-                            <img src={more} style={{ width: '50px', marginLeft: '10px', marginBottom: '5px' }} onclick={handleMore}></img>
-
-                            <img src={line5} style={{ marginLeft: '10px', width: '350px' }}></img>
-                        </div>
-                    )*/}
-                    {offers.map((offer,index) => (
+                    {promos.map((offer,index) => (
                         <div style={{marginTop: '2vh',marginLeft:"3vw"}}>
                             <div style={{display: 'flex', justifyContent: 'space-between',alignItems:"center"}}>
                                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",border:"1px solid #bebebe",width:"35vw",height:"8vw",borderRadius:"2vw",padding:"0"}}>
                                     <img src={promo5} style={offerLogo}/>
-                                    <span style={offerFromStyle}>&nbsp;&nbsp;{offer.offerFrom}</span>
+                                    <span style={offerFromStyle}>&nbsp;&nbsp;{offer.code}</span>
                                 </div>
                                 <span style={{marginRight: '3vw', color: '#ff5656', fontWeight: '900', verticalAlign : 'bottom',marginRight:"3.4vw",  fontSize: '5vw'}}>Apply</span>
                             </div>
-                            <p style={offerDescStyle}>{offer.desc}</p>
-                            <p style={offerConditionStyle}>{offer.condition}</p>
+                            <p style={offerDescStyle}>{offer.summary}</p>
+                            <p style={offerConditionStyle}>{offer.terms}</p>
                             <p style={offerButtonStyle} id={`${index}button`} onClick={()=>handleClick(index)} className={classes.moreBtn}>More</p>
                             <div id={`${index}toggle`} className={classes.toggleDiv}>
                             <img src={line5} style={{ width: '94vw'}}></img>
@@ -243,8 +222,8 @@ const mapStateToProps = (state) => ({
 })
 
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = dispatch => ({
+    _get_promos: (id) => dispatch(getPromos(id)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApplyPrommos)

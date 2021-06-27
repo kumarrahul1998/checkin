@@ -2,11 +2,14 @@ import {Grid,Typography,Divider, makeStyles, useMediaQuery} from "@material-ui/c
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import share from '../../../assets/order/share.png'
-import icon from '../../../assets/order/icon.png'
+import share from '../../../assets/order/share.png';
+import icon from '../../../assets/order/icon.png';
 import { useState } from 'react';
 import veg from '../../../assets/order/veg.png';
 import { useHistory } from "react-router";
+import { connect } from 'react-redux';
+import React from "react";
+import {PAYMENT_SUCCESS_REQ} from '../middleware/index';
 
 const useStyles= makeStyles(theme=>({
   mainContainer:{
@@ -215,7 +218,7 @@ const useStyles= makeStyles(theme=>({
   }
 }))
 
-function PaymentSuccessful() {
+function PaymentSuccessful(props) {
   const [booking,setBooking]= useState(true);
   const [order,setOrder]= useState(false)
   const classes = useStyles();
@@ -230,6 +233,12 @@ function PaymentSuccessful() {
   }
 
   const history = useHistory();
+
+  React.useEffect(()=>{
+    props.SEND_PAYMENT_SUCCESS_REQ("11");
+    console.log('[PaymentSuccessful]',props.paymentDetails);
+  },[])
+
   return (
     <div>
     <Grid container className={classes.mainContainer}>
@@ -401,4 +410,12 @@ function PaymentSuccessful() {
   );
 }
 
-export default PaymentSuccessful;
+const mapStateToProps = state => ({
+  paymentDetails : state.order.paymentSuccessDetails,
+});
+
+const mapDispatchToProps = dispatch => ({
+  SEND_PAYMENT_SUCCESS_REQ : (id) => dispatch(PAYMENT_SUCCESS_REQ(id)),
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(PaymentSuccessful);
