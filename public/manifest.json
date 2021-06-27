@@ -1,7 +1,4 @@
-{
-  "name": "checkin",
-  "short_name": "checkin",
-  "theme_color": "#ff5656",
+{"theme_color": "#ff5656",
   "background_color": "#ff5656",
   "display": "standalone",
   "orientation": "portrait",
