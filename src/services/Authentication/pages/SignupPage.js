@@ -22,60 +22,60 @@ function SignupPage(props) {
 
   const { state } = props
 
-  useEffect(()=>{
-    const handleManifest=async ()=>{
-      const resp = await make_API_call('get','/restaurants/11/');
-      var name;
-      if(resp.staus===200){
-        name=resp.data.name;
-      }
-      var myDynamicManifest = {
-          "name": name,
-          "short_name": name,
-          "theme_color": "#ff5656",
-          "background_color": "#ff5656",
-          "display": "standalone",
-          "orientation": "portrait",
-          "scope": "/",
-          "start_url": "/",
-          "icons": [
-              {
-                  "src": "maskable.png",
-                  "sizes": "196x196",
-                  "type": "image/png",
-                  "purpose":"maskable any",
-              },
-              {
-              "src": 'logo192.png',
-              "sizes": "192x192",
-              "type": "image/png",
-            },
+  // useEffect(()=>{
+  //   const handleManifest=async ()=>{
+  //     const resp = await make_API_call('get','/restaurants/11/');
+  //     var name;
+  //     if(resp.staus===200){
+  //       name=resp.data.name;
+  //     }
+  //     var myDynamicManifest = {
+  //         "name": name,
+  //         "short_name": name,
+  //         "theme_color": "#ff5656",
+  //         "background_color": "#ff5656",
+  //         "display": "standalone",
+  //         "orientation": "portrait",
+  //         "scope": "/",
+  //         "start_url": "/",
+  //         "icons": [
+  //             {
+  //                 "src": "maskable.png",
+  //                 "sizes": "196x196",
+  //                 "type": "image/png",
+  //                 "purpose":"maskable any",
+  //             },
+  //             {
+  //             "src": 'logo192.png',
+  //             "sizes": "192x192",
+  //             "type": "image/png",
+  //           },
             
-            {
-            "src": 'logo256.png',
-            "sizes": "256x256",
-            "type": "image/png",
-          },
-          {
-              "src": 'logo384.png',
-              "sizes": "384x384",
-              "type": "image/png",
-            },
-            {
-              "src": 'logo192.png',
-              "sizes": "515x512",
-              "type": "image/png",
-            },
+  //           {
+  //           "src": 'logo256.png',
+  //           "sizes": "256x256",
+  //           "type": "image/png",
+  //         },
+  //         {
+  //             "src": 'logo384.png',
+  //             "sizes": "384x384",
+  //             "type": "image/png",
+  //           },
+  //           {
+  //             "src": 'logo192.png',
+  //             "sizes": "515x512",
+  //             "type": "image/png",
+  //           },
           
-      ]
-        }
-        const stringManifest = JSON.stringify(myDynamicManifest);
-        const blob = new Blob([stringManifest], {type: 'application/json'});
-        const manifestURL = URL.createObjectURL(blob);
-        document.querySelector('#my-manifest-placeholder').setAttribute('href', manifestURL);
-  }
-  handleManifest();  
-  },[])
+  //     ]
+  //       }
+  //       const stringManifest = JSON.stringify(myDynamicManifest);
+  //       const blob = new Blob([stringManifest], {type: 'application/json'});
+  //       const manifestURL = URL.createObjectURL(blob);
+  //       document.querySelector('#my-manifest-placeholder').setAttribute('href', manifestURL);
+  // }
+  // handleManifest();  
+  // },[])
   const useStyles = makeStyles((theme) => ({
     root: {
       height: '100vh',
