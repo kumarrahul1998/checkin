@@ -11,13 +11,21 @@ function AskContact(props) {
   const { setState, authenticateViaNumber } = props
   const [phonenumber, setPhonenumber] = React.useState("")
   const [disable, setDisable] = React.useState(false)
-  const handleProceed = () => {
-    authenticateViaNumber(phonenumber)
+  const handleProceed =async () => {
+    // const resp= await authenticateViaNumber(phonenumber)
+    // if(resp.status===200){
+    //   setState({
+    //     askingProfileDetails: false,
+    //     askingContact: false,
+    //     askingOTP: true,
+    //   })
+    // }
     setState({
       askingProfileDetails: false,
       askingContact: false,
       askingOTP: true,
     })
+  
   }
 
   const handlePhone = (event) => {

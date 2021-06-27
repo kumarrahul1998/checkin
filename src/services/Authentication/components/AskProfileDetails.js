@@ -6,14 +6,15 @@ import TextInput from "../../../shared/components/TextInput/Basic"
 import Button from "../../../shared/components/Button/Basic"
 import { useHistory } from 'react-router-dom'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import { _set_state } from '../middleware'
+import { _set_state,sendName } from '../middleware'
 import { connect } from "react-redux"
 
 function AskProfileDetails(props) {
-  const { setState } = props
+  const { setState,_sendName } = props
   const history = useHistory()
   const handleProceed = () => {
     // history.push("/Home")
+    // _sendName(firstName,lastName);
     setState({
       login: {
         isLoggedIn: true
@@ -118,7 +119,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setState: (obj) => dispatch(_set_state(obj))
+    setState: (obj) => dispatch(_set_state(obj)),
+    _sendName: (fName,lName)=> dispatch(sendName(fName,lName))
   }
 }
 
