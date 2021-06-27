@@ -26,6 +26,7 @@ function HomePage(props) {
         loadTrendingDishes()
         // make_API_call('get','/menus/restaurants/11/available/')
         loadRequestData_();
+        // handleManifest();
     }, [])
 
     const cartStyle = {
