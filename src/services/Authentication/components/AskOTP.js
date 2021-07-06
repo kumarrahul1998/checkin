@@ -10,14 +10,17 @@ import { act } from 'react-dom/test-utils'
 
 
 function AskOTP(props) {
-  const { setState ,_sendOtp} = props
+  const { setState ,_sendOtp,login} = props
   const handleVerify = () => {
-    // _sendOtp(values);
-    setState({
-      askingProfileDetails: true,
-      askingContact: false,
-      askingOTP: false
-    })
+    _sendOtp("123456");
+    if(login.otp.isLoading===false&&login.otp.error===null){
+      setState({
+        askingProfileDetails: true,
+        askingContact: false,
+        askingOTP: false
+      })
+    }
+    
   }
   const [activeInput, setActiveInput] = useState(0);
   const [values, setValues] = useState(['','','',''])
@@ -146,7 +149,9 @@ function AskOTP(props) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    state: state.authentication.signup
+    state: state.authentication.signup,
+    login: state.authentication.login,
+
   }
 }
 

@@ -17,6 +17,7 @@ export const sendPhoneNoSuccess = (payload)=>({
 
 export const sendPhoneNoFailure = (payload)=>({
   type: ACTION.SEND_PHONE_NO_FAILURE,
+  payload,
 })
 
 
@@ -27,10 +28,12 @@ export const checkOtpReq = (payload)=>({
 
 export const checkOtpSuccess =(payload)=>({
   type: ACTION.CHECK_OTP_SUCCESS,
+  payload
 })
 
 export const checkOtpFailure = (payload)=>({
   type: ACTION.CHECK_OTP_FAILURE,
+  payload
 })
 
 export const sendNameReq=(payload)=>({
@@ -39,8 +42,15 @@ export const sendNameReq=(payload)=>({
 
 export const sendNameSuccess= (payload)=>({
   type: ACTION.SEND_NAME_SUCCESS,
+  payload
 })
 
 export const sendNameFailure= (payload)=>({
   type: ACTION.SEND_NAME_FAILURE,
+  payload
 })
+
+// export const setLoginState = (payload)=>({
+//   type: ACTION.SET_LOGIN,
+//   payload
+// })

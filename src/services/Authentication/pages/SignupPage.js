@@ -20,7 +20,6 @@ import '../../../stylings/profilepage.css'
 function SignupPage(props) {
 
   const { state } = props
-
   const useStyles = makeStyles((theme) => ({
     root: {
       height: '100vh',

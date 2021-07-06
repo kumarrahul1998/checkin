@@ -1,7 +1,6 @@
 import ACTION from "../actions/actionTypes"
 
 const initState = {
-  isLoggedIn: false,
   contact: {
     isLoading:'idle',
     payload:'',
@@ -9,12 +8,12 @@ const initState = {
   },
   otp: {
     isLoading:'idle',
-    payload:'',
+    payload:{},
     error:null
   },
   name: {
     isLoading:'idle',
-    payload:'',
+    payload:{},
     error:null
   },
 }
@@ -22,11 +21,11 @@ const initState = {
 export const LoginReducer = (state = initState, action) => {
   switch (action.type) {
 
-    case ACTION.SET_STATE:
-      return {
-        ...state,
-        ...action.payload
-      }
+    // case ACTION.SET_STATE:
+    //   return {
+    //     ...state,
+    //     ...action.payload
+    //   }
     case ACTION.SEND_PHONE_NO_REQ:
       return {
         ...state,
@@ -67,7 +66,7 @@ export const LoginReducer = (state = initState, action) => {
                 otp:{
                   ...state.otp,
                   isLoading:false,
-                  payload: action.payload
+                  payload: {...action.payload}
                 }
               }
               case ACTION.CHECK_OTP_FAILURE:

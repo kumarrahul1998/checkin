@@ -8,18 +8,19 @@ import { useHistory } from 'react-router-dom'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { _set_state,sendName } from '../middleware'
 import { connect } from "react-redux"
+import { useEffect } from 'react'
 
 function AskProfileDetails(props) {
-  const { setState,_sendName } = props
+  const { setState,_sendName,login } = props
   const history = useHistory()
   const handleProceed = () => {
     // history.push("/Home")
-    // _sendName(firstName,lastName);
-    setState({
-      login: {
-        isLoggedIn: true
-      }
-    })
+    _sendName(firstName,lastName,login.otp.payload);
+    // setState({
+    //   login: {
+    //     isLoggedIn: true
+    //   }
+    // })
   }
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -50,7 +51,11 @@ function AskProfileDetails(props) {
 //   const image = document.getElementById("bottom-image");
 //   image.style.display = "block";
 // }
-
+  // useEffect(()=>{
+  //   if(login.isLoggedIn===true){
+  //   history.push('/home');
+  //   }
+  // },[login.isLoggedIn])
   return (
     <div style={{overflow:"hidden"}}>
       <div style={{ fontWeight: 400, fontSize: 12 }} >One step away from your first 500 Checkin CHIPS <InfoOutlinedIcon style={{ marginBottom: "-6px" }} fontSize="small" /></div>
@@ -113,14 +118,15 @@ function AskProfileDetails(props) {
 }
 const mapStateToProps = (state, ownProps) => {
   return {
-    state: state.authentication.signup
+    state: state.authentication.signup,
+    login: state.authentication.login,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setState: (obj) => dispatch(_set_state(obj)),
-    _sendName: (fName,lName)=> dispatch(sendName(fName,lName))
+    _sendName: (fName,lName,token)=> dispatch(sendName(fName,lName,token))
   }
 }
 
