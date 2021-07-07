@@ -73,3 +73,17 @@ export const calculateAmount = (cart)=>{
   }
 }
 }
+
+export const placeOrderReq = () =>({
+  type: ACTION.PLACE_ORDER_REQ,
+})
+
+export const placeOrderSuccess=(payload)=>({
+  type: ACTION.PLACE_ORDER_SUCCESS,
+  payload
+})
+
+export const placeOrderFailure=(payload)=>({
+  type: ACTION.PLACE_ORDER_FAILURE,
+  payload
+})
