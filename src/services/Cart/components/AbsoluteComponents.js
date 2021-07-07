@@ -3,14 +3,19 @@ import React from 'react'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { connect } from "react-redux"
 import { useHistory } from 'react-router-dom';
-function AbsoluteItems({ cart,amount }) {
+import {place_order} from "../middleware/index"
+import { useEffect } from 'react';
+function AbsoluteItems({ cart,amount,placeOrder }) {
 
   const history = useHistory()
-  
   const handleClick = () => {
-    history.push("/order-successful")
+  place_order();
   }
-
+  useEffect(()=>{
+    if(cart.order.isLoading===false&&cart.order.data==="success"){
+      history.push('/order-successful')
+    }
+  },[cart.order])
  
   return (
     <div style={{
@@ -60,8 +65,8 @@ const mapStateToProps = (state) => ({
   amount: state.amount
 })
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = dispatch => ({
+  placeOrder: ()=>dispatch(place_order())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(AbsoluteItems)

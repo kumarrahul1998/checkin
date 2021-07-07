@@ -6,6 +6,11 @@ const initialState = {
     isLoading: false,
     data: [],
     error: ""
+  },
+  order:{
+    isLoading:'idle',
+    data:'',
+    error:'',
   }
 }
 
@@ -57,6 +62,29 @@ export default (state = initialState, { type, payload }) => {
       items: {
         ...state.items,
         data: [...payload.items.data]
+      }
+    }
+    case ACTION.PLACE_ORDER_REQ: return{
+      ...state,
+      order:{
+        ...state.order,
+        isLoading:true,
+      }
+    }
+    case ACTION.PLACE_ORDER_SUCCESS: return{
+      ...state,
+      order:{
+        ...state.order,
+        isLoading:false,
+        data: payload
+      }
+    }
+    case ACTION.PLACE_ORDER_FAILURE: return{
+      ...state,
+      order:{
+        ...state.order,
+        isLoading:false,
+        error: payload,
       }
     }
     default:
