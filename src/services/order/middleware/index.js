@@ -5,6 +5,16 @@ import {GET_ORDER_STATUS_SUCCESS,
   SEND_PAYMENT_REQUEST_FAILED
 } from '../actions/actionCreators';
 
+export const orderSent = id => dispatch => {
+  return make_API_call('post',`/promos/active/restaurants/${id}`)
+  .then(res => {
+    // Success Statements
+  })
+  .catch(err => {
+    // Failed Statements
+  })
+}
+
 export const SEND_ORDER_STATUS_REQ = (id) => (dispatch) => {
     
     return make_API_call('get',`/promos/active/restaurants/${id}`)

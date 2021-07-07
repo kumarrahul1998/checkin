@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
-import Carousel from '../components/Carousel'
-import Services from '../components/Services'
-import OrderStatus from '../components/OrderStatus'
-import Trending from '../components/Trending'
-import MenuItem from '../components/MenuButton'
+import React, { useEffect } from 'react';
+import Carousel from '../components/Carousel';
+import Services from '../components/Services';
+import OrderStatus from '../components/OrderStatus';
+import Trending from '../components/Trending';
+import MenuItem from '../components/MenuButton';
 import CartIcon from '../../../assets/home/shopping_cart.svg';
 import Badge from '@material-ui/core/Badge';
 import BillingBottomBar from '../components/BillingBottomBar';
@@ -11,7 +11,7 @@ import BillingBottomBar from '../components/BillingBottomBar';
 import { _load_orders, _load_restaurent_details, _load_trending_dishes } from '../middleware'
 import { connect } from "react-redux";
 import {useHistory} from 'react-router-dom';
-import make_API_call from "../../../providers/REST_API";
+//import make_API_call from "../../../providers/REST_API";
 
 function HomePage(props) {
     const { loadRestaurentDetails, state, loadOrders, loadTrendingDishes } = props
@@ -91,4 +91,5 @@ const mapDispatchToProps = (dispatch) => ({
     loadOrders: () => dispatch(_load_orders()),
     loadTrendingDishes: () => dispatch(_load_trending_dishes()),
 })
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+
+export default connect(mapStateToProps,mapDispatchToProps)(HomePage)

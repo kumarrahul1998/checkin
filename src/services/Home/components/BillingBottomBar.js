@@ -4,15 +4,25 @@ import { Widgets } from '@material-ui/icons';
 import {connect} from 'react-redux';
 import {useHistory} from 'react-router'
 import FastForwardIcon from '@material-ui/icons/FastForward';
+import {_GET_TOTAL_AMOUNT} from '../middleware/index';
 
 
-function BillingBottomBar({cart,amount}) {
+function BillingBottomBar(props) {
     const history = useHistory();
+
+    React.useEffect(()=>{
+        props.get_amount('11');
+    },[]);
+
+    React.useEffect(()=>{
+        console.log('[BillingBottomBar]',props.totalAmount)
+    },[props.totalAmount]);
+
     // const amount = cart.items.data.reduce((init, item) => init + item.price, 0).toFixed(2)
     return (
         <div style={{ color: "#fff"}} >
             <div style={{ display: "flex", justifyContent: "space-between", marginRight: "5px" }} >
-                <div style={{ margin: "8px", display: "flex",alignItems:"center" }}> <ReceiptOutlinedIcon /><div style={{ marginTop: "3px", marginLeft: "6px" }}>Total: &#8377;{amount.Total}</div> </div>
+                <div style={{ margin: "8px", display: "flex",alignItems:"center" }}> <ReceiptOutlinedIcon /><div style={{ marginTop: "3px", marginLeft: "6px" }}>Total: &#8377;{props.amount.Total}</div> </div>
                 <div onClick={() => history.push('/settlebill')} style={{ display:"flex",alignItems:"center"}}>Settle Bill &nbsp; <FastForwardIcon fontSize="small" /></div>
             </div>
         </div >
@@ -21,7 +31,12 @@ function BillingBottomBar({cart,amount}) {
 
 const mapStateToProps = state => ({
     cart : state.cart,
-    amount:state.amount
+    amount:state.amount,
+    totalAmount: state.home.totalAmount
+});
+
+const mapDispatchToProps = dispatch => ({
+    get_amount: (id) => dispatch(_GET_TOTAL_AMOUNT(id))
 })
 
-export default connect(mapStateToProps)(BillingBottomBar);
+export default connect(mapStateToProps,mapDispatchToProps)(BillingBottomBar);

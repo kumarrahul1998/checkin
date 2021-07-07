@@ -2,6 +2,8 @@ import React from 'react'
 import { makeStyles,Typography } from '@material-ui/core';
 import complete from "../../../assets/order/complete.gif"
 import { useHistory } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {orderSent} from '../middleware/index';
 
 const useStyles= makeStyles({
     completeImage:{
@@ -15,10 +17,13 @@ const useStyles= makeStyles({
     }
 })
 
-const OrderSuccessful = () => {
+const OrderSuccessful = (props) => {
     const history = useHistory()
     const classes = useStyles();
-    setTimeout(()=>history.push('/home'),2500);
+    setTimeout(()=>{
+        history.push('/home');
+        props.orderSent('11');
+    },2500);
 
     return (
             <div style={{display:"flex" ,alignItems:"center",height:"100vh",justifyContent:"center",flexDirection:"column",background:"#ffffff",zIndex:"1000"}}>
@@ -28,4 +33,8 @@ const OrderSuccessful = () => {
     )
 }
 
-export default OrderSuccessful
+const mapDispatchToProps = dispatch => ({
+    orderSent : id => dispatch(orderSent(id))
+})
+
+export default connect(null,mapDispatchToProps)(OrderSuccessful);

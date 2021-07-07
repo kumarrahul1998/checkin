@@ -1,4 +1,24 @@
-import ACTION from "./actionTypes"
+import ACTION from "./actionTypes";
+
+export const getAmountSuccess = payload => ({
+  type: ACTION.GET_AMOUNT_SUCCESS,
+  payload
+})
+
+export const getAmountFail = payload => ({
+  type: ACTION.GET_AMOUNT_FAIL,
+  payload
+})
+
+export const getOrderStatusSuccess = payload => ({
+  type: ACTION.GET_ORDER_STATUS_SUCCESS,
+  payload
+})
+
+export const getOrderStatusFailure = payload => ({
+  type: ACTION.GET_ORDER_STATUS_FAIL,
+  payload
+})
 
 export const setStateAction = (payload) => ({
   type: ACTION.SET_STATE,

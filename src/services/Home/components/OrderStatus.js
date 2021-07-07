@@ -9,6 +9,9 @@ import RoundedButton from '../../../shared/components/Button/Rounded'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from "@material-ui/core"
 import { useHistory } from "react-router"
+import { PinDropSharp } from "@material-ui/icons";
+import {_GET_ORDER_STATUS} from '../middleware/index';
+import {connect} from 'react-redux'
 
 const useStyles= makeStyles(theme=>({
     container:{
@@ -50,77 +53,22 @@ const useStyles= makeStyles(theme=>({
 }));
 
 
-export default function OrderStatus() {
+function OrderStatus(props) {
     const classes = useStyles();
     const history= useHistory();
     const handleClick=()=>{
         history.push('/order');
     }
+
+    React.useEffect(()=>{
+        props._ORDER_STATUS("11");
+    },[])
+
+    React.useEffect(()=>{
+        console.log('[ORDERSTATUS.js]',props.orderStatus);
+    },[props.orderNumbers])
+
     return (<>
-        {/* <Grid style={{ height: "130px", backgroundColor: "#ffefef", marginTop: "15px" ,display:"flex",justifyContent:"space-between",padding:"0"}} container spacing={0}>
-            <Grid style={{ margin: "10px", marginLeft: '30px', backgroundColor: "white", borderRadius: "6px", height: "70px", marginTop: "30px" }} item xs={7} lg={7} md={7} sm={7}>
-                <Grid container spacing={1}>
-                    <Grid style={{ textAlign: "center" }} item xs={4}>
-                        <img src={OrderFirstImage} height="16px" />
-                    </Grid>
-                    <Grid style={{ textAlign: "center" }} item xs={4}>
-                        <img src={OrderSecondImage} height="16px" />
-                    </Grid>
-                    <Grid style={{ textAlign: "center" }} item xs={4}>
-                        <img src={OrderThirdImage} height="18px" />
-                    </Grid>
-                    <Grid style={{ textAlign: "center" }} item xs={4}>
-                        <p style={{ fontSize: 10, marginLeft: "6px", marginTop: "0", color: '#6d6d6d', fontSize: '9px', fontWeight: 600 }}>
-
-                            <span
-                                style={{ color: "red", fontWeight: 600 }}
-                            >
-                            
-                            </span>
-                                0&nbsp;New
-                            </p>
-                    </Grid>
-                    <Grid style={{ textAlign: "center" }} item xs={4}>
-                        <p style={{ fontSize: 9, marginLeft: "6px", marginTop: "0", color: '#6d6d6d', fontSize: '9px', fontWeight: 600 }}>
-                            <span
-                                style={{ color: "red", fontWeight: 600 }}
-                            >
-                                2
-                                </span>
-                                &nbsp;In Progress
-                            </p>
-                    </Grid>
-                    <Grid style={{ textAlign: "center" }} item xs={4}>
-                        <p style={{ fontSize: 10, marginLeft: "6px", marginTop: "0", color: '#6d6d6d', fontSize: '8px', fontWeight: 600 }}>
-                            <span
-                                style={{ color: "red", fontWeight: 600 }}
-                            >
-                                2
-                                </span>
-                                &nbsp;Delivered
-
-                            </p>
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid style={{ marginTop: "30px", marginLeft: '-15px' }} item xs={4} lg={4} md={4} sm={4}>
-                <div>
-                    <div style={{ fontSize: 13, color: "#6d6d6d", fontWeight: 800, textAlign: "center" }}>Order Status</div>
-                    <div >
-                        <RoundedButton
-                            size={"small"}
-                            fullWidth
-                        >
-                            <span
-                                style={{ fontSize: "14px" }}
-                            >
-                                View Items
-                                </span>
-                        </RoundedButton>
-                    </div>
-                </div>
-            </Grid>
-        </Grid> */}
         <Grid container spacing={0}>
             <Grid item container lg={12} md={12} sm={12} xs={12} className={classes.container} spacing={0}>
                 <Grid item lg={5} md={5} sm={7} xs={7} className={classes.imageContainer} >
@@ -182,3 +130,13 @@ export default function OrderStatus() {
         </Grid>
     </>)
 }
+
+const mapStateToProps = state => ({
+    orderNumbers: state.home.orderNumbers
+});
+
+const mapDispatchToProps = dispatch => ({
+    _ORDER_STATUS: id => dispatch(_GET_ORDER_STATUS(id)),
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(OrderStatus);

@@ -38,14 +38,37 @@ const initState = {
         data: [],
         error: ""
     },
-    serviceRequest : []
-        
+    serviceRequest : [],
+    orderNumbers: [],
+    totalAmount: []
     
 }
 
 
 export const HomeReducer = (state = initState, action) => {
     switch (action.type) {
+        case ACTION.GET_AMOUNT_SUCCESS:
+            return {
+                ...state,
+                totalAmount: action.payload
+            }
+
+        case ACTION.GET_AMOUNT_FAIL:
+            return {
+                ...state,
+                totalAmount: action.payload
+            }
+        case ACTION.GET_ORDER_STATUS_SUCCESS:
+            return {
+                ...state,
+                orderNumbers: action.payload
+            }
+
+        case ACTION.GET_ORDER_STATUS_FAIL:
+            return {
+                ...state,
+                orderNumbers: action.payload
+            }
 
         case ACTION.SET_STATE:
             return {

@@ -10,8 +10,33 @@ import {
   loadTrendingDishesReq,
   loadTrendingDishesSuccess,
   loadTrendingDishesFailure,
-
+  getOrderStatusFailure,
+  getOrderStatusSuccess,
+  getAmountSuccess,
+  getAmountFail,
 } from "../actions/actionCreator"
+
+export const _GET_ORDER_STATUS = (id) => (dispatch) => {
+  return make_API_call("get",`/promos/active/restaurants/${id}`)
+    .then(res => {
+      dispatch(getOrderStatusSuccess(res))
+    })
+    .catch(() => {
+      const msg = `Failed to get details`
+      dispatch(getOrderStatusFailure(msg))
+    })
+}
+
+export const _GET_TOTAL_AMOUNT = (id) => (dispatch) => {
+  return make_API_call("get",`/promos/active/restaurants/${id}`)
+    .then(res => {
+      dispatch(getAmountSuccess(res))
+    })
+    .catch(() => {
+      const msg = `Failed to get amount`
+      dispatch(getAmountFail(msg))
+    })
+}
 
 export const _set_state = (obj) => (dispatch) => {
   dispatch(setStateAction(obj))
