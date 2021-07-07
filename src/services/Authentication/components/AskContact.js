@@ -8,16 +8,27 @@ import { _set_state, _authenticate_via_number } from '../middleware'
 import  '../../../stylings/contact.css'
 
 function AskContact(props) {
-  const { setState, authenticateViaNumber } = props
+  const { setState, authenticateViaNumber,login } = props
   const [phonenumber, setPhonenumber] = React.useState("")
   const [disable, setDisable] = React.useState(false)
-  const handleProceed = () => {
-    authenticateViaNumber(phonenumber)
-    setState({
-      askingProfileDetails: false,
-      askingContact: false,
-      askingOTP: true,
-    })
+  const handleProceed =async () => {
+    // const resp= await authenticateViaNumber(phonenumber)
+    // if(resp.status===200){
+    //   setState({
+    //     askingProfileDetails: false,
+    //     askingContact: false,
+    //     askingOTP: true,
+    //   })
+    // }
+     authenticateViaNumber(phonenumber);
+    console.log(login);
+    // if(login.contact.isLoading===false&&login.contact.error===null){
+      // setState({
+      //   askingProfileDetails: false,
+      //   askingContact: false,
+      //   askingOTP: true,
+      // })
+    // }
   }
 
   const handlePhone = (event) => {
@@ -102,7 +113,8 @@ function AskContact(props) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    state: state.authentication.signup
+    state: state.authentication.signup,
+    login: state.authentication.login,
   }
 }
 

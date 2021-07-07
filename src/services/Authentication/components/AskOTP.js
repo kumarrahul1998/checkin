@@ -4,19 +4,23 @@ import { connect } from "react-redux"
 
 import BoxInput from "../../../shared/components/TextInput/BoxInput"
 import Button from "../../../shared/components/Button/Basic"
-import { _set_state } from '../middleware'
+import { _set_state,checkOtp } from '../middleware'
 import { act } from 'react-dom/test-utils'
 
 
 
 function AskOTP(props) {
-  const { setState } = props
+  const { setState ,_sendOtp,login} = props
   const handleVerify = () => {
-    setState({
-      askingProfileDetails: true,
-      askingContact: false,
-      askingOTP: false
-    })
+    _sendOtp("123456");
+    if(login.otp.isLoading===false&&login.otp.error===null){
+      setState({
+        askingProfileDetails: true,
+        askingContact: false,
+        askingOTP: false
+      })
+    }
+    
   }
   const [activeInput, setActiveInput] = useState(0);
   const [values, setValues] = useState(['','','',''])
@@ -145,13 +149,16 @@ function AskOTP(props) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    state: state.authentication.signup
+    state: state.authentication.signup,
+    login: state.authentication.login,
+
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setState: (obj) => dispatch(_set_state(obj))
+    setState: (obj) => dispatch(_set_state(obj)),
+    _sendOtp : (otp)=>dispatch(checkOtp(otp)),
   }
 }
 

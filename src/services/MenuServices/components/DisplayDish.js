@@ -17,7 +17,7 @@ import {calculateAmount} from "../../Cart/actions/actionCreator"
 
 function Displaydish(props) {
     // const [loading, setloading] = useState(true);
-    const { _add_item, _remove_item,cart,Amount } = props
+    const { _add_item, _remove_item,cart,Amount,searchTerm } = props
     const [open,setOpen] = useState(false)
     let Width = window.innerWidth;
     const history = useHistory()
@@ -79,15 +79,21 @@ function Displaydish(props) {
       )
 
     return (
-
-        <div id = {props.obj.name} style={{ marginBottom: '30px', width: "100%"}}>
+        
+       Items.filter(elem=>{
+                if(searchTerm=='') return elem
+                else if(elem.name.toLowerCase().includes(searchTerm.toLowerCase()))return elem
+            }).length===0?null: <div id = {props.obj.name} style={{ marginBottom: '30px', width: "100%"}}>
             <h3 style={{ color: '#6d6d6d', marginLeft: "10px" }}>&nbsp;{props.obj.name}</h3>
 
-            {Items.map((item, index) =>
+            {Items.filter(elem=>{
+                if(searchTerm=='') return elem
+                else if(elem.name.toLowerCase().includes(searchTerm.toLowerCase()))return elem
+            }).map((item, index) =>
                 <div style={{ height: '150px', width: "100%", marginLeft: "8px"}}>
                     <div style={{ display: 'flex', justifyContent: "space-between" }}>
                         <div style={{ display: 'flex', marginLeft: "5px" }} >
-                            <div>  {item.isVegetarian === "veg" ?
+                            <div>  {item.is_vegetarian === "veg" ?
                                 (<img style={{ height: "15px", width: "15px", marginLeft: "5px" }} src={Veg} />)
                                 : (<img style={{ height: "15px", width: "15px", marginLeft: "5px" }} src={nonVeg} />)}</div>
                             <div style={{ width: "160px"}} >
@@ -234,7 +240,7 @@ function Displaydish(props) {
                 </div>
             )
             }
-        </div >
+        </div>
     )
 }
 

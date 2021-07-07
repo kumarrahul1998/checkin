@@ -35,7 +35,7 @@ function AbsoluteItems({ cart,amount }) {
           // marginTop: '5px',
           marginLeft: '10px'
         }}>
-          <div style={{ fontSize: "12px", marginBottom: "5px" }} >{cart.items.data.reduce((init,item)=>init+item.cartValue,0)} items</div>
+          <div style={{ fontSize: "12px", marginBottom: "5px" }} >{cart.items.data.reduce((init,item)=>init+item.quantity,0)} items</div>
           <div> &#8377;&nbsp;{amount.Total}</div>
         </div>
         <div

@@ -2,7 +2,7 @@ import ACTION from "../actions/actionTypes"
 
 const initState = {
     details: {
-        isLoading: false,
+        isLoading: 'idle',
         data: {
             "pk": 0,
             "bill": "",
@@ -40,7 +40,12 @@ const initState = {
     },
     serviceRequest : [],
     orderNumbers: [],
-    totalAmount: []
+    totalAmount: [],
+    requestData:{
+        isLoading:'idle',
+        data:[],
+        error:'',
+    }
     
 }
 
@@ -92,6 +97,32 @@ export const HomeReducer = (state = initState, action) => {
                     ...state.serviceRequest,
                     {request : action.request, status: action.status}
                 ]
+            }
+        case ACTION.LOAD_REQUEST_DATA_REQUEST:
+            return {
+                ...state,
+                requestData:{
+                    ...state.requestData,
+                    isLoading:true,
+                },
+            }
+            case ACTION.LOAD_REQUEST_DATA_SUCCESS:
+            return {
+                ...state,
+                requestData:{
+                    ...state.requestData,
+                    data:[...action.payload],
+                    isLoading:false,
+                },
+            }
+            case ACTION.LOAD_REQUEST_DATA_FAILURE:
+            return {
+                ...state,
+                requestData:{
+                    ...state.requestData,
+                    isLoading:false,
+                    error:action.payload,
+                },
             }
         case ACTION.LOAD_RESTAURENT_DETAILS_SUCCESS:
             return {
