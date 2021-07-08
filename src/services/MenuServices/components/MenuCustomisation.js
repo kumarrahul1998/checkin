@@ -18,6 +18,7 @@ import Radio from '@material-ui/core/Radio';
 import { addItem, removeItem } from "../../Cart/actions/actionCreator"
 import { connect } from 'react-redux'
 import CustomizationItem from './CustomizationItem';
+import { useEffect } from 'react';
 const useStyles = makeStyles({
     list: {
         width: 250,
@@ -33,7 +34,7 @@ function MenuCusomisation({dish, _add_item, _remove_item,cart }) {
     const [selectedType,setSelectedType]= useState(null);
     const [selectedCustomization,setSelectedCustomization]= useState([]);
     const [open, setOpen] = React.useState(false)
-
+    const [total,setTotal] = React.useState(0);
     const [selection, setSelection] = React.useState([])
 
     const toggleDrawer = () => {
@@ -56,7 +57,23 @@ function MenuCusomisation({dish, _add_item, _remove_item,cart }) {
         //      _add_item(temp,cart)
 
     // })
-        
+        if(dish.types.length>1){
+           const index= dish.types.findIndex((item)=>item==selectedType);
+            const tempDish= {...dish};
+            tempDish.type_index=index;
+            if(dish.customizations){
+                tempDish.customizations=[...selectedCustomization];
+            }
+            _add_item(tempDish,cart);
+        }else{
+            const index= 0;
+            const tempDish= {...dish};
+            tempDish.type_index=index;
+            if(dish.customizations){
+                tempDish.customizations=[...selectedCustomization];
+            }
+            _add_item(tempDish,cart);
+        }
     toggleDrawer()
     }
     // console.log(dish)
@@ -65,36 +82,54 @@ function MenuCusomisation({dish, _add_item, _remove_item,cart }) {
     }
 
     const handleAddonChange=(e,item,subitem,max_select)=>{
-           if(e.target.checked===true){
+            const selectedCustomizationTemp=[...selectedCustomization];   
+        if(e.target.checked===true){
                console.log('true executed==>',e.target.checked);
-            if(selectedCustomization.find(i=>i.pk===item.pk)){
-              const index= selectedCustomization.findIndex(i=>i.pk===item.pk)
-              if(selectedCustomization[index].fields.length<=max_select){
-                  selectedCustomization[index].fields.push(subitem);
+            if(selectedCustomizationTemp.find(i=>i.pk===item.pk)){
+              const index= selectedCustomizationTemp.findIndex(i=>i.pk===item.pk)
+              if(selectedCustomizationTemp[index].fields.length<max_select){
+                  selectedCustomizationTemp[index].fields.push(subitem);
+                  setSelectedCustomization([...selectedCustomizationTemp])
                  }else{
                     console.log("inside else block executed==>");
-                const popElem = selectedCustomization[index].fields.pop();
-                selectedCustomization[index].fields.push(subitem);
+                const popElem = selectedCustomizationTemp[index].fields.pop();
+                selectedCustomizationTemp[index].fields.push(subitem);
+                setSelectedCustomization([...selectedCustomizationTemp])
                 
               }  
             }else{
                 const temp = {...item};
                 temp.fields=[subitem];
-                selectedCustomization.push(temp);
-              }
+                selectedCustomizationTemp.push(temp);
+                setSelectedCustomization([...selectedCustomizationTemp])
+              
+            }
            }else{
                console.log('false executed===>',e.target.checked)
-               if(selectedCustomization.find(i=>i.pk===item.pk)){
-                const index= selectedCustomization.findIndex(i=>i.pk===item.pk)
-                  selectedCustomization[index].fields.pop(subitem);
-                    if(selectedCustomization[index].fields.length===0){
-                        selectedCustomization.pop(selectedCustomization[index]);
+               if(selectedCustomizationTemp.find(i=>i.pk===item.pk)){
+                const index= selectedCustomizationTemp.findIndex(i=>i.pk===item.pk)
+                  selectedCustomizationTemp[index].fields.pop(subitem);
+                  setSelectedCustomization([...selectedCustomizationTemp])
+                    
+                  if(selectedCustomizationTemp[index].fields.length===0){
+                        selectedCustomizationTemp.pop(selectedCustomizationTemp[index]);
+                        setSelectedCustomization([...selectedCustomizationTemp])
+                    
                     }
                 }  
              
             }
-            console.log('selected checkboxes ===>',selectedCustomization);
         }
+        useEffect(()=>{
+          const temp= selectedCustomization?.reduce((acc,customItem)=>{
+                let subtotal= customItem.fields.reduce((subAcc,customSubItem)=>{
+                    return subAcc+parseFloat(customSubItem.cost)
+                },0);
+                console.log(subtotal);
+                return subtotal+acc;
+            },0)
+        setTotal(temp);
+        },[selectedCustomization])
     return (
         <div>
             <div
@@ -145,14 +180,14 @@ function MenuCusomisation({dish, _add_item, _remove_item,cart }) {
                     {dish.customizations.length>1?<><div style={{ margin: "20px", color: '#6d6d6d', }}><b>Choose Add-Ons&nbsp;</b> </div>
                     <div >
                         {dish.customizations.map((item,i) =>
-                        <CustomizationItem item={item} i={i} dish={dish} selectedCustomization={selectedCustomization} handleAddonChange={handleAddonChange}/>                            
+                        <CustomizationItem key={i} item={item} i={i} dish={dish} selectedCustomization={selectedCustomization} handleAddonChange={handleAddonChange}/>                            
                         )
 
                     }
                     </div>
                     </>:null}
                     {/* <div style={{ margin: "20px", color: '#6d6d6d', }}><b>Other Beverages Add On&nbsp;</b>(1/5)</div> */}
-                    <div style={{
+                    {/* <div style={{
                         height: Height * 0.07 + 'px',
                         width: Width * 0.85 + 'px',
                         background: '#32c282',
@@ -168,6 +203,17 @@ function MenuCusomisation({dish, _add_item, _remove_item,cart }) {
                                 Total&nbsp;&#8377; 123.00
                             </div>
                             <div style={{padding:"0 1rem",cursor:"pointer"}} onClick={addToCart} >
+                                ADD ITEM
+                            </div>
+                        </div>
+                    </div> */}
+                    <div style={{zIndex:"10",display:"flex",justifyContent:"center",position:"fixed",bottom:"0",opacity:"1",width:"100%",background:"white",padding:"1rem 0"}}>
+                    <div style={{ display: 'flex',width:"90%", justifyContent: 'space-between',alignItems:"center",height:"100%",background:"#32c282", color: '#fff',borderRadius:"0.2rem"  }}>
+                            <div style={{padding:"1rem 1rem"}}>
+                                Total&nbsp;&#8377; 
+                                { total }                          
+                            </div>
+                            <div style={{padding:"1rem 1rem",cursor:"pointer"}} onClick={addToCart} >
                                 ADD ITEM
                             </div>
                         </div>
