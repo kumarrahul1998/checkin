@@ -4,7 +4,13 @@ import {
     // GET_SETTLE_BILL_DETAILS_FAILED,
     settleBillReq,
     settleBillSuccess,
-    settleBillFailure
+    settleBillFailure,
+    razorpayCallReq,
+    razorpayCallFailure,
+    razorpayCallSuccess,
+    razorpayCallbackReq,
+    razorpayCallbackSuccess,
+    razorpayCallbackFailure,
 } from '../actions/actionCreator';
 import { checkoutReq,checkoutSuccess,checkoutFailure } from "../actions/actionCreator";
 
@@ -24,10 +30,10 @@ export const  checkout = () =>async (dispatch,getState)=>{
     try{ dispatch(checkoutReq())
      const resp= await make_API_call('post',"/sessions/active/request/checkout/",{payment_mode:"rzrpay"})
      if(resp.status===200){
-       dispatch(checkoutSuccess());
+       dispatch(checkoutSuccess("success"));
      }
    }catch(err){
-      dispatch(checkoutFailure(err.message));
+      dispatch(checkoutFailure(err));
      }
    }
 
@@ -42,3 +48,30 @@ export const  getSettleBill = (session_id) =>async (dispatch,getState)=>{
       dispatch(settleBillFailure(err));
      }
    }
+
+  export const  razorpayCall = (id) =>async (dispatch,getState)=>{
+    try{ dispatch(razorpayCallReq())
+     const resp= await make_API_call('post',`/payments/pay/razorpay/sessions/${id}/`)
+     if(resp.status===200){
+       dispatch(razorpayCallSuccess(resp.data));
+     }
+   }catch(err){
+      dispatch(razorpayCallFailure(err));
+     }
+   }
+
+   export const  razorpayCallback = (response) =>async (dispatch,getState)=>{
+    try{ dispatch(razorpayCallbackReq())
+     const resp= await make_API_call('post',`/payments/callback/razorpay/`,{
+      payment_id: response.payment_id,
+      order_id: response.order_id,
+      signature: response.signature,
+      })
+     if(resp.status===201){
+       dispatch(razorpayCallbackSuccess(resp.data));
+      }
+   }catch(err){
+      dispatch(razorpayCallbackFailure(err));
+     }
+   }
+ 

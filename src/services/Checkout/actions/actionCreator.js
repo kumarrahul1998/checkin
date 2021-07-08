@@ -37,3 +37,30 @@ export const settleBillFailure=(payload)=>({
   payload
 })
 
+export const razorpayCallReq = () =>({
+  type: ACTION.RAZORPAY_CALL_REQ,
+})
+
+export const razorpayCallSuccess=(payload)=>({
+  type: ACTION.RAZORPAY_CALL_SUCCESS,
+  payload
+})
+
+export const razorpayCallFailure=(payload)=>({
+  type: ACTION.RAZORPAY_CALL_FAILURE,
+  payload
+})
+
+export const razorpayCallbackReq = () =>({
+  type: ACTION.RAZORPAY_CALLBACK_REQ,
+})
+
+export const razorpayCallbackSuccess=(payload)=>({
+  type: ACTION.RAZORPAY_CALLBACK_SUCCESS,
+  payload
+})
+
+export const razorpayCallbackFailure=(payload)=>({
+  type: ACTION.RAZORPAY_CALLBACK_FAILURE,
+  payload
+})

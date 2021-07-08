@@ -2,7 +2,10 @@ import actionTypes from "../actions/actionTypes"
 import ACTION from "../actions/actionTypes"
 
 const initialState = {
-  settleBillDetails: { isLoading: "idle",data:[],error:{}}
+  settleBillDetails: { isLoading: "idle",data:'',error:{}},
+  checkout: { isLoading: "idle",data:{},error:{}},
+  razorpay: { isLoading: "idle",data:{},error:{}},
+  callback: { isLoading: "idle",data:{},error:{}},
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -25,17 +28,88 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       settleBillDetails:{...state.settleBillDetails,
         isLoading:false,
-        data: [...payload]
+        data: {...payload}
       }
     }
     case ACTION.SETTLE_BILL_FAILURE: 
     return {
       ...state,
       settleBillDetails:{...state.settleBillDetails,
+        isLoading:false,
+        error: payload
+      }
+    }
+    
+    case ACTION.CHECKOUT_REQ: 
+    return {
+      ...state,
+      checkout:{...state.checkout,
+        isLoading:true,
+      }
+    }
+    case ACTION.CHECKOUT_SUCCESS: 
+    return {
+      ...state,
+      checkout:{...state.checkout,
+        isLoading:false,
+        data: payload
+      }
+    }
+    case ACTION.CHECKOUT_FAILURE: 
+    return {
+      ...state,
+      checkout:{...state.checkout,
+        isLoading:false,
+        error: payload
+      }
+    }
+    case ACTION.RAZORPAY_CALL_REQ: 
+    return {
+      ...state,
+      razorpay:{...state.razorpay,
+        isLoading:true,
+      }
+    }
+    case ACTION.RAZORPAY_CALL_SUCCESS: 
+    return {
+      ...state,
+      razorpay:{...state.razorpay,
+        isLoading:false,
+        data: {...payload}
+      }
+    }
+    case ACTION.RAZORPAY_CALL_FAILURE: 
+    return {
+      ...state,
+      razorpay:{...state.razorpay,
+        isLoading:false,
+        error: payload
+      }
+    }
+    case ACTION.RAZORPAY_CALLBACK_REQ: 
+    return {
+      ...state,
+      callback:{...state.callback,
+        isLoading:true,
+      }
+    }
+    case ACTION.RAZORPAY_CALLBACK_SUCCESS: 
+    return {
+      ...state,
+      callback:{...state.callback,
+        isLoading:false,
+        data: {...payload}
+      }
+    }
+    case ACTION.RAZORPAY_CALLBACK_FAILURE: 
+    return {
+      ...state,
+      callback:{...state.callback,
         isLoading:true,
         error: payload
       }
     }
+    
     default:
       return state
   }
