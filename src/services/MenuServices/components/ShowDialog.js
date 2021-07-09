@@ -14,7 +14,7 @@ import Slide from '@material-ui/core/Slide';
 import Zoom from '@material-ui/core/Zoom'
 import { Fade } from '@material-ui/core';
 import  '../../../stylings/displaydishstyle.css'
-
+import { _addItem,_removeItem } from '../../Cart/middleware/index';
 const useStyles = makeStyles({
     paper: {
         width: "100%",
@@ -136,8 +136,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    _add_item: (item) => dispatch(addItem(item)),
-    _remove_item: (id) => dispatch(removeItem(id))
+    _add_item: (item) => dispatch(_addItem(item)),
+    _remove_item: (id) => dispatch(_removeItem(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowDialog)

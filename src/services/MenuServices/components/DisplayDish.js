@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import ShowDialog from './ShowDialog';
 import  '../../../stylings/displaydishstyle.css';
 import {calculateAmount} from "../../Cart/actions/actionCreator"
+import {_addItem,_removeItem,_calculateAmount} from "../../Cart/middleware/index"
 
 function Displaydish(props) {
     // const [loading, setloading] = useState(true);
@@ -97,7 +98,7 @@ function Displaydish(props) {
                                 (<img style={{ height: "15px", width: "15px", marginLeft: "5px" }} src={Veg} />)
                                 : (<img style={{ height: "15px", width: "15px", marginLeft: "5px" }} src={nonVeg} />)}</div>
                             <div style={{ width: "160px"}} >
-                                <div
+                                {/* <div
 
                                     style={{
                                         height: '18px',
@@ -106,18 +107,18 @@ function Displaydish(props) {
                                         borderRadius: '10px 4px 4px 10px',
                                         marginBottom: '10px',
                                         backgroundColor: 'red'
-                                    }}>
+                                    }}> */}
                                          {/* here in the width, i calculated an approx width per letter because the tags for the dishes can be anything other than
                                             must try or recommended and the tag width must adjust according to that so i ended up at an approx relationship */}
-                                    <div >
+                                    {/* <div >
 
                                         <div><div style={{ height: '2px' }}>{itemTypeIcons["RECOMMENDED"]}
                                         </div> <span style={{ color: '#fff', marginBottom: '10px', marginLeft: '25px', fontSize: 10 }}>  {item.tags[0]}</span> </div>
                                     </div>
 
-                                </div>
+                                </div> */}
 
-                                <div style={{ marginLeft: '-16px' }} >
+                                <div style={{ marginLeft: '5px' }} >
                                     <div style={{ marginTop: '0', color: '#6d6d6d' }} >{item.name}</div>
                                     {item.costs.length>1? null:
                                     <div style={{ marginTop: '10px', color: '#6d6d6d' }}> &#8377;{item.costs[0]}</div>
@@ -250,9 +251,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    _add_item: (item,cart) => dispatch(addItem(item,cart)),
-    _remove_item: (item,cart) => dispatch(removeItem(item,cart)),
-    Amount: (data)=>dispatch(calculateAmount(data))
+    _add_item: (item,cart) => dispatch(_addItem(item,cart)),
+    _remove_item: (item,cart) => dispatch(_removeItem(item,cart)),
+    Amount: (data)=>dispatch(_calculateAmount(data))
 
 })
 

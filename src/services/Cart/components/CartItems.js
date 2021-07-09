@@ -10,7 +10,8 @@ import BrightnessLowIcon from '@material-ui/icons/BrightnessLow';
 import actionTypes from '../actions/actionTypes';
 import {calculateAmount} from "../actions/actionCreator"
 import {addItem,removeItem} from "../actions/actionCreator"
-export const CartItems = ({ cart,sendToCart,removeFromCart,Amount ,_add_item,_remove_item}) => {
+import { _addItem,_removeItem,_calculateAmount } from '../middleware';
+export const CartItems = ({ cart,Amount ,_add_item,_remove_item}) => {
   const items = cart.items.data
   const width = window.innerWidth
   const [value, setValue] = React.useState(1);
@@ -126,9 +127,9 @@ const mapStateToProps = (state) => ({
 
 
 const mapDispatchToProps = dispatch => ({
-  _add_item: (item,cart) => dispatch(addItem(item,cart)),
-    _remove_item: (item,cart) => dispatch(removeItem(item,cart)),
-    Amount: (data)=>dispatch(calculateAmount(data))
+  _add_item: (item,cart) => dispatch(_addItem(item,cart)),
+    _remove_item: (item,cart) => dispatch(_removeItem(item,cart)),
+    Amount: (data)=>dispatch(_calculateAmount(data))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(CartItems);

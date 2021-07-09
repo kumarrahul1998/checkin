@@ -10,7 +10,7 @@ const initialState = {
   order:{
     isLoading:'idle',
     data:'',
-    error:'',
+    error:{},
   }
 }
 
@@ -98,8 +98,7 @@ const initialAmountState= {
 export const AmountReducer = (state=initialAmountState,{type,payload})=>{
   switch(type){
     case ACTION.CALCULATE_AMOUNT: return {
-      ...state,
-      ...payload,
+     Total: payload,
     } 
     default: return state
   }

@@ -16,6 +16,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Radio from '@material-ui/core/Radio';
 import { addItem, removeItem } from "../../Cart/actions/actionCreator"
+import { _addItem,_removeItem,_calculateAmount } from '../../Cart/middleware';
 import { connect } from 'react-redux'
 import CustomizationItem from './CustomizationItem';
 import { useEffect } from 'react';
@@ -121,15 +122,20 @@ function MenuCusomisation({dish, _add_item, _remove_item,cart }) {
             }
         }
         useEffect(()=>{
-          const temp= selectedCustomization?.reduce((acc,customItem)=>{
+          var temp= selectedCustomization.reduce((acc,customItem)=>{
                 let subtotal= customItem.fields.reduce((subAcc,customSubItem)=>{
                     return subAcc+parseFloat(customSubItem.cost)
                 },0);
                 console.log(subtotal);
                 return subtotal+acc;
             },0)
+            if(selectedType){
+
+            const typeIndex= dish.types.findIndex(i=>i===selectedType);   
+            temp+=parseFloat(dish.costs[typeIndex])
+        }
         setTotal(temp);
-        },[selectedCustomization])
+        },[selectedCustomization,selectedType])
     return (
         <div>
             <div
@@ -154,7 +160,7 @@ function MenuCusomisation({dish, _add_item, _remove_item,cart }) {
                         </div>
                     </div>
                     {dish.types.length>1?<>
-                    <div style={{ margin: "20px", color: '#6d6d6d', }}><b>Choose Type&nbsp;</b></div>
+                    <div style={{ margin: "20px", color: '#6d6d6d', }}><b>Choose Type&nbsp;(1/1)</b></div>
                         {dish.types.map((element,index)=>
                             <div style={{ display: 'flex', justifyContent: 'space-between', }}>
                                 <div style={{ marginTop: '15px',marginLeft:"20px" }}>   
@@ -230,8 +236,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    _add_item: (item,cart) => dispatch(addItem(item,cart)),
-    _remove_item: (item,cart) => dispatch(removeItem(item,cart))
+    _add_item: (item,cart) => dispatch(_addItem(item,cart)),
+    _remove_item: (item,cart) => dispatch(_removeItem(item,cart))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuCusomisation)

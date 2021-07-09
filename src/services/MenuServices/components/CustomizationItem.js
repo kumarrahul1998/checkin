@@ -31,7 +31,7 @@ const CustomizationItem = ({item,i,dish,selectedCustomization,handleAddonChange}
     //     setState(prev=>!prev);
     // }
     return (
-        <div style={i===dish.customizations.length-1?{paddingBottom:"60px"}:{}}>
+        <div style={i===dish.customizations.length-1?{paddingBottom:"90px"}:{}}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', }}>
                                 <div style={{ marginTop: '15px',marginLeft:"20px" }}>   
                                     <div style={{ color: '#6d6d6d' }}>{item.name}({item.min_select}/{item.max_select})</div>

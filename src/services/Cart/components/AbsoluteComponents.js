@@ -9,7 +9,7 @@ function AbsoluteItems({ cart,amount,placeOrder }) {
 
   const history = useHistory()
   const handleClick = () => {
-  place_order();
+    placeOrder();
   }
   useEffect(()=>{
     if(cart.order.isLoading===false&&cart.order.data==="success"){

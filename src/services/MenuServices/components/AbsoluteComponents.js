@@ -34,7 +34,7 @@ function AbsoluteComponents({ cart,amount }) {
                 marginLeft: '2rem',
                 color: '#fff'
               }}>
-                { cart.items.data.reduce((init,item)=>init+item.cartValue,0)} Items&nbsp;|&nbsp; &#8377;{amount.Total}
+                { cart.items.data.reduce((init,item)=>init+item.quantity,0)} Items&nbsp;|&nbsp; &#8377;{amount.Total}
               </div>
             </div>
           </div>

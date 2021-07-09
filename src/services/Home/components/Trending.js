@@ -18,7 +18,7 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import {addItem,removeItem} from "../../Cart/actions/actionCreator"
 import {calculateAmount} from "../../Cart/actions/actionCreator"
-
+import {_addItem,_removeItem,_calculateAmount} from "../../Cart/middleware/index"
 function Trending({ home, sendToCart, cart,removeFromCart,Amount }) {
 
     let items = [
@@ -118,7 +118,7 @@ function Trending({ home, sendToCart, cart,removeFromCart,Amount }) {
                                                 }}>
                                                     <div style={{ display: 'flex', color: '#fff' }}>
                                                         <div ><RemoveIcon style={{ width: '16px', marginLeft: '5px' }} onClick={()=>handleDecrease(dish)} /></div>
-                                                        <div style={{ marginTop: '5px', marginLeft: '8px', }} >{cart.items.data.find(i=>i.name==dish.name).cartValue}</div>
+                                                        <div style={{ marginTop: '5px', marginLeft: '8px', }} >{cart.items.data.find(i=>i.pk==dish.pk).quantity}</div>
                                                         <div ><AddIcon style={{ width: '16px', marginLeft: '10px' }} onClick={()=>handleIncrease(dish)}   /></div>
                                                     </div>
                                                 
@@ -144,9 +144,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    sendToCart : (data,cart) => dispatch(addItem(data,cart)),
-    removeFromCart: (data,cart)=>dispatch(removeItem(data,cart)),
-    Amount: (data)=>dispatch(calculateAmount(data))
+    sendToCart : (data,cart) => dispatch(_addItem(data,cart)),
+    removeFromCart: (data,cart)=>dispatch(_removeItem(data,cart)),
+    Amount: (data)=>dispatch(_calculateAmount(data))
 
 })
 

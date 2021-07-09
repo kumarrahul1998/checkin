@@ -1,5 +1,5 @@
 import make_API_call from "../../../providers/REST_API"
-import {placeOrderReq,placeOrderSuccess,placeOrderFailure} from '../actions/actionCreator';
+import {placeOrderReq,placeOrderSuccess,placeOrderFailure, increaseItem, addItem, decreaseItem, removeItem, calculateAmount} from '../actions/actionCreator';
 // import {
 //   setStateAction,
 //   loadRestaurentDetailsReq,
@@ -17,18 +17,92 @@ import {placeOrderReq,placeOrderSuccess,placeOrderFailure} from '../actions/acti
 // export const _set_state = (obj) => (dispatch) => {
 //   dispatch(setStateAction(obj))
 // }
+export const _addItem = (payload,cart) =>(dispatch,getState)=>{ 
+  // console.log(cart)
+  // console.log(cart?.items?.data?.find(i=>i.pk==payload.pk&&i.variantChosen.pk==payload.variantChosen.pk))
+  if(cart?.items?.data?.find(i=>i.pk==payload.pk)){
+  const index= cart.items.data.findIndex((i)=>i.pk==payload.pk);
+  const item = cart;
+  item.items.data[index].quantity= item.items.data[index].quantity+1;
+  // console.log(item);
+  return dispatch(increaseItem(item))
+}
+else{
+  const item= payload;
+  if(item.quantity==undefined)item.quantity=0
+  item.quantity=item.quantity+ 1;
+  if(item.type_index==undefined){
+    item.type_index=0;
+  }
+  return dispatch(addItem(item))
+}
+}
+
+export const _removeItem = (payload,cart) =>(dispatch,getState)=>{
+ 
+  var quantity=0;
+ quantity= cart.items.data.find(i=>i.pk==payload.pk).quantity
+  if(quantity>1){
+    const index= cart.items.data.findIndex(i=>i.pk==payload.pk);
+    const item = cart;
+    
+    item.items.data[index].quantity= item.items.data[index].quantity-1;
+    console.log(item);
+    return dispatch( decreaseItem(item))
+  }
+  else{
+    return dispatch(removeItem(payload))
+  }
+}
+
+export const _calculateAmount = (cart)=>(dispatch,getState)=>{
+  var total=0;
+  if(cart.items.data.length>=1){
+    
+    cart.items.data.forEach(item=>{
+      if(item.customizations){
+        total+= (item.costs[item.type_index]+item.customizations.reduce((acc,customItem)=>{
+          return acc+customItem.fields.reduce((subAcc,customSubItem)=>{
+            return subAcc+parseFloat(customSubItem.cost)
+          },0)
+        },0))*item.quantity;
+      }else{
+        total+= parseFloat(item.costs[item.type_index])*item.quantity
+      }
+      
+    })
+
+    //   total = cart.items.data.reduce((acc,item)=>{
+    //   if(item.customizations){
+    //     return (acc+item.customizations.reduce((custAcc,customItem)=>{
+    //       return custAcc+customItem.fields.reduce((custSubAcc,customSubItem)=>{
+    //         return custSubAcc+parseFloat(customSubItem.cost)
+    //        },0)
+    //       },0)
+    //    +parseFloat(item.costs[item.type_index] ))*item.quantity
+    //   }
+    //   else{
+    //       return (acc+parseFloat(item.costs[item.type_index]))*item.quantity
+    //   }
+    // },0);
+
+  }
+  return dispatch(calculateAmount(total.toFixed(2)))
+}
+
 
 export const place_order = () =>async (dispatch,getState)=>{
  try{ dispatch(placeOrderReq())
   const items= getState().cart.items.data;
-  const resp= await make_API_call('post',"/sessions/active/order/",)
+  const resp= await make_API_call('post',"/sessions/active/order/",{data:[...items]})
   if(resp.status===200){
     dispatch(placeOrderSuccess());
   }
 }catch(err){
-   dispatch(placeOrderFailure(err.message));
+   dispatch(placeOrderFailure(err));
   }
 }
+
 
 
 // export const _load_restaurent_details = () => (dispatch, getState) => {

@@ -5,74 +5,32 @@ export const setStateAction = (payload) => ({
   payload
 })
 
-export const addItem = (payload,cart) =>{ 
-  // console.log(cart)
-  // console.log(cart?.items?.data?.find(i=>i.pk==payload.pk&&i.variantChosen.pk==payload.variantChosen.pk))
-  if(cart?.items?.data?.find(i=>i.pk==payload.pk&&i.variantChosen?.pk==payload.variantChosen?.pk)){
-  const index= cart.items.data.findIndex((i)=>i.pk==payload.pk&&i.variantChosen?.pk==payload.variantChosen?.pk);
-  const item = cart;
-  
-  item.items.data[index].quantity= item.items.data[index].quantity+1;
-  // console.log(item);
-  return ({
-    type:ACTION.INCREASE_ITEM,
-    payload: item,
-  })
-}
-else{
-  const item= payload;
-  if(item.quantity==undefined)item.quantity=0
-  item.quantity=item.quantity+ 1;
-  return ({
+export const addItem =(payload)=>({
   type: ACTION.ADD_ITEM,
-  payload:item,
+  payload,
 })
-}
-}
-export const removeItem = (payload,cart) =>{
- 
-  var quantity=0;
- quantity= cart.items.data.find(i=>i.pk==payload.pk&&i.variantChosen==payload.variantChosen).quantity
-  if(quantity>1){
-    const index= cart.items.data.findIndex(i=>i.pk==payload.pk&&i.variantChosen==payload.variantChosen);
-    const item = cart;
-    
-    item.items.data[index].quantity= item.items.data[index].quantity-1;
-    console.log(item);
-    return ({
-      type:ACTION.DECREASE_ITEM,
-      payload: item,
-    })
-  }
-  else{
-    return ({
-      type: ACTION.REMOVE_ITEM,
-      payload
-    })
-  }
-}
-export const calculateAmount = (cart)=>{
-  var total=0;
-  if(cart.items.data.length>=1){
-    //  const total = cart.items.data.reduce((init, item) => init + item.price, 0).toFixed(2)
-    cart.items.data.forEach(item=>{
-      if(item.variantChosen){
-          total = total+((item.variantChosen.price+item.price)*item.quantity)
-      }else{
-        total=total+(item.costs[0]*item.quantity)
-        
-      }
-    
-    })
-// console.log(total);
-  }
-  return {
+
+export const increaseItem =(payload)=>({
+  type: ACTION.INCREASE_ITEM,
+  payload,
+})
+
+export const removeItem =(payload)=>({
+  type: ACTION.REMOVE_ITEM,
+  payload,
+})
+
+export const decreaseItem =(payload)=>({
+  type: ACTION.DECREASE_ITEM,
+  payload,
+})
+
+export const calculateAmount =(payload)=>({
   type: ACTION.CALCULATE_AMOUNT,
-  payload:{
-    Total: total.toFixed(2),
-  }
-}
-}
+  payload,
+})
+
+
 
 export const placeOrderReq = () =>({
   type: ACTION.PLACE_ORDER_REQ,
