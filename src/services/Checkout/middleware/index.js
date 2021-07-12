@@ -20,6 +20,13 @@ import { checkoutReq,checkoutSuccess,checkoutFailure } from "../actions/actionCr
 //       })
 //   }
 
+export const applyPromoCode = code =>{
+  make_API_call('post',"/sessions/active/promos/avail/",{code: code})
+    .then(res => {
+      console.log('[checkout middleware]',res);
+    })
+}
+
 export const  checkout = () =>async (dispatch,getState)=>{
     try{ dispatch(checkoutReq())
      const resp= await make_API_call('post',"/sessions/active/request/checkout/",{payment_mode:"rzrpay"})

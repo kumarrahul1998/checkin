@@ -8,7 +8,6 @@ function SettleBill(props) {
 
     React.useEffect(() => {
         props._getSettleBill("11");
-        
         console.log('[SettleBill]',props.getSettleBillDeatils)
     },[]);
 

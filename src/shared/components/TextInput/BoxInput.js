@@ -10,8 +10,9 @@ function BoxInput({ autoFocus, label,classes, ...rest }) {
     root: {
       '& input': {
         color: 'white',
-        fontSize: "1.3em",
+        fontSize: "1.4em",
         textAlign: "center",
+        height: "0.75em"
       },
       '& input:valid + fieldset': {
         borderColor: 'white',
@@ -28,7 +29,7 @@ function BoxInput({ autoFocus, label,classes, ...rest }) {
       '&:hover + fieldset' : {
         borderColor: 'white'
       },
-      width: "60px"
+      width: "53px"
     },
   })(TextField);
   return (
