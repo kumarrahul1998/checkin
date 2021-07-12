@@ -1,4 +1,4 @@
-import { setStateAction,sendPhoneNoReq,sendPhoneNoSuccess,sendPhoneNoFailure,sendNameReq,sendNameFailure,sendNameSuccess,checkOtpReq,checkOtpFailure,checkOtpSuccess} from "../actions/actionCreator"
+import { setStateAction,sendPhoneNoReq,sendPhoneNoSuccess,sendPhoneNoFailure,sendNameReq,sendNameFailure,sendNameSuccess,checkOtpReq,checkOtpFailure,checkOtpSuccess, getSessionDetailsReq, getSessionDetailsSuccess, getSessionDetailsFailure} from "../actions/actionCreator"
 import fb from "firebase"
 // import firebase from "../../../fbConfig"
 import make_API_call from "../../../providers/REST_API"
@@ -83,6 +83,15 @@ export const checkOtp =(otp)=>async (dispatch)=>{
   
     } 
 }
+export const getSessionDetails =()=>async (dispatch)=>{
+  try{ dispatch(getSessionDetailsReq()) 
+    const resp = await make_API_call('get','/sessions/active/');
+     dispatch(getSessionDetailsSuccess(resp));
+      
+    }catch(err){
+      dispatch(getSessionDetailsFailure(err))
+    } 
+}
 
 export const sendName =(firstName,lastName,token)=>async (dispatch)=>{
   try{ dispatch(sendNameReq()) 
@@ -90,6 +99,7 @@ export const sendName =(firstName,lastName,token)=>async (dispatch)=>{
     //  if(resp.status===200){
        dispatch(sendNameSuccess({username:`${firstName} ${lastName}`}));
         // dispatch(setLoginState())
+        dispatch(getSessionDetails())
         dispatch(_set_state({
           login: {
             isLoggedIn: true
@@ -102,4 +112,5 @@ export const sendName =(firstName,lastName,token)=>async (dispatch)=>{
   
     } 
 }
+
 

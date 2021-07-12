@@ -13,7 +13,7 @@ import store from '../store/Index/index';
 // }
 
 // axios.defaults.headers.common["Authorization"] = `Token ${state.authentication.login.name.payload}`
-axios.defaults.headers.common["Authorization"] = `Token 94e4a74e73f57788daca4b58e8ba4cc28870f1608fbc542fd6933baada5b84d9`
+axios.defaults.headers.common["Authorization"] = `Token 5c45fe349899b613a9084ba0bea2dfbc0f5f0e8d5a1290e601c7bdb1b994f0b2`
 axios.defaults.baseURL = "https://dev.api.check-in.in"
 const make_API_call = (req_method, path, data = {}) => {
   switch (req_method) {

@@ -50,6 +50,22 @@ export const sendNameFailure= (payload)=>({
   payload
 })
 
+export const getSessionDetailsReq=(payload)=>({
+  type: ACTION.GET_SESSION_DETAILS_REQ,
+})
+
+export const getSessionDetailsSuccess= (payload)=>({
+  type: ACTION.GET_SESSION_DETAILS_SUCCESS,
+  payload
+})
+
+export const getSessionDetailsFailure= (payload)=>({
+  type: ACTION.GET_SESSION_DETAILS_FAILURE,
+  payload
+})
+
+
+
 // export const setLoginState = (payload)=>({
 //   type: ACTION.SET_LOGIN,
 //   payload

@@ -16,6 +16,11 @@ const initState = {
     payload:{},
     error:null
   },
+  session:{
+    isLoading: 'idle',
+    payload:{},
+    error:null
+  }
 }
 
 export const LoginReducer = (state = initState, action) => {
@@ -104,7 +109,32 @@ export const LoginReducer = (state = initState, action) => {
                           error: action.payload
                         }
                       }
-                     
+                      case ACTION.GET_SESSION_DETAILS_REQ: 
+                      return {
+                        ...state,
+                        session:{
+                          ...state.session,
+                          isLoading:true,
+                        }
+                      }
+                      case ACTION.GET_SESSION_DETAILS_SUCCESS: 
+                      return {
+                        ...state,
+                        session:{
+                          ...state.session,
+                          isLoading:false,
+                          payload: {...action.payload},
+                        }
+                      }
+                      case ACTION.GET_SESSION_DETAILS_FAILURE:
+                        return {
+                          ...state,
+                          session:{
+                            ...state.session,
+                            isLoading:false,
+                            error: action.payload,
+                          }
+                        } 
     default:
       return state
   }

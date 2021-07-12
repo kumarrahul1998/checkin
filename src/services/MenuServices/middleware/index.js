@@ -16,9 +16,10 @@ export const _set_state = (obj) => (dispatch) => {
   dispatch(setStateAction(obj))
 }
 
-export const _load_menu = () => (dispatch) => {
+export const _load_menu = () => (dispatch,getState) => {
   dispatch(loadMenuReq())
-  return make_API_call("get", "/menus/restaurants/11/available/")
+  var id= getState().authentication.login.session.payload.restaurant.pk;
+  return make_API_call("get", `/menus/restaurants/${id}/available/`)
     .then(res => {
       dispatch(loadMenuSuccess(res))
     }).catch(err => {
@@ -27,8 +28,9 @@ export const _load_menu = () => (dispatch) => {
     })
 }
 
-export const getPromos = (id) => (dispatch) => {
+export const getPromos = (id) => (dispatch,getState) => {
   dispatch(getpromosReq())
+  var id= getState().authentication.login.session.payload.restaurant.pk;
   return make_API_call('get',`/promos/active/restaurants/${id}`)
     .then(res => {
       dispatch(getpromosSuccess(res))

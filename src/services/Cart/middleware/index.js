@@ -95,10 +95,8 @@ export const place_order = () =>async (dispatch,getState)=>{
  try{ dispatch(placeOrderReq())
   const items= getState().cart.items.data;
   const resp= await make_API_call('post',"/sessions/active/order/",{data:[...items]})
-  if(resp.status===200){
-    dispatch(placeOrderSuccess());
-  }
-}catch(err){
+   dispatch(placeOrderSuccess("success"));
+  }catch(err){
    dispatch(placeOrderFailure(err));
   }
 }
