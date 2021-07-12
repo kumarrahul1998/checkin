@@ -23,6 +23,7 @@ import { blue } from '@material-ui/core/colors';
 import CategoriesMore from '../../Checkout/components/CategoriesMore';
 import { makeStyles } from '@material-ui/core';
 import { getPromos } from '../../MenuServices/middleware/index';
+import {applyPromoCode} from '../middleware/index';
 
 const useStyles = makeStyles({
     toggleDiv:{
@@ -123,7 +124,9 @@ const ApplyPrommos = (props) => {
         bttn.style.display="none";
     }
 
-    
+    const applyClicked = (code) => {
+        applyPromoCode(code);
+    }
 
     return (
         <div>
@@ -186,7 +189,7 @@ const ApplyPrommos = (props) => {
                                     <img src={promo5} style={offerLogo}/>
                                     <span style={offerFromStyle}>&nbsp;&nbsp;{offer.code}</span>
                                 </div>
-                                <span style={{marginRight: '3vw', color: '#ff5656', fontWeight: '900', verticalAlign : 'bottom',marginRight:"3.4vw",  fontSize: '5vw'}}>Apply</span>
+                                <span onClick={() => applyClicked(offer.code)} style={{marginRight: '3vw', color: '#ff5656', fontWeight: '900', verticalAlign : 'bottom',marginRight:"3.4vw",  fontSize: '5vw'}}>Apply</span>
                             </div>
                             <p style={offerDescStyle}>{offer.summary}</p>
                             <p style={offerConditionStyle}>{offer.terms}</p>

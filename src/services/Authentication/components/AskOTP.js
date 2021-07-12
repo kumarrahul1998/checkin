@@ -23,7 +23,7 @@ function AskOTP(props) {
     
   }
   const [activeInput, setActiveInput] = useState(0);
-  const [values, setValues] = useState(['','','',''])
+  const [values, setValues] = useState(['','','','','',''])
   const [disable, setDisable] = useState(false)
 
   const handleOnChange = useCallback((e) => {
@@ -58,7 +58,7 @@ function AskOTP(props) {
   }
 
   const focusNextInput = () => {
-    if(activeInput<3)  setActiveInput(activeInput+1)
+    if(activeInput<5)  setActiveInput(activeInput+1)
   }
 
   const handleOnFocus = useCallback((index, event) => {
@@ -100,7 +100,7 @@ function AskOTP(props) {
 
   return (
     <div style={{overflow:"hidden"}}>
-      <Grid spacing={3} container >
+      <Grid spacing={0} container >
         <Grid item xs={1} >
 
         </Grid>
@@ -109,19 +109,25 @@ function AskOTP(props) {
             <Grid item xs={12} >
               <div style={{ fontSize: 20, textAlign: "left" }} ><span style={{ fontWeight: 100 }}>OTP sent to </span>9997867899</div>
             </Grid>
-            <Grid item xs={12} >
+            <Grid item xs={0} style={{marginLeft: 0,paddingLeft: 0}} >
               <Grid spacing={3} container >
-                <Grid className="text-left" item xs={3} >
+                <Grid className="text-left" item xs={2} >
                   <BoxInput autoFocus={activeInput === 0} value={values[0]} onChange={handleOnChange} onFocus={(e) => handleOnFocus(0, e)} onKeyDown={handleOnKeyDown}  />
                 </Grid>
-                <Grid className="text-left" item xs={3}  >
+                <Grid className="text-left" item xs={2}  >
                   <BoxInput autoFocus={activeInput === 1} value={values[1]} onChange={handleOnChange} onFocus={(e) => handleOnFocus(1, e)} onKeyDown={handleOnKeyDown}  />
                 </Grid>
-                <Grid className="text-left" item xs={3}  >
+                <Grid className="text-left" item xs={2}  >
                   <BoxInput autoFocus={activeInput === 2} value={values[2]} onChange={handleOnChange} onFocus={(e) => handleOnFocus(2, e)} onKeyDown={handleOnKeyDown}  />
                 </Grid>
-                <Grid className="text-left" item xs={3}  >
+                <Grid className="text-left" item xs={2}  >
                   <BoxInput autoFocus={activeInput === 3} value={values[3]} onChange={handleOnChange} onFocus={(e) => handleOnFocus(3, e)} onKeyDown={handleOnKeyDown}  />
+                </Grid>
+                <Grid className="text-left" item xs={2}  >
+                  <BoxInput autoFocus={activeInput === 4} value={values[4]} onChange={handleOnChange} onFocus={(e) => handleOnFocus(4, e)} onKeyDown={handleOnKeyDown}  />
+                </Grid>
+                <Grid className="text-left" item xs={2}  >
+                  <BoxInput autoFocus={activeInput === 5} value={values[5]} onChange={handleOnChange} onFocus={(e) => handleOnFocus(5, e)} onKeyDown={handleOnKeyDown}  />
                 </Grid> 
               </Grid>
             </Grid>
