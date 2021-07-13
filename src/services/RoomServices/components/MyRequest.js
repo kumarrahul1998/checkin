@@ -67,12 +67,12 @@ function MyRequest(props) {
 
     // }
     const eventStatus={
-        0:'STATUS_NONE',
+        0:'NONE',
         1:'STATUS_OPEN',
-        5:'STATUS_PROGRESS',
-        6:'STATUS_COOKED',
-        10:'STATUS_DONE',
-        9:'STATUS_CANCELLED',
+        5:'In PROGRESS',
+        6:'COOKED',
+        10:'DONE',
+        9:'CANCELLED',
     }
     return (
             <div style={requestsContainerStyle}>
@@ -81,8 +81,8 @@ function MyRequest(props) {
                     <div style={{...divStyle,marginTop: '2.87vh'}}>
                         <span style={requestStyle}>{ele.message}</span>
                         {ele.status === 1?
-                            <span style={statusButtonStyle}>{eventStatus[ele.status]}</span>:
-                            <span style={{...statusButtonStyle,background: '#32c282'}}>{ele.status}</span>
+                            <span style={{...statusButtonStyle,background: '#32c282'}}>{eventStatus[ele.status]}</span>:
+                            <span style={statusButtonStyle}>{eventStatus[ele.status]}</span>
                         }
                     </div>
                     )

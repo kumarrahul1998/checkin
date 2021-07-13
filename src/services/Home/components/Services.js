@@ -26,6 +26,7 @@ import Bed from '../../../assets/home/services/group_3.png';
 import Tissue from '../../../assets/home/services/napkin.png';
 import Shaving from '../../../assets/home/services/shaving_cream.png';
 import Dental from '../../../assets/home/services/tooth_paste.png';
+import { sendServiceRequest } from '../middleware';
 
 function TextFieldSizes(props) {
 
@@ -106,13 +107,13 @@ function TextFieldSizes(props) {
 
     const sendRequestButtonClicked = () => {
         let searchValue = document.querySelector('#serviceSearch').value.trim();
-        const pastServices = props.requests.find(request => request.request.toLowerCase() === searchValue.toLowerCase());
+        // const pastServices = props.requests.find(request => request.request.toLowerCase() === searchValue.toLowerCase());
         if(searchValue !== ''){
-            if(!pastServices){
+            // if(!pastServices){
                 props.sendRequest(searchValue, 'PENDING');
-            }else{
-                alert('This Service Already Exists!');
-            }
+            // }else{
+                // alert('This Service Already Exists!');
+            // }
         } else {
             alert('Please Enter a Service Request');
         }
@@ -172,7 +173,9 @@ function TextFieldSizes(props) {
 }
 
 const mapDispatchToProps = dispatch => ({
-    sendRequest : (value,serviceStatus) => dispatch({type: actionTypes.SEND_REQUEST, request : value, status : serviceStatus}),
+    // sendRequest : (value,serviceStatus) => dispatch({type: actionTypes.SEND_REQUEST, request : value, status : serviceStatus}),
+    sendRequest : (value,serviceStatus) => dispatch(sendServiceRequest(value,serviceStatus)),
+
 })
 
 const mapStateToProps = state => ({

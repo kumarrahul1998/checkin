@@ -11,10 +11,9 @@ import BillingBottomBar from '../components/BillingBottomBar';
 import { _load_orders, _load_restaurent_details, _load_trending_dishes } from '../middleware'
 import { connect } from "react-redux";
 import {useHistory} from 'react-router-dom';
-import make_API_call from "../../../providers/REST_API";
-import {loadRequestData} from '../actions/actionCreator';
+import {loadRequestData} from '../middleware/index';
 function HomePage(props) {
-    const { loadRestaurentDetails, state, loadOrders, loadTrendingDishes ,loadRequestData_} = props
+    const { loadRestaurentDetails, state, loadOrders, loadTrendingDishes ,loadRequestData_,login} = props
     const { details } = state
     let windowHeight = window.innerHeight;
     let windowWidth = window.innerWidth;
@@ -27,6 +26,12 @@ function HomePage(props) {
         // make_API_call('get','/menus/restaurants/11/available/')
         loadRequestData_();
     }, [])
+    useEffect(() => {
+        loadRestaurentDetails()
+        loadOrders()
+        loadTrendingDishes()
+        loadRequestData_();
+    }, [login.session.isLoading])
 
     const cartStyle = {
         position : 'absolute',
@@ -84,7 +89,8 @@ function HomePage(props) {
 
 const mapStateToProps = (state) => ({
     state: state.home,
-    cart: state.cart
+    cart: state.cart,
+    login: state.authentication.login,
 })
 
 const mapDispatchToProps = (dispatch) => ({

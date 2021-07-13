@@ -42,7 +42,7 @@ function Example({details}) {
     return (
         <div className="banner-container" style={{marginTop: '1vh'}}>
             {
-               details.isLoading===false&&details.data.covers.map((item, i) => <Item key={i} item={item} />)
+               details.isLoading===false&&details?.data?.covers?.map((item, i) => <Item key={i} item={item} />)
             }
         </div>
     )

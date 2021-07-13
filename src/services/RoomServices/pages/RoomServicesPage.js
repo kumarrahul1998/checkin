@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom';
 import { connect } from "react-redux";
 import BackButton from '../../../assets/RoomServices/BackButton.svg';
 import MyRequest from '../components/MyRequest';
-import { loadRequestData } from '../../Home/actions/actionCreator';
+import { loadRequestData } from '../../Home/middleware/index';
 const RoomServicesPage = props => {
 
     const navBarStyle = {

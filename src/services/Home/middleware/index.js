@@ -14,6 +14,12 @@ import {
   getOrderStatusSuccess,
   getAmountSuccess,
   getAmountFail,
+  sendRequestReq,
+  sendRequestFailure,
+  sendRequestSuccess,
+  loadRequestReq,
+  loadRequestSuccess,
+  loadRequestFailure,
 } from "../actions/actionCreator"
 
 export const _GET_ORDER_STATUS = (id) => (dispatch) => {
@@ -44,7 +50,8 @@ export const _set_state = (obj) => (dispatch) => {
 
 export const _load_restaurent_details = () => (dispatch, getState) => {
   dispatch(loadRestaurentDetailsReq())
-  return make_API_call("get", "/restaurants/11/")
+  var id= getState().authentication.login.session.payload.restaurant?.pk;
+  return make_API_call("get", `/restaurants/${id}/`)
     .then(res => {
       console.log(res);
       dispatch(loadRestaurentDetailsSuccess(res))
@@ -52,6 +59,34 @@ export const _load_restaurent_details = () => (dispatch, getState) => {
       const msg = `Failed to load details`
       dispatch(loadRestaurentDetailsFailure(msg))
     })
+}
+
+export const sendServiceRequest = (req)=>async (dispatch)=>{
+  dispatch(sendRequestReq())
+  let serviceCode;
+  if(req.includes('Please send a person to clean the room.')){
+    serviceCode= 1;
+  }else{
+    serviceCode= 3;
+  }
+  try{
+  const resp =  await make_API_call('post','/sessions/active/request/service/',{service:serviceCode,message:req});
+  dispatch(sendRequestSuccess(resp))
+  
+}catch(err){
+    dispatch(sendRequestFailure("Request cant be sent"))
+  }
+}
+
+export const loadRequestData=()=>async (dispatch)=>{
+  dispatch(loadRequestReq());
+  try{
+    const resp = await make_API_call('get','/sessions/active/events/')
+    dispatch(loadRequestSuccess(resp))
+  }
+  catch(err){
+    dispatch(loadRequestFailure("Data cant be loaded"));
+  }
 }
 
 export const _load_orders = () => (dispatch, getState) => {

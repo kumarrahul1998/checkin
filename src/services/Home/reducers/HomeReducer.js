@@ -38,7 +38,7 @@ const initState = {
         data: [],
         error: ""
     },
-    serviceRequest : [],
+    serviceRequest : {isLoading:"idle"},
     orderNumbers: [],
     totalAmount: [],
     requestData:{
@@ -90,14 +90,32 @@ export const HomeReducer = (state = initState, action) => {
                     isLoading: true
                 }
             }
-        case ACTION.SEND_REQUEST:
+        case ACTION.SEND_REQUEST_REQ:
             return {
                 ...state,
-                serviceRequest : [
+                serviceRequest : {
                     ...state.serviceRequest,
-                    {request : action.request, status: action.status}
-                ]
+                    isLoading: true,
+                }
             }
+            case ACTION.SEND_REQUEST_SUCCESS:
+                return {
+                    ...state,
+                    serviceRequest : {
+                        ...state.serviceRequest,
+                        isLoading: false,
+                        payload: action.payload
+                    }
+                }
+                case ACTION.SEND_REQUEST_FAILURE:
+                    return {
+                        ...state,
+                        serviceRequest : {
+                            ...state.serviceRequest,
+                            isLoading: false,
+                            payload: action.payload,
+                        }
+                    }    
         case ACTION.LOAD_REQUEST_DATA_REQUEST:
             return {
                 ...state,

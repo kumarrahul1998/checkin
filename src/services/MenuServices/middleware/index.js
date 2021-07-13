@@ -18,7 +18,7 @@ export const _set_state = (obj) => (dispatch) => {
 
 export const _load_menu = () => (dispatch,getState) => {
   dispatch(loadMenuReq())
-  var id= getState().authentication.login.session.payload.restaurant.pk;
+  var id= getState().authentication.login.session.payload?.restaurant?.pk;
   return make_API_call("get", `/menus/restaurants/${id}/available/`)
     .then(res => {
       dispatch(loadMenuSuccess(res))
@@ -30,7 +30,7 @@ export const _load_menu = () => (dispatch,getState) => {
 
 export const getPromos = (id) => (dispatch,getState) => {
   dispatch(getpromosReq())
-  var id= getState().authentication.login.session.payload.restaurant.pk;
+  var id= getState().authentication.login.session.payload?.restaurant?.pk;
   return make_API_call('get',`/promos/active/restaurants/${id}`)
     .then(res => {
       dispatch(getpromosSuccess(res))

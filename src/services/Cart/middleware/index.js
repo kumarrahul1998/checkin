@@ -94,7 +94,8 @@ export const _calculateAmount = (cart)=>(dispatch,getState)=>{
 export const place_order = () =>async (dispatch,getState)=>{
  try{ dispatch(placeOrderReq())
   const items= getState().cart.items.data;
-  const resp= await make_API_call('post',"/sessions/active/order/",{data:[...items]})
+  const id= getState().authentication.login.session.payload.pk;
+  const resp= await make_API_call('post',`/sessions/${id}/manage/order/`,{data:[...items],session_id:id})
    dispatch(placeOrderSuccess("success"));
   }catch(err){
    dispatch(placeOrderFailure(err));
