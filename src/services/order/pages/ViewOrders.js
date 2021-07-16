@@ -24,17 +24,28 @@ const useStyles= makeStyles(theme=>({
 
 const ViewOrders = (props) => {
     
-    const orderArr= [
-    {name:"Farmhouse Pizza",quantity:"3F",status:"pending",time: "3 Minutes ago",addOn:[{heading:"Add On",content:"Extra Cheese"},{heading:"Pizza Crust",content: "Plain Bread"}],request:{heading:"Your Request",content:"Spread the cheese on the crust evenly"}},
-    {name:"Butter Chicken",quantity:"1F",status:"progress",time: "3 Minutes ago",request:{heading:"Your Request",content:"Spread the cheese on the crust evenly"}},
-    {name:"Garlic Nan",quantity:"1F",status:"cancelled",time: "3 Minutes ago"},
-    {name:"Garlic Nan",quantity:"1F",status:"delivered",time: "3 Minutes ago"},
-    ];
-
+    // const orderArr= [
+    // {name:"Farmhouse Pizza",quantity:"3F",status:"pending",time: "3 Minutes ago",addOn:[{heading:"Add On",content:"Extra Cheese"},{heading:"Pizza Crust",content: "Plain Bread"}],request:{heading:"Your Request",content:"Spread the cheese on the crust evenly"}},
+    // {name:"Butter Chicken",quantity:"1F",status:"progress",time: "3 Minutes ago",request:{heading:"Your Request",content:"Spread the cheese on the crust evenly"}},
+    // {name:"Garlic Nan",quantity:"1F",status:"cancelled",time: "3 Minutes ago"},
+    // {name:"Garlic Nan",quantity:"1F",status:"delivered",time: "3 Minutes ago"},
+    // ];
+    const [orderArr,setOrderArr]= React.useState([]);
     React.useEffect(()=>{
-        props._get_order_status("11");
+        props._get_order_status();
         console.log('[ViewOrders.js]orderStatus Data: ',props.orderStatus);
     },[])
+
+    // React.useEffect(()=>{
+    // //    if(Array.isArray(props.orderStatus)){
+    // //        setOrderArr([...props.orderStatus])
+    // // }else{
+        
+    //     //    }
+    //     // setOrderArr([]);
+    //     // setOrderArr([...props.orderStatus]);
+    
+    // },[props.orderStatus])
 
     const history= useHistory();
     const handleBackClick=()=>{
@@ -51,7 +62,7 @@ const ViewOrders = (props) => {
                 </Grid>
                 <Grid container>
                     <Grid className={classes.container} item lg={12} md={12} sm={12} xs={12}>
-                    {props.orderStatus === 'Failed to get Order Status'? (<p>Error Loading Order Status</p>) : orderArr.map((item,index)=><OrderCard key={index} data={item} />)}
+                    {props.orderStatus.data.length<1? (<p>Error Loading Order Status</p>) : props.orderStatus.data.map((item,index)=><OrderCard key={index} data={item} />)}
                     </Grid>
                 </Grid>
             </Grid>

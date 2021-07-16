@@ -75,12 +75,7 @@ export const HomeReducer = (state = initState, action) => {
                 orderNumbers: action.payload
             }
 
-        case ACTION.SET_STATE:
-            return {
-                ...state,
-                ...action.payload
-            }
-
+        
         case ACTION.LOAD_RESTAURENT_DETAILS_REQ:
             return {
                 ...state,

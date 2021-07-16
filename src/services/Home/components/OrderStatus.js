@@ -59,14 +59,25 @@ function OrderStatus(props) {
     const handleClick=()=>{
         history.push('/order');
     }
-
+    const [inProgress,setInProgress]= React.useState([]);
+    const [delivered,setDelivered] = React.useState([]);
+    const [newOrder,setNewOrder]= React.useState([]);
     React.useEffect(()=>{
-        props._ORDER_STATUS("11");
+        props._ORDER_STATUS();
     },[])
 
     React.useEffect(()=>{
-        console.log('[ORDERSTATUS.js]',props.orderStatus);
+        if(Array.isArray(props.orderNumbers)){
+            let newArr = props.orderNumbers?.filter(i=>i.status==1)
+            let inArr= props.orderNumbers?.filter(i=>i.status==5);
+            let deliver= props.orderNumbers?.filter(i=>i.status==10);
+            setInProgress([...inArr]);
+            setDelivered([...deliver]);
+            setNewOrder([...newArr]);
+        }
     },[props.orderNumbers])
+
+    
 
     return (<>
         <Grid container spacing={0}>
@@ -80,7 +91,7 @@ function OrderStatus(props) {
                             >
 
                             </span>
-                                0&nbsp;New
+                                {newOrder.length}&nbsp;New
                             </p>
                     </Grid>
                     <Grid style={{ textAlign: "center" }} item xs={4}>
@@ -89,7 +100,7 @@ function OrderStatus(props) {
                             <span
                                 style={{ color: "red", fontWeight: 600 }}
                             >
-                                2
+                                {inProgress.length}
                                 </span>
                                 &nbsp;In Progress
                             </p>
@@ -100,7 +111,7 @@ function OrderStatus(props) {
                             <span
                                 style={{ color: "red", fontWeight: 600 }}
                             >
-                                2
+                                {delivered.length}
                                 </span>
                                 &nbsp;Delivered
 
@@ -136,7 +147,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    _ORDER_STATUS: id => dispatch(_GET_ORDER_STATUS(id)),
+    _ORDER_STATUS: () => dispatch(_GET_ORDER_STATUS()),
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(OrderStatus);

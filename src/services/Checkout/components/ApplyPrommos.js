@@ -23,7 +23,7 @@ import { blue } from '@material-ui/core/colors';
 import CategoriesMore from '../../Checkout/components/CategoriesMore';
 import { makeStyles } from '@material-ui/core';
 import { getPromos } from '../../MenuServices/middleware/index';
-import {applyPromoCode} from '../middleware/index';
+import {applyPromo} from '../middleware/index';
 
 const useStyles = makeStyles({
     toggleDiv:{
@@ -35,18 +35,11 @@ const useStyles = makeStyles({
 const ApplyPrommos = (props) => {
 
     React.useEffect(() => {
-        props._get_promos("11")
+        props._get_promos()
     }, [])
 
-    const handleApply = () => {
-        history.push("/settlebill")
-        // console.log("sdfg")
-
-    }
-    const handleMore = () => {
-        console.log("more")
-
-    }
+    
+    
     const classes = useStyles();
     // console.log(props)
     const { menu } = props;
@@ -125,7 +118,8 @@ const ApplyPrommos = (props) => {
     }
 
     const applyClicked = (code) => {
-        applyPromoCode(code);
+        props._applyPromo(code);
+        history.push('/settlebill')
     }
 
     return (
@@ -226,7 +220,8 @@ const mapStateToProps = (state) => ({
 
 
 const mapDispatchToProps = dispatch => ({
-    _get_promos: (id) => dispatch(getPromos(id)),
+    _get_promos: () => dispatch(getPromos()),
+    _applyPromo: (code)=>dispatch(applyPromo(code))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApplyPrommos)

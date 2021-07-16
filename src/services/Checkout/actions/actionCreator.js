@@ -64,3 +64,31 @@ export const razorpayCallbackFailure=(payload)=>({
   type: ACTION.RAZORPAY_CALLBACK_FAILURE,
   payload
 })
+
+export const applyPromoReq = () =>({
+  type: ACTION.APPLY_PROMO_REQ,
+})
+
+export const applyPromoSuccess=(payload)=>({
+  type: ACTION.APPLY_PROMO_SUCCESS,
+  payload
+})
+
+export const applyPromoFailure=(payload)=>({
+  type: ACTION.APPLY_PROMO_FAILURE,
+  payload
+})
+
+export const removePromoReq = () =>({
+  type: ACTION.REMOVE_PROMO_REQ,
+})
+
+export const removePromoSuccess=(payload)=>({
+  type: ACTION.REMOVE_PROMO_SUCCESS,
+  payload
+})
+
+export const removePromoFailure=(payload)=>({
+  type: ACTION.REMOVE_PROMO_FAILURE,
+  payload
+})

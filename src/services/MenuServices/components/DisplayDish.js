@@ -94,7 +94,7 @@ function Displaydish(props) {
                 <div style={{ height: '150px', width: "100%", marginLeft: "8px"}}>
                     <div style={{ display: 'flex', justifyContent: "space-between" }}>
                         <div style={{ display: 'flex', marginLeft: "5px" }} >
-                            <div>  {item.is_vegetarian === "veg" ?
+                            <div>  {item.is_vegetarian===null?null:item.is_vegetarian === "veg" ?
                                 (<img style={{ height: "15px", width: "15px", marginLeft: "5px" }} src={Veg} />)
                                 : (<img style={{ height: "15px", width: "15px", marginLeft: "5px" }} src={nonVeg} />)}</div>
                             <div style={{ width: "160px"}} >
@@ -147,7 +147,7 @@ function Displaydish(props) {
                                 }}
 
                                 >
-                                    {cart.items.data?.find(i=>i.pk==item.pk&&i.variantChosen==item.variantChosen)?.quantity  == undefined?
+                                    {cart.items.data?.find(i=>i.pk==item.pk)?.quantity  == undefined?
                                         (
                                             item.types.length>1||item.customizations.length>=1?
                                                 <MenuCustomisation dish={item}/>

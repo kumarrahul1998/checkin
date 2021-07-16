@@ -22,8 +22,8 @@ import {
   loadRequestFailure,
 } from "../actions/actionCreator"
 
-export const _GET_ORDER_STATUS = (id) => (dispatch) => {
-  return make_API_call("get",`/promos/active/restaurants/${id}`)
+export const _GET_ORDER_STATUS = () => (dispatch) => {
+  return make_API_call("get",`/sessions/active/orders/`)
     .then(res => {
       dispatch(getOrderStatusSuccess(res))
     })

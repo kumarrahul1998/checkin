@@ -3,8 +3,8 @@ import ACTION from "../actions/actionTypes"
 const initState = {
   contact: {
     isLoading:'idle',
-    payload:'',
-    error:null
+    payload:{},
+    error:{}
   },
   otp: {
     isLoading:'idle',
@@ -32,6 +32,14 @@ export const LoginReducer = (state = initState, action) => {
     //     ...action.payload
     //   }
     case ACTION.SEND_PHONE_NO_REQ:
+      return {
+        ...state,
+        contact:{
+          ...state.contact,
+          isLoading:true,
+        }
+      }
+      case ACTION.RESEND_OTP_REQ:
       return {
         ...state,
         contact:{

@@ -26,12 +26,7 @@ const initState = {
 export default (state = initState, action) => {
     switch (action.type) {
 
-        case ACTION.SET_STATE:
-            return {
-                ...state,
-                ...action.payload
-            }
-
+        
         case ACTION.LOAD_MENU_REQ:
             return {
                 ...state,

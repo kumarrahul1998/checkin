@@ -10,6 +10,8 @@ import { useHistory } from "react-router";
 import { connect } from 'react-redux';
 import React from "react";
 import {PAYMENT_SUCCESS_REQ} from '../middleware/index';
+import dateFormat from "dateformat";
+import nonVeg from '../../../assets/home/nonvegicon.jpg';
 
 const useStyles= makeStyles(theme=>({
   mainContainer:{
@@ -221,6 +223,8 @@ const useStyles= makeStyles(theme=>({
 function PaymentSuccessful(props) {
   const [booking,setBooking]= useState(true);
   const [order,setOrder]= useState(false)
+  const [checkedOut,setCheckedOut] = useState();
+  const {paymentDetails} = props
   const classes = useStyles();
   const isActive = useMediaQuery('(max-width:300px)');
   const isActive378 = useMediaQuery('(max-width:378px');
@@ -235,22 +239,24 @@ function PaymentSuccessful(props) {
   const history = useHistory();
 
   React.useEffect(()=>{
-    props.SEND_PAYMENT_SUCCESS_REQ("11");
+    props.SEND_PAYMENT_SUCCESS_REQ();
     console.log('[PaymentSuccessful]',props.paymentDetails);
+    setCheckedOut(dateFormat(paymentDetails?.data?.checked_out, "dddd, mmmm dS, yyyy, h:MM:ss TT"))
   },[])
 
+  
   return (
     <div>
     <Grid container className={classes.mainContainer}>
       <Grid  item lg={12} md={12} sm={12} xs={12}>
         <Grid container>
-        <Grid className={classes.arrowContainer} item lg={1} md={1} sm={2} xs={3}>
-          <ArrowBackIcon onClick={() => history.goBack()} className={classes.arrow} />
+        <Grid className={classes.arrowContainer} item lg={1} md={1} sm={2} xs={2}>
+          <ArrowBackIcon onClick={() => history.push('/home')} className={classes.arrow} />
           
         </Grid>
-        <Grid item  lg={9} md={9} sm={8} xs={6}>
-           <Typography className={classes.name} variant="h3">Grey Orange</Typography>
-          <Typography className={classes.location} variant="h6">Lavel Road - Bengaluru</Typography>
+        <Grid item  lg={9} md={9} sm={8} xs={7}>
+           <Typography className={classes.name} variant="h3">{paymentDetails?.data?.restaurant?.name}</Typography>
+          <Typography className={classes.location} variant="h6">{paymentDetails?.data?.restaurant?.location?.address}</Typography>
         </Grid>
         <Grid className={classes.rightContainer} item lg={2} md={2} sm={2} xs={3}>
         <span><img src={share} className={classes.share} alt="share" /></span>
@@ -286,11 +292,11 @@ function PaymentSuccessful(props) {
       <Grid container className={classes.bookingContainer} spacing={2}>
             <Grid  item lg={10} md={10} sm={10} xs={10}>
             <Typography className={classes.heading} variant="subtitle2">Name</Typography>
-            <Typography className={classes.content} variant="subtitle1">Shivansh Saini</Typography>
+            <Typography className={classes.content} variant="subtitle1">{paymentDetails?.data?.customer?.display_name}</Typography>
             </Grid>
             <Grid  item lg={10} md={10} sm={10} xs={10}>
             <Typography className={classes.heading} variant="subtitle2">Date & Time</Typography>
-            <Typography className={classes.content} variant="subtitle1">4:30 PM | 21st October 2019</Typography>
+            <Typography className={classes.content} variant="subtitle1">{checkedOut}</Typography>
             </Grid>
             <Grid  item lg={10} md={10} sm={10} xs={10}>
             <Typography className={classes.heading} variant="subtitle2">Diners</Typography>
@@ -298,7 +304,7 @@ function PaymentSuccessful(props) {
             </Grid>
             <Grid  item lg={10} md={10} sm={10} xs={10}>
             <Typography className={classes.heading} variant="subtitle2">Order ID</Typography>
-            <Typography className={classes.content} variant="subtitle1">1234567</Typography>
+            <Typography className={classes.content} variant="subtitle1">{paymentDetails?.data?.hash_id}</Typography>
             </Grid>
             
           </Grid>
@@ -319,24 +325,30 @@ function PaymentSuccessful(props) {
           </Grid>
       </Grid>
       {order?<Grid item lg={12} md={12} sm={12} xs={12}>
-      <Grid container className={classes.foodMainContainer}>
-      <Grid  item lg={1} md={1} sm={1} xs={1}>
-          <img src={veg} className={isActive378?isActive200?classes.veg200:classes.RespVeg:classes.veg} alt="veg" />
+      {
+        paymentDetails.data.ordered_items.map(item=>{
+          return <Grid container className={classes.foodMainContainer}>
+      <Grid  item lg={1} md={1} sm={1} xs={1} >
+          <div >
+
+          {/* <img src={veg} className={isActive378?isActive200?classes.veg200:classes.RespVeg:classes.veg} alt="veg" /> */}
+          {item.item.is_vegetarian===null?null:item.item.is_vegetarian === "veg" ?
+                                (<img style={{ height: "15px", width: "15px", margin: "0 5px",positon:"relative",top:"7px" }} src={veg} />)
+                                : (<img style={{ height: "15px", width: "15px", margin: "0 5px",position:"relative",top:"7px" }} src={nonVeg} />)}
+          </div>
             </Grid>
             <Grid  item lg={11} md={11} sm={11} xs={11}>
-              {/* <div className={classes.foodContainer}> */}
                 <Grid container>
                   <Grid item lg={8} md={8} sm={8} xs={8}>
-                <Typography className={isActive?classes.respFoodMain:classes.foodMain} variant="subtitle1">Farmhouse Pizza x 1(Medium)</Typography>
+                <Typography className={isActive?classes.respFoodMain:classes.foodMain} variant="subtitle1">{item?.item?.name} x {item?.quantity} {item?.is_customized?"(Customized)":null}</Typography>
 
                   </Grid>
                   <Grid style={{display:"flex" ,justifyContent: "flex-end"}} item lg={4} md={4} sm={4} xs={4}>
-                <Typography className={isActive?classes.respFoodMain:classes.foodMain} variant="subtitle1">&#8377; 230</Typography>
+                <Typography className={isActive?classes.respFoodMain:classes.foodMain} variant="subtitle1">&#8377; {item.cost}</Typography>
                   
                   </Grid>
                 </Grid>
-              {/* </div> */}
-              <Divider className={classes.divider}></Divider>
+              {/* <Divider className={classes.divider}></Divider>
               <div className={classes.foodContainer}>
                 <div className={classes.addOnContainer}>
                   <Typography variant="subtitle2" className={classes.heading}> Add ons</Typography>
@@ -353,15 +365,19 @@ function PaymentSuccessful(props) {
                 <Typography variant="subtitle1" className={classes.content}>Spread Cheese on the crust evenly</Typography>
                   
                 </div>
-                </div>
+                </div> */}
             </Grid>
-            <Grid container className={classes.foodMainContainer}>
+            </Grid>
+      
+        })
+      }
+            {/* <Grid container className={classes.foodMainContainer}>
             <Grid  item lg={1} md={1} sm={1} xs={1}>
                 <img src={veg} className={isActive378?isActive200?classes.veg200:classes.RespVeg:classes.veg} alt="veg" />
                   </Grid>
-              <Grid  item lg={11} md={11} sm={11} xs={11}>
+              <Grid  item lg={11} md={11} sm={11} xs={11}> */}
               {/* <div className={classes.foodContainer}> */}
-                <Grid container>
+                {/* <Grid container>
                   <Grid item item lg={8} md={8} sm={8} xs={8}>
                 <Typography className={isActive?classes.respFoodMain:classes.foodMain} variant="subtitle1">Tawa Roti x 1</Typography>
 
@@ -370,38 +386,37 @@ function PaymentSuccessful(props) {
                 <Typography className={isActive?classes.respFoodMain:classes.foodMain} variant="subtitle1">&#8377; 230</Typography>
                     
                   </Grid>
-                </Grid>
+                </Grid> */}
               {/* </div> */}
-            </Grid>
-            </Grid>
+            {/* </Grid>
+            </Grid> */}
 
             
-      </Grid>
       <Divider></Divider>
         <div className={`${classes.foodContainer} ${classes.mtb}`}>
                 <Typography className={classes.rateHeading} variant="subtitle1">Subtotal</Typography>
-                <Typography className={classes.rateContent} variant="subtitle1">-&#8377; 230</Typography>
+                <Typography className={classes.rateContent} variant="subtitle1">-&#8377; {paymentDetails?.data?.bill?.subtotal}</Typography>
           </div>
           <div className={`${classes.foodContainer} ${classes.mtb}`}>
                 <Typography className={classes.rateHeading} variant="subtitle1">Charges</Typography>
-                <Typography className={classes.rateContent} variant="subtitle1">-&#8377; 230</Typography>
+                <Typography className={classes.rateContent} variant="subtitle1">-&#8377; {paymentDetails?.data?.bill?.total_charges}</Typography>
           </div>
           <div className={`${classes.foodContainer} ${classes.mtb}`}>
                 <Typography className={classes.rateHeading} variant="subtitle1">Taxes</Typography>
-                <Typography className={classes.rateContent} variant="subtitle1">-&#8377; 230</Typography>
+                <Typography className={classes.rateContent} variant="subtitle1">-&#8377; {paymentDetails?.data?.bill?.tax}</Typography>
           </div>
           <div className={`${classes.foodContainer} ${classes.mtb}`}>
                 <Typography className={classes.rateHeading} variant="subtitle1">Promo-(New)</Typography>
-                <Typography className={classes.rateContent} variant="subtitle1">-&#8377; 230</Typography>
+                <Typography className={classes.rateContent} variant="subtitle1"> {paymentDetails?.data?.bill?.promo===null?"-":paymentDetails?.data?.bill?.promo}</Typography>
           </div>
           <div className={`${classes.foodContainer} ${classes.mtb}`}>
                 <Typography className={classes.rateHeading} variant="subtitle1">Discount</Typography>
-                <Typography className={classes.rateContent} variant="subtitle1">-&#8377; 230</Typography>
+                <Typography className={classes.rateContent} variant="subtitle1">-&#8377; {paymentDetails?.data?.bill?.discount}</Typography>
           </div>
           <Divider></Divider>
           <div className={classes.foodContainer}>
-                <Typography className={classes.totalHeading} variant="h6">Discount</Typography>
-                <Typography className={classes.totalContent} variant="h6">&#8377; 230</Typography>
+                <Typography className={classes.totalHeading} variant="h6">Total</Typography>
+                <Typography className={classes.totalContent} variant="h6">&#8377; {paymentDetails?.data?.bill?.total}</Typography>
           </div>
       </Grid>:null}
     </Grid>
@@ -415,7 +430,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  SEND_PAYMENT_SUCCESS_REQ : (id) => dispatch(PAYMENT_SUCCESS_REQ(id)),
+  SEND_PAYMENT_SUCCESS_REQ : () => dispatch(PAYMENT_SUCCESS_REQ()),
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(PaymentSuccessful);

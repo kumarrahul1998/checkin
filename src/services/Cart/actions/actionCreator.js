@@ -45,3 +45,17 @@ export const placeOrderFailure=(payload)=>({
   type: ACTION.PLACE_ORDER_FAILURE,
   payload
 })
+
+export const emptyCartReq = () =>({
+  type: ACTION.EMPTY_CART_REQ,
+})
+
+export const emptyCartSuccess=(payload)=>({
+  type: ACTION.EMPTY_CART_SUCCESS,
+  payload
+})
+
+export const emptyCartFailure=(payload)=>({
+  type: ACTION.EMPTY_CART_FAILURE,
+  payload
+})

@@ -17,8 +17,8 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
 
-    case ACTION.SET_STATE:
-      return { ...state, ...payload }
+    // case ACTION.SET_STATE:
+    //   return { ...state, ...payload }
 
     case HOMEACTION.SEND_TO_CART:
       return {
@@ -84,6 +84,27 @@ export default (state = initialState, { type, payload }) => {
       order:{
         ...state.order,
         isLoading:false,
+        error: payload,
+      }
+    }
+    case ACTION.EMPTY_CART_REQ: return state
+    case ACTION.EMPTY_CART_SUCCESS: return{
+      ...state,
+      
+      items:{
+        ...state.items,
+        data:[],
+      },
+      order: {
+        ...state.order,
+        isLoading:"idle",
+        data: '',
+      },
+    }
+    case ACTION.EMPTY_CART_FAILURE: return {
+      ...state,
+      items:{
+        ...state.items,
         error: payload,
       }
     }

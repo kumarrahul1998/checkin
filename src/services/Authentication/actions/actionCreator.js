@@ -64,6 +64,9 @@ export const getSessionDetailsFailure= (payload)=>({
   payload
 })
 
+export const resendOtpReq=(payload)=>({
+  type: ACTION.RESEND_OTP_REQ,
+})
 
 
 // export const setLoginState = (payload)=>({

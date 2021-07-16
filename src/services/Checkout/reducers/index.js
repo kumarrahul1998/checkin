@@ -6,6 +6,8 @@ const initialState = {
   checkout: { isLoading: "idle",data:{},error:{}},
   razorpay: { isLoading: "idle",data:{},error:{}},
   callback: { isLoading: "idle",data:{},error:{}},
+  applyPromo: { isLoading: "idle",data:{},error:{}},
+  removePromo: { isLoading: "idle",data:{},error:{}},
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -109,7 +111,59 @@ export default (state = initialState, { type, payload }) => {
         error: payload
       }
     }
-    
+    case ACTION.APPLY_PROMO_REQ: 
+    return {
+      ...state,
+      applyPromo:{...state.applyPromo,
+        isLoading:true,
+      }
+    }
+    case ACTION.APPLY_PROMO_SUCCESS: 
+    return {
+      ...state,
+      applyPromo:{...state.applyPromo,
+        isLoading:false,
+        data: payload
+      }
+    }
+    case ACTION.APPLY_PROMO_FAILURE: 
+    return {
+      ...state,
+      applyPromo:{...state.applyPromo,
+        isLoading:false,
+        error: payload
+      }
+    }
+    case ACTION.REMOVE_PROMO_REQ: 
+    return {
+      ...state,
+      removePromo:{...state.removePromo,
+        isLoading:true,
+      }
+    }
+    case ACTION.REMOVE_PROMO_SUCCESS: 
+    return {
+      ...state,
+      applyPromo:{
+        ...state.applyPromo,
+        isLoading: "idle",
+        data: [],
+        error:{},
+      },
+      removePromo:{...state.removePromo,
+        isLoading:false,
+        data: payload
+      }
+    }
+    case ACTION.REMOVE_PROMO_FAILURE: 
+    return {
+      ...state,
+      
+      removePromo:{...state.removePromo,
+        isLoading:false,
+        error: payload
+      }
+    }
     default:
       return state
   }

@@ -24,7 +24,7 @@ function loadScript(src) {
 	})
 }
 
-export const CheckoutPage = (props) => {
+const CheckoutPage = (props) => {
   const history = useHistory()
  
   // Razorpay function for payment popup 
@@ -37,18 +37,20 @@ export const CheckoutPage = (props) => {
 		}
 
 		const options = {
-			key: 'rzp_test_uGoq5ABJztRAhk',
+			key: 'rzp_test_edAXAbPED9Pl1G',
 			currency: props.razorpay.data.currency,
-			amount: props.getSettleBillDeatils.data.Bill.total.toString(),
+			amount: (props.getSettleBillDeatils.data.bill?.total*100).toString(),
 			order_id: props.razorpay.data.order_id,
-			name: 'Donation',
-			description: 'Thank you for nothing. Please give us some money',
+			name: 'Payment',
+			description: 'Please Pay',
 			image: 'http://localhost:1337/logo.svg',
 			handler: function (response) {
+        console.log(response);
 				props._razorpayCallback(response);
 			},
 			prefill: {
-				name:props.getSettleBillDeatils.data.host.User.display_name,
+				// name:props.getSettleBillDeatils.data.host.User.display_name,
+        name: "rahul",
 				email:props.razorpay.data.email,
 				phone_number: props.razorpay.data.phone
 			}
@@ -59,30 +61,31 @@ export const CheckoutPage = (props) => {
 
 
   useEffect(()=>{
-    props._getSettleBill('11');
+    props._getSettleBill();
   },[])
 
   const handlePayClick=()=>{
     props._checkoutRequest();
-    props._razorpayCall('id');
-    // history.push('/payment')
+    
   }
 
   useEffect(()=>{
-    if(props.checkout.isLoading===false&&props.checkout.data=="success"){
-      if(props.razorpay.isLoading===false&&props.razorpay.data.order_id){
-        displayRazorpay();
-      }
+    if(props.razorpay.data.order_id){
+      displayRazorpay();
     }
-  },[props.checkout.isLoading,props.razorpay.isLoading])
+  },[props.razorpay.data.order_id])
 
   useEffect(()=>{
-    if(props.callback.isLoading===false&&props.callback.data.payment_id)
+    if(props.callback.isLoading===false&&props.callback.data.pk)
     {
       history.push('/payment');
     }
   },[props.callback.data])
-
+  
+  React.useEffect(()=>{
+  props._getSettleBill()      
+  },[props.applyPromo,props.removePromo])
+  
   return (
     <div>
       <div style={{ height: '80px', width: '100%', backgroundColor: '#ececec' }}>
@@ -96,9 +99,9 @@ export const CheckoutPage = (props) => {
         <div style={{ color: "#6d6d6d", fontSize: '15px', margin: '25px 0px 0px 15px' }}>
           Bill Details
         </div>
-        <div><SettleBill /></div>
+        <div><SettleBill settleBillDetails={props.getSettleBillDeatils}/></div>
         <div> <Promos /></div>
-        <div><GrandTotal /></div>
+        <div><GrandTotal settleBillDetails={props.getSettleBillDeatils} /></div>
         <div className="text-center" style={{ bottom: 20, position: 'fixed', width: '100%' }}><Button fullWidth style={{ backgroundColor: '#32c282', marginTop: '30px', color: '#fff', width: '90%' }} onClick={handlePayClick}>PAY</Button></div>
       </div>
 
@@ -112,12 +115,15 @@ const mapStateToProps = state => ({
   razorpay: state.checkout.razorpay,
   checkout: state.checkout.checkout,
   callback: state.checkout.callback,
+  applyPromo: state.checkout.applyPromo,
+  removePromo: state.checkout.removePromo,
+
 });
 
 const mapDispatchToProps = dispatch => ({
-      _getSettleBill : (id) => dispatch(getSettleBill(id)),
+      _getSettleBill : () => dispatch(getSettleBill()),
       _checkoutRequest: ()=> dispatch(checkout()),
-      _razorpayCall: (id)=>dispatch(razorpayCall(id)),
+      _razorpayCall: ()=>dispatch(razorpayCall()),
       _razorpayCallback: (response)=>dispatch(razorpayCallback(response))
     });
 

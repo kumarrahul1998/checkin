@@ -4,7 +4,8 @@ import complete from "../../../assets/order/complete.gif"
 import { useHistory } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {orderSent} from '../middleware/index';
-
+import {emptyCart} from "../../Cart/middleware"
+import { useEffect } from 'react';
 const useStyles= makeStyles({
     completeImage:{
         height:"auto",
@@ -20,6 +21,11 @@ const useStyles= makeStyles({
 const OrderSuccessful = (props) => {
     const history = useHistory()
     const classes = useStyles();
+    
+    useEffect(()=>{
+        props._emptyCart();
+    },[])
+
     setTimeout(()=>{
         history.push('/home');
         props.orderSent('11');
@@ -34,7 +40,8 @@ const OrderSuccessful = (props) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    orderSent : id => dispatch(orderSent(id))
+    orderSent : id => dispatch(orderSent(id)),
+    _emptyCart : () => dispatch(emptyCart())
 })
 
 export default connect(null,mapDispatchToProps)(OrderSuccessful);

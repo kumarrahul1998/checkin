@@ -1,4 +1,4 @@
-import { setStateAction,sendPhoneNoReq,sendPhoneNoSuccess,sendPhoneNoFailure,sendNameReq,sendNameFailure,sendNameSuccess,checkOtpReq,checkOtpFailure,checkOtpSuccess, getSessionDetailsReq, getSessionDetailsSuccess, getSessionDetailsFailure} from "../actions/actionCreator"
+import { setStateAction,sendPhoneNoReq,sendPhoneNoSuccess,sendPhoneNoFailure,sendNameReq,sendNameFailure,sendNameSuccess,checkOtpReq,checkOtpFailure,checkOtpSuccess, getSessionDetailsReq, getSessionDetailsSuccess, getSessionDetailsFailure, resendOtpReq} from "../actions/actionCreator"
 import fb from "firebase"
 // import firebase from "../../../fbConfig"
 import make_API_call from "../../../providers/REST_API"
@@ -11,23 +11,21 @@ export const _set_state = (obj) => (dispatch) => {
 export const _authenticate_via_number = (number) =>async (dispatch) => {
   try{ dispatch(sendPhoneNoReq()) 
   // const resp = await make_API_call('post','/auth/login',number);
-  let recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+
+  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
     'size': 'invisible',
     'callback': (response) => {
       // reCAPTCHA solved, allow signInWithPhoneNumber.
       // ...
-      const el = window.document.getElementById('recaptcha-container');
-    if (el != null) {
-      el.remove();
-    }
-      console.log("captcha")
+       console.log("captcha")
     },
   });
-  const resp = await firebase.auth().signInWithPhoneNumber(`+91${number}`,recaptchaVerifier);
+  
+  const resp = await firebase.auth().signInWithPhoneNumber(`+91${number}`,window.recaptchaVerifier);
   if(resp){
    console.log(resp);
     window.confirmationResult = resp;
-     dispatch(sendPhoneNoSuccess(resp));
+     dispatch(sendPhoneNoSuccess({phoneNo:number,...resp}));
      dispatch(_set_state({
       askingProfileDetails: false,
       askingContact: false,
@@ -36,7 +34,13 @@ export const _authenticate_via_number = (number) =>async (dispatch) => {
    }
   }catch(err){
     console.log(err);
-    dispatch(sendPhoneNoFailure(err.message))
+    dispatch(sendPhoneNoFailure(err))
+    // dispatch(getSessionDetails())
+    // dispatch(_set_state({
+    //   login: {
+    //     isLoggedIn: true
+    //   }
+    // }))
 
   } 
   // window.recaptchaVerifier = new fb.auth.RecaptchaVerifier('recaptcha-container', {
@@ -65,6 +69,24 @@ export const _authenticate_via_number = (number) =>async (dispatch) => {
 
 }
 
+export const resendOtp =()=>async (dispatch,getState)=>{
+  try{ 
+    dispatch(resendOtpReq())
+    const number= getState().authentication.login.contact.payload.phoneNo;
+  const appVerifier = window.recaptchaVerifier;
+  const resp = await firebase.auth().signInWithPhoneNumber(`+91${number}`,appVerifier);
+  if(resp){
+    window.confirmationResult = resp;
+     dispatch(sendPhoneNoSuccess({phoneNo:number,...resp}));
+     
+   }
+  }catch(err){
+    console.log(err);
+    dispatch(sendPhoneNoFailure(err))
+  }
+}
+
+
 export const checkOtp =(otp)=>async (dispatch)=>{
   try{ dispatch(checkOtpReq()) 
     // const resp = await make_API_call('post','/auth/otp',otp);
@@ -87,6 +109,10 @@ export const getSessionDetails =()=>async (dispatch)=>{
   try{ dispatch(getSessionDetailsReq()) 
     const resp = await make_API_call('get','/sessions/active/');
      dispatch(getSessionDetailsSuccess(resp));
+     const el = window.document.getElementById('recaptcha-container');
+     if (el != null) {
+       el.remove();
+     }
       
     }catch(err){
       dispatch(getSessionDetailsFailure(err))
@@ -95,9 +121,9 @@ export const getSessionDetails =()=>async (dispatch)=>{
 
 export const sendName =(firstName,lastName,token)=>async (dispatch)=>{
   try{ dispatch(sendNameReq()) 
-    // const resp = await make_API_call('post','/auth/authenticate/',{username:`${firstName} ${lastName}`,id_token:token.ya});
+    const resp = await make_API_call('post','/auth/authenticate/',{username:`${firstName} ${lastName}`,id_token:token.ya});
     //  if(resp.status===200){
-       dispatch(sendNameSuccess({username:`${firstName} ${lastName}`}));
+       dispatch(sendNameSuccess({username:`${firstName} ${lastName}`,...resp}));
         // dispatch(setLoginState())
         dispatch(getSessionDetails())
         dispatch(_set_state({

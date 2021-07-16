@@ -1,5 +1,6 @@
 import make_API_call from "../../../providers/REST_API"
-import {placeOrderReq,placeOrderSuccess,placeOrderFailure, increaseItem, addItem, decreaseItem, removeItem, calculateAmount} from '../actions/actionCreator';
+import { getSettleBill } from "../../Checkout/middleware";
+import {placeOrderReq,placeOrderSuccess,placeOrderFailure, increaseItem, addItem, decreaseItem, removeItem, calculateAmount, emptyCartReq, emptyCartSuccess, emptyCartFailure} from '../actions/actionCreator';
 // import {
 //   setStateAction,
 //   loadRestaurentDetailsReq,
@@ -95,14 +96,42 @@ export const place_order = () =>async (dispatch,getState)=>{
  try{ dispatch(placeOrderReq())
   const items= getState().cart.items.data;
   const id= getState().authentication.login.session.payload.pk;
-  const resp= await make_API_call('post',`/sessions/${id}/manage/order/`,{data:[...items],session_id:id})
+  var data = [];
+  items.forEach((item)=>{
+    let obj={type_index:item.type_index,quantity:item.quantity,item:item.pk,customizations:[],remarks:"something"};
+    if(item.customizations.length>1){
+      item.customizations.forEach(subItem=>{
+        // let subObj={pk:subItem.pk,fields:[]}
+        subItem.fields.forEach(subSubItem=>{
+          // subObj.fields.push({pk:subSubItem.pk})
+          obj.customizations.push(subSubItem.pk)
+        
+        })
+        // obj.customizations.push(subObj);
+      })
+    }else{
+    }
+    data.push(obj)
+  })
+  // const JSONData = JSON.stringify(data);
+  // console.log(data);
+  const resp= await make_API_call('post',`/sessions/active/order/`,[...data])
    dispatch(placeOrderSuccess("success"));
   }catch(err){
    dispatch(placeOrderFailure(err));
   }
 }
 
+export const emptyCart= ()=>async (dispatch,getState)=>{
+  try{
+    dispatch(emptyCartReq())
+    dispatch(emptyCartSuccess())
+    dispatch(getSettleBill());
+  }catch(err){
+    dispatch(emptyCartFailure(err))
+  }
 
+}
 
 // export const _load_restaurent_details = () => (dispatch, getState) => {
 //   dispatch(loadRestaurentDetailsReq())

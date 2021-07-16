@@ -81,7 +81,7 @@ function MenuPage(props) {
                             Menu 
                         </div>
                         <div style={{ fontSize: '10px', marginTop: '5px' ,color:"#6d6d6d"}}>
-                            Grey Orange - Lavel Road
+                            {props?.details?.data?.name} - {props.details?.data?.locality}
                         </div>
                     </div>
                 </div>
@@ -118,6 +118,7 @@ function MenuPage(props) {
 }
 const mapStateToProps = (state) => ({
     menu: state.menu,
+    details: state.home.details
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,7 +1,8 @@
 import React from 'react'
 import Divider from '@material-ui/core/Divider'
 
-export default function GrandTotal() {
+export default function GrandTotal({settleBillDetails}) {
+
 
 
     return (
@@ -16,12 +17,12 @@ export default function GrandTotal() {
                     <div style={{ margin: '5px' }}>Browine Cash</div>
                 </div>
                 <div>
-                    <div style={{ margin: '5px' }}> &#8377;&nbsp;375.00</div>
-                    <div style={{ margin: '5px' }}> &#8377;&nbsp;10.00</div>
-                    <div style={{ margin: '5px' }}> &#8377;&nbsp;18.75</div>
-                    <div style={{ margin: '5px' }}> &#8377;&nbsp;-100.75</div>
-                    <div style={{ margin: '5px' }}> &#8377;&nbsp;-37.75</div>
-                    <div style={{ margin: '5px' }}> &#8377;&nbsp;-129.00</div>
+                    <div style={{ margin: '5px' }}> &#8377;&nbsp;{settleBillDetails?.data?.bill?.subtotal}</div>
+                    <div style={{ margin: '5px' }}> &#8377;&nbsp;{settleBillDetails?.data?.bill?.total_charges}</div>
+                    <div style={{ margin: '5px' }}> &#8377;&nbsp;{settleBillDetails?.data?.bill?.tax}</div>
+                    <div style={{ margin: '5px' }}> &#8377;&nbsp;{settleBillDetails?.data?.bill?.promo}</div>
+                    <div style={{ margin: '5px' }}> &#8377;&nbsp;{settleBillDetails?.data?.bill?.discount}</div>
+                    <div style={{ margin: '5px' }}> &#8377;&nbsp;{null}</div>
 
                 </div>
             </div>
@@ -29,7 +30,7 @@ export default function GrandTotal() {
             <Divider style={{ margin: '10px' }} />
             <div className='d-flex justify-content-between' style={{ margin: '0px 20px', color: '#ff5656', fontWeight: 600 }}>
                 <div>GRAND TOTAL</div>
-                <div>&#8377;&nbsp;265.00</div>
+                <div>&#8377;&nbsp;{settleBillDetails?.data?.bill?.total}</div>
             </div>
 
         </>

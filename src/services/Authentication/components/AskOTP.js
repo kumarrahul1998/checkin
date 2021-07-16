@@ -7,21 +7,12 @@ import Button from "../../../shared/components/Button/Basic"
 import { _set_state,checkOtp } from '../middleware'
 import { act } from 'react-dom/test-utils'
 
+import { resendOtp } from '../middleware'
 
 
 function AskOTP(props) {
   const { setState ,_sendOtp,login} = props
-  const handleVerify = () => {
-    _sendOtp("123456");
-    if(login.otp.isLoading===false&&login.otp.error===null){
-      setState({
-        askingProfileDetails: true,
-        askingContact: false,
-        askingOTP: false
-      })
-    }
-    
-  }
+  
   const [activeInput, setActiveInput] = useState(0);
   const [values, setValues] = useState(['','','','','',''])
   const [disable, setDisable] = useState(false)
@@ -97,7 +88,29 @@ function AskOTP(props) {
           default: break;
       }
   })
-
+  // My code
+  const handleResend=()=>{
+    props._resendOtp();
+  }
+  useEffect(()=>{
+    const interval= setTimeout(()=>{
+      const resend = document.getElementById('resend');
+      resend.style.display="block";
+    },60000)
+  },[])
+  
+  const handleVerify = () => {
+    console.log(values.join(''));
+    _sendOtp(values.join(''));
+    // if(login.otp.isLoading===false&&login.otp.error===null){
+    //   setState({
+    //     askingProfileDetails: true,
+    //     askingContact: false,
+    //     askingOTP: false
+    //   })
+    // }
+    
+  }
   return (
     <div style={{overflow:"hidden"}}>
       <Grid spacing={0} container >
@@ -107,7 +120,7 @@ function AskOTP(props) {
         <Grid item xs={10} >
           <Grid spacing={3} container >
             <Grid item xs={12} >
-              <div style={{ fontSize: 20, textAlign: "left" }} ><span style={{ fontWeight: 100 }}>OTP sent to </span>9997867899</div>
+              <div style={{ fontSize: 20, textAlign: "left" }} ><span style={{ fontWeight: 100 }}>OTP sent to </span>+91{props.login?.contact?.payload?.phoneNo}</div>
             </Grid>
             <Grid item xs={0} style={{marginLeft: 0,paddingLeft: 0}} >
               <Grid spacing={3} container >
@@ -141,8 +154,8 @@ function AskOTP(props) {
               </Button>
             </Grid>
             <Grid item xs={12} >
-              <div style={{ fontWeight: 400, fontSize: 12 }} >
-                Didn’t recieve the verification OTP? <a className="a-tag" href="#" >Resend Again</a>
+              <div style={{ fontWeight: 400, fontSize: 12,display:"none" }} id="resend" >
+                Didn’t recieve the verification OTP? <span className="a-tag" href="#" style={{textDecoration:"underline"}} onClick={handleResend} >Resend Again</span>
               </div>
             </Grid>
           </Grid>
@@ -164,6 +177,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setState: (obj) => dispatch(_set_state(obj)),
+    _resendOtp: () => dispatch(resendOtp()),
     _sendOtp : (otp)=>dispatch(checkOtp(otp)),
   }
 }

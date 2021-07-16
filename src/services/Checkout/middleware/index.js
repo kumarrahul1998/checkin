@@ -11,7 +11,13 @@ import {
     razorpayCallbackReq,
     razorpayCallbackSuccess,
     razorpayCallbackFailure,
-} from '../actions/actionCreator';
+    applyPromoReq,
+    applyPromoSuccess,
+    applyPromoFailure,
+    removePromoReq,
+    removePromoFailure,
+    removePromoSuccess
+  } from '../actions/actionCreator';
 import { checkoutReq,checkoutSuccess,checkoutFailure } from "../actions/actionCreator";
 
 // export const SEND_SETTLE_BILL_DETAILS_REQ = (id) => (dispatch) => {
@@ -26,42 +32,34 @@ import { checkoutReq,checkoutSuccess,checkoutFailure } from "../actions/actionCr
 //       })
 //   }
 
-export const applyPromoCode = code =>{
-  make_API_call('post',"/sessions/active/promos/avail/",{code: code})
-    .then(res => {
-      console.log('[checkout middleware]',res);
-    })
-}
 
 export const  checkout = () =>async (dispatch,getState)=>{
     try{ dispatch(checkoutReq())
      const resp= await make_API_call('post',"/sessions/active/request/checkout/",{payment_mode:"rzrpay"})
-     if(resp.status===200){
        dispatch(checkoutSuccess("success"));
-     }
-   }catch(err){
+        dispatch(razorpayCall())
+      }catch(err){
       dispatch(checkoutFailure(err));
      }
    }
 
-export const  getSettleBill = (session_id) =>async (dispatch,getState)=>{
+export const  getSettleBill = () =>async (dispatch,getState)=>{
     try{ dispatch(settleBillReq())
+        const session_id= getState().authentication.login.session.payload.pk;
      const resp= await make_API_call('get',`/sessions/${session_id}/manage/bill/ `)
-     if(resp.status===200){
-       dispatch(settleBillSuccess(resp.data));
-     }
-   }catch(err){
+       dispatch(settleBillSuccess(resp));
+  
+      }catch(err){
      console.log(err);
       dispatch(settleBillFailure(err));
      }
    }
 
-  export const  razorpayCall = (id) =>async (dispatch,getState)=>{
+  export const  razorpayCall = () =>async (dispatch,getState)=>{
     try{ dispatch(razorpayCallReq())
-     const resp= await make_API_call('post',`/payments/pay/razorpay/sessions/${id}/`)
-     if(resp.status===200){
-       dispatch(razorpayCallSuccess(resp.data));
-     }
+      const session_id= getState().authentication.login.session.payload.pk;
+     const resp= await make_API_call('post',`/sessions/active/pay/razorpay/`,session_id)
+       dispatch(razorpayCallSuccess(resp));
    }catch(err){
       dispatch(razorpayCallFailure(err));
      }
@@ -70,15 +68,35 @@ export const  getSettleBill = (session_id) =>async (dispatch,getState)=>{
    export const  razorpayCallback = (response) =>async (dispatch,getState)=>{
     try{ dispatch(razorpayCallbackReq())
      const resp= await make_API_call('post',`/payments/callback/razorpay/`,{
-      payment_id: response.payment_id,
-      order_id: response.order_id,
-      signature: response.signature,
+      payment_id: response.razorpay_payment_id,
+      order_id: response.razorpay_order_id,
+      signature: response.razorpay_signature,
+      extra_data: {...response}
       })
-     if(resp.status===201){
-       dispatch(razorpayCallbackSuccess(resp.data));
-      }
+       dispatch(razorpayCallbackSuccess(resp));
    }catch(err){
       dispatch(razorpayCallbackFailure(err));
+     }
+   }
+ 
+   export const  applyPromo = (code) =>async (dispatch,getState)=>{
+    try{ dispatch(applyPromoReq())
+      const resp= await make_API_call('post',`/sessions/active/promos/avail/`,{
+      code
+      })
+       dispatch(applyPromoSuccess(resp));
+   }catch(err){
+      dispatch(applyPromoFailure(err));
+     }
+   }
+ 
+   export const  removePromo = (code) =>async (dispatch,getState)=>{
+    try{ dispatch(removePromoReq())
+      const session_id= getState().authentication.login.session.payload.pk;
+      const resp= await make_API_call('delete',`/sessions/active/promos/remove/`)
+       dispatch(removePromoSuccess(resp));
+   }catch(err){
+      dispatch(removePromoFailure(err));
      }
    }
  
